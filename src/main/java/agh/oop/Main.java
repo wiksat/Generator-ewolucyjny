@@ -1,4 +1,4 @@
-package agh.ics.oop;
+package agh.oop;
 
 public class Main {
     public static void main(String[] args) {

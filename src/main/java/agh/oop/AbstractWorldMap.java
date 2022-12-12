@@ -1,4 +1,4 @@
-package agh.ics.oop;
+package agh.oop;
 
 import java.util.ArrayList;
 import java.util.HashMap;

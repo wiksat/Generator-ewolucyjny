@@ -1,4 +1,4 @@
-package agh.ics.oop;
+package agh.oop;
 
 public class Grass extends AbstractWorldMapElement {
     public Grass(Vector2d position){
