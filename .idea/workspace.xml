@@ -4,17 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4aa76a78-281e-4a75-ba85-5abd33576347" name="Changes" comment="dodane pliki">
+    <list default="true" id="4aa76a78-281e-4a75-ba85-5abd33576347" name="Changes" comment="dodane pliki2">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agh/oop/MapDirection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agh/oop/MoveDirection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agh/oop/StatusOfAnimal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agh/ics/oop/AbstractWorldMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/oop/AbstractWorldMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agh/ics/oop/AbstractWorldMapElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/oop/AbstractWorldMapElement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agh/ics/oop/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/oop/Animal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agh/ics/oop/Grass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/oop/Grass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agh/ics/oop/IMapElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/oop/IMapElement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agh/ics/oop/IPositionChangeObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/oop/IPositionChangeObserver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agh/ics/oop/IWorldMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/oop/IWorldMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agh/ics/oop/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/oop/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agh/ics/oop/Vector2d.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/oop/Vector2d.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/oop/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/oop/Animal.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +22,13 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="PUSH_TAGS">
@@ -48,8 +52,9 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/wikto/IdeaProjects/Generator-ewolucyjny/src/main/java/agh/ics/oop",
+    "last_opened_file_path": "C:/Users/wikto/Pulpit/DarwinGame-main/DarwinGame-main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -61,6 +66,7 @@
       <recent name="C:\Users\wikto\IdeaProjects\Generator-ewolucyjny\src\main\java\agh\ics\oop" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="agh.oop" />
       <recent name="agh.ics.oop" />
     </key>
   </component>
@@ -72,7 +78,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1670847956387</updated>
-      <workItem from="1670847959827" duration="2978000" />
+      <workItem from="1670847959827" duration="3567000" />
+      <workItem from="1672132419164" duration="12782000" />
     </task>
     <task id="LOCAL-00001" summary="changed package">
       <created>1670849139968</created>
@@ -88,7 +95,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670850391765</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="dodane pliki2">
+      <created>1670851149834</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1670851149834</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -108,6 +122,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="changed package" />
     <MESSAGE value="dodane pliki" />
-    <option name="LAST_COMMIT_MESSAGE" value="dodane pliki" />
+    <MESSAGE value="dodane pliki2" />
+    <option name="LAST_COMMIT_MESSAGE" value="dodane pliki2" />
   </component>
 </project>
