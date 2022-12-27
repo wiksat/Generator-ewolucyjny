@@ -13,4 +13,7 @@ public class Grass extends AbstractWorldMapElement {
     public String getName(){
         return "grass";
     }
+    public String getImageResource() {
+        return"";
+    }
 }

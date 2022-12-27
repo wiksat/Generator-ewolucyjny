@@ -13,7 +13,44 @@ public abstract class AbstractWorldMap implements IWorldMap,IPositionChangeObser
 
     protected final MapVisualizer visualize = new MapVisualizer(this);
     protected MapBoundary mapBoundary=new MapBoundary();
+    public void growGrass(int noOfTuftsInJungle, int noOfTuftsInSteppes) {
+        int noOfGrownGrassTufts = 0;
+        for (int i = 0; i < noOfTuftsInJungle; i++) {
+            if (this.jungleBoundary.area() > this.jungleBoundary.getSlotsTaken()) {
+                Vector2d grassPosition;
+                do {
+                    grassPosition = Vector2d.getRandomVectorBetween(
+                            this.getJungleBoundary().lowerLeft(),
+                            this.getJungleBoundary().upperRight());
+                } while (this.isOccupied(grassPosition));
 
+                this.map.put(grassPosition, new Grass(grassPosition));
+                this.incrementSlotsTaken(grassPosition);
+
+                noOfGrownGrassTufts++;
+            }
+        }
+        for (int i = 0; i < noOfTuftsInSteppes; i++) {
+            if (this.mapBoundary.area() - this.jungleBoundary.area() > this.mapBoundary.getSlotsTaken() - this.jungleBoundary.getSlotsTaken()) {
+                Vector2d grassPosition;
+                do {
+                    grassPosition = Vector2d.getRandomVectorBetween(
+                            this.getMapBoundary().lowerLeft(),
+                            this.getMapBoundary().upperRight());
+                } while (
+                        this.getJungleBoundary().isInside(grassPosition) || this.isOccupied(grassPosition));
+
+                this.map.put(grassPosition, new Grass(grassPosition));
+                this.incrementSlotsTaken(grassPosition);
+
+                noOfGrownGrassTufts++;
+            }
+        }
+//        for (var observer : this.grassActionObservers) {
+//            observer.grassGrow(noOfGrownGrassTufts);
+//        }
+//        coś z obserwatorem
+    }
     @Override
     public boolean canMoveTo(Vector2d position) {
         return (!animals.containsKey(position));
@@ -29,7 +66,8 @@ public abstract class AbstractWorldMap implements IWorldMap,IPositionChangeObser
         x = this.mapBoundary.X_el.get(this.mapBoundary.X_el.size()-1).getPosition().x;
         y = this.mapBoundary.Y_el.get(this.mapBoundary.Y_el.size()-1).getPosition().y;
         Vector2d vectorR = new Vector2d(x,y);
-        return this.visualize.draw(vectorL,vectorR);
+//        return this.visualize.draw(vectorL,vectorR);
+        return "";
     }
     public Vector2d getLowerLeftDrawLimit(){
         this.mapBoundary.sortuj();

@@ -110,6 +110,9 @@ public class Animal extends AbstractWorldMapElement  {
     }
     public void setLifeEnergy(int energy){
         this.lifeEnergy=energy;
+        if (this.getLifeEnergy() <= 0) {
+            makeDead();
+        }
     }
     public boolean canReproduce(Animal otherAnimal) {
         return otherAnimal.getPosition().equals(this.getPosition()) &&
@@ -177,6 +180,12 @@ public class Animal extends AbstractWorldMapElement  {
 //        this.becameParent(child);
 //        otherAnimal.becameParent(child);
         return child;
+    }
+    public void nextDay() {
+        this.setLifeEnergy(this.getLifeEnergy() - this.costOfTheDay);
+        if (this.status == StatusOfAnimal.ALIVE) {
+            this.age++;
+        }
     }
     public void addObserver(IPositionChangeObserver observer){
         this.observers.add(observer);
