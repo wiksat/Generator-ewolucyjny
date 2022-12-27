@@ -8,7 +8,7 @@ public interface GuiParameters {
     int startNumberOfPlants = 20;
     int plantEnergy = 5;
     int numberOfNewPlant = 10;
-    boolean plantGrowthVariant = false; /* false - zalesione równiki, true - toksyczne trupt */
+    boolean plantGrowthVariant = false; /* false - zalesione rowniki, true - toksyczne trupt */
 
     int startNumberOfAnimals = 10;
     int startAnimalEnergy = 20;
@@ -17,8 +17,8 @@ public interface GuiParameters {
 
     int minNumberOfMutations = 0;
     int maxNumberOfMutations = 1;
-    boolean mutationVariant = false; /* false - pełna losowość, true - lekka korekta */
+    boolean mutationVariant = false; /* false - pelna losowosc, true - lekka korekta */
     int lengthOfAnimalGenome = 16;
-    boolean behaviourVariant = false; /* false - pełna predestynacja, true - nieco szaleństwa */
+    boolean behaviourVariant = false; /* false - pelna predestynacja, true - nieco szaleństwa */
 
 }
