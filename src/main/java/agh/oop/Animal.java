@@ -11,20 +11,21 @@ public class Animal extends AbstractWorldMapElement  {
     private IWorldMap map;
     private StatusOfAnimal status = StatusOfAnimal.ALIVE;
     private List<IPositionChangeObserver> observers = new ArrayList<IPositionChangeObserver>();
+    private final List<MoveDirection> genotype;
 
     //variables from userentry
     private int geneLength=10;
-    private final Genotype genotype;
+
+
     private int costOfTheDay=2;
     private int minLifeEnergyToReproduce=5;
     private int amountOfEnergyFromParentToChild=3;
+    private int energyFromPlant=2;
 
-//    Animal(IWorldMap map){
-//        this.map=map;
-//    }
-    Animal(IWorldMap map, Vector2d initialPosition){
+    Animal(IWorldMap map, Vector2d initialPosition, List<MoveDirection> genotype){
         this.map=map;
         this.position=initialPosition;
+        this.genotype = genotype;
         List<MoveDirection> genes = new ArrayList<>();
         for (int i = 0; i < this.geneLength; i++) {
             double randNum = Math.random()*8;
@@ -34,7 +35,7 @@ public class Animal extends AbstractWorldMapElement  {
         this.lifeEnergy=10;
 
     }
-    public Animal(AbstractWorldMap map, Vector2d initialPosition, int startingEnergy, Genotype genotype) {
+    public Animal(AbstractWorldMap map, Vector2d initialPosition, int startingEnergy, List<MoveDirection> genotype) {
         this.position=initialPosition;
         this.map = map;
         this.lifeEnergy = startingEnergy;
@@ -45,6 +46,13 @@ public class Animal extends AbstractWorldMapElement  {
     }
     public String getA(){
         return position+" "+orientation;
+    }
+    public void makeDead(){
+        this.status=StatusOfAnimal.DEAD;
+        //cos z observerem trzeba bedzie zrobic
+    }
+    public void eatPlant(){
+        this.setLifeEnergy(this.getLifeEnergy() + this.energyFromPlant);
     }
     public String toString(){
         return switch(orientation) {
@@ -100,52 +108,74 @@ public class Animal extends AbstractWorldMapElement  {
     public int getLifeEnergy(){
         return this.lifeEnergy;
     }
+    public void setLifeEnergy(int energy){
+        this.lifeEnergy=energy;
+    }
     public boolean canReproduce(Animal otherAnimal) {
         return otherAnimal.getPosition().equals(this.getPosition()) &&
                 this.getLifeEnergy() >= this.minLifeEnergyToReproduce &&
                 otherAnimal.getLifeEnergy() >= this.minLifeEnergyToReproduce
                 ;
     }
+    public List<MoveDirection> getGenotype(){
+            return this.genotype;
+    }
+    public List<MoveDirection> getLeftSlice(int howMany){
 
-    public Animal procreate(Animal otherAnimal) {
+        return this.genotype.subList(0, howMany);
+    }
+    public List<MoveDirection> getRightSlice(int howMany){
+        return this.genotype.subList(this.genotype.size() - howMany, this.genotype.size());
+    }
+    public Animal reproduce(Animal otherAnimal) {
         if (!this.canReproduce(otherAnimal)) {
             throw new IllegalArgumentException("There is too little life energy to reproduce");
         }
 
-        int precentOfGenesThisAnimal = this.getLifeEnergy() / (this.getLifeEnergy() + otherAnimal.getLifeEnergy());
-        int precentOfGenesAnotherAnimal = 1 - precentOfGenesThisAnimal;
+        float precentOfGenesThisAnimal = this.getLifeEnergy() / (this.getLifeEnergy() + otherAnimal.getLifeEnergy());
+        float precentOfGenesAnotherAnimal = 1 - precentOfGenesThisAnimal;
 
-        Genotype newGenotype;
+        List<MoveDirection> newGenotype;
         boolean side=Math.random() < 0.5;
-        if (precentOfGenesAnotherAnimal > precentOfGenesThisAnimal) {
+//        if (precentOfGenesAnotherAnimal > precentOfGenesThisAnimal) {
             if (side) {
-                newGenotype = new Genotype(otherAnimal.getGenotype().getLeftSlice(precentOfGenesAnotherAnimal),
-                        this.getGenotype().getRightSlice(precentOfGenesThisAnimal));
+//                newGenotype = new Genotype(otherAnimal.getGenotype().getLeftSlice(precentOfGenesAnotherAnimal),
+//                        this.getGenotype().getRightSlice(precentOfGenesThisAnimal));
+                newGenotype=(otherAnimal.getLeftSlice((int)precentOfGenesAnotherAnimal*otherAnimal.getGenotype().size()));
+                newGenotype.addAll((this.getRightSlice((int)precentOfGenesThisAnimal*this.getGenotype().size())));
+
             }
             else {
-                newGenotype = new Genotype(this.getGenotype().getLeftSlice(precentOfGenesThisAnimal),
-                        otherAnimal.getGenotype().getRightSlice(precentOfGenesAnotherAnimal));
+//                newGenotype = new Genotype(this.getGenotype().getLeftSlice(precentOfGenesThisAnimal),
+//                        otherAnimal.getGenotype().getRightSlice(precentOfGenesAnotherAnimal));
+                newGenotype=(this.getLeftSlice((int)precentOfGenesThisAnimal*this.getGenotype().size()));
+                newGenotype.addAll((otherAnimal.getRightSlice((int)precentOfGenesAnotherAnimal*otherAnimal.getGenotype().size())));
             }
-        }
-        else {
-            if (side) {
-                newGenotype = new Genotype(this.getGenotype().getLeftSlice(precentOfGenesAnotherAnimal),
-                        otherAnimal.getGenotype().getRightSlice(precentOfGenesThisAnimal));
-            }
-            else {
-                newGenotype = new Genotype(otherAnimal.getGenotype().getLeftSlice(precentOfGenesThisAnimal),
-                        this.getGenotype().getRightSlice(precentOfGenesAnotherAnimal));
-            }
-        }
+//        }
+//        else {
+//            if (side) {
+////                newGenotype = new Genotype(this.getGenotype().getLeftSlice(precentOfGenesAnotherAnimal),
+////                        otherAnimal.getGenotype().getRightSlice(precentOfGenesThisAnimal));
+//
+//                newGenotype=(this.getLeftSlice((int)precentOfGenesAnotherAnimal*otherAnimal.getGenotype().size()));
+//                newGenotype.addAll((otherAnimal.getRightSlice((int)precentOfGenesThisAnimal*this.getGenotype().size())));
+//            }
+//            else {
+////                newGenotype = new Genotype(otherAnimal.getGenotype().getLeftSlice(precentOfGenesThisAnimal),
+////                        this.getGenotype().getRightSlice(precentOfGenesAnotherAnimal));
+//                newGenotype=(otherAnimal.getLeftSlice((int)precentOfGenesThisAnimal*this.getGenotype().size()));
+//                newGenotype.addAll((this.getRightSlice((int)precentOfGenesAnotherAnimal*otherAnimal.getGenotype().size())));
+//            }
+//        }
 
 //        int thisEnergyCost = (int) (this.getEnergy() * SimulationConfig.procreationEnergyCostFraction);
 //        int otherEnergyCost = (int) (otherAnimal.getEnergy() * SimulationConfig.procreationEnergyCostFraction);
-        this.setEnergy(this.getEnergy() - this.amountOfEnergyFromParentToChild);
-        otherAnimal.setEnergy(otherAnimal.getEnergy() - this.amountOfEnergyFromParentToChild);
+        this.setLifeEnergy(this.getLifeEnergy() - this.amountOfEnergyFromParentToChild);
+        otherAnimal.setLifeEnergy(otherAnimal.getLifeEnergy() - this.amountOfEnergyFromParentToChild);
 
-        var child = new Animal(this.map, this.position, this.amountOfEnergyFromParentToChild*2, newGenotype);
-        this.becameParent(child);
-        otherAnimal.becameParent(child);
+        var child = new Animal((AbstractWorldMap) this.map, this.position, this.amountOfEnergyFromParentToChild*2, newGenotype);
+//        this.becameParent(child);
+//        otherAnimal.becameParent(child);
         return child;
     }
     public void addObserver(IPositionChangeObserver observer){

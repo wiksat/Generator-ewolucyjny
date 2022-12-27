@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4aa76a78-281e-4a75-ba85-5abd33576347" name="Changes" comment="dodane pliki2">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agh/oop/MapDirection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agh/oop/MoveDirection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agh/oop/StatusOfAnimal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="4aa76a78-281e-4a75-ba85-5abd33576347" name="Changes" comment="zaczęty animal (idzie opornie)">
+      <change afterPath="$PROJECT_DIR$/src/main/java/agh/oop/Genotype.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/agh/oop/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/oop/Animal.java" afterDir="false" />
     </list>
@@ -27,6 +23,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -79,7 +76,7 @@
       <option name="presentableId" value="Default" />
       <updated>1670847956387</updated>
       <workItem from="1670847959827" duration="3567000" />
-      <workItem from="1672132419164" duration="12782000" />
+      <workItem from="1672132419164" duration="16120000" />
     </task>
     <task id="LOCAL-00001" summary="changed package">
       <created>1670849139968</created>
@@ -102,7 +99,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670851149834</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="zaczęty animal (idzie opornie)">
+      <created>1672148448514</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1672148448514</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -123,6 +127,7 @@
     <MESSAGE value="changed package" />
     <MESSAGE value="dodane pliki" />
     <MESSAGE value="dodane pliki2" />
-    <option name="LAST_COMMIT_MESSAGE" value="dodane pliki2" />
+    <MESSAGE value="zaczęty animal (idzie opornie)" />
+    <option name="LAST_COMMIT_MESSAGE" value="zaczęty animal (idzie opornie)" />
   </component>
 </project>
