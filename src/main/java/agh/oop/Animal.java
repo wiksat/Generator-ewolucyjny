@@ -2,9 +2,13 @@ package agh.oop;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Animal extends AbstractWorldMapElement  {
+    String uniqueID = UUID.randomUUID().toString();
     private int lifeEnergy;
+    private int howManyChildren=0;
     private MapDirection orientation;
     private Vector2d position;
     private int age;
@@ -69,7 +73,9 @@ public class Animal extends AbstractWorldMapElement  {
     public boolean isAt(Vector2d position){
         return position.equals(this.position);
     }
-
+    public int getAge(){
+            return this.age;
+    }
     @Override
     public String getName() {
         return switch (this.orientation) {
@@ -177,9 +183,19 @@ public class Animal extends AbstractWorldMapElement  {
         otherAnimal.setLifeEnergy(otherAnimal.getLifeEnergy() - this.amountOfEnergyFromParentToChild);
 
         var child = new Animal((AbstractWorldMap) this.map, this.position, this.amountOfEnergyFromParentToChild*2, newGenotype);
+        //observery
 //        this.becameParent(child);
 //        otherAnimal.becameParent(child);
+
+        this.incrementChildren();
+        otherAnimal.incrementChildren();
         return child;
+    }
+    public void incrementChildren(){
+        this.howManyChildren++;
+    }
+    public int getHowManyChildren(){
+        return this.howManyChildren;
     }
     public void nextDay() {
         this.setLifeEnergy(this.getLifeEnergy() - this.costOfTheDay);

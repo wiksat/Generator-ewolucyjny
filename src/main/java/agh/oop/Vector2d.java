@@ -1,6 +1,7 @@
 package agh.oop;
 
 import java.util.Objects;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Vector2d {
     public final int x;
@@ -37,6 +38,12 @@ public class Vector2d {
     public Vector2d opposite(){
         Vector2d vector2d = new Vector2d(-this.x,-this.y);
         return vector2d;
+    }
+    public static Vector2d getRandomVectorBetween(Vector2d lowerLeft, Vector2d upperRight) {
+        int x = ThreadLocalRandom.current().nextInt(lowerLeft.x, upperRight.x + 1);
+        int y = ThreadLocalRandom.current().nextInt(lowerLeft.y, upperRight.y + 1);
+
+        return new Vector2d(x, y);
     }
     @Override
     public boolean equals(Object other){

@@ -1,56 +1,76 @@
 package agh.oop;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public abstract class AbstractWorldMap implements IWorldMap,IPositionChangeObserver {
     protected List<Animal> animalsList = new ArrayList<>();
-    protected Map<Vector2d, Animal> animals = new HashMap<>();
+    protected final Map<Vector2d, NavigableSet<MapAnimalContainer>> animals = new LinkedHashMap<>();
 
-    protected Map<Vector2d, Grass> grasses = new HashMap<Vector2d, Grass>();
+    protected final Map<Vector2d, AbstractWorldMapElement> grasses = new LinkedHashMap<>();
 
-    protected final MapVisualizer visualize = new MapVisualizer(this);
-    protected MapBoundary mapBoundary=new MapBoundary();
-    public void growGrass(int noOfTuftsInJungle, int noOfTuftsInSteppes) {
-        int noOfGrownGrassTufts = 0;
-        for (int i = 0; i < noOfTuftsInJungle; i++) {
-            if (this.jungleBoundary.area() > this.jungleBoundary.getSlotsTaken()) {
+//    protected final MapVisualizer visualize = new MapVisualizer(this);
+    protected MapBoundary mapBoundary;
+    protected MapBoundary jungleBoundary;
+
+
+
+    //variable from user
+    int numberOfPlant=10;
+
+    @Override
+
+    public boolean place(Animal animal) {
+        if (animal == null) throw new IllegalArgumentException("null can't be placed on the worldMap");
+        if (animal.getPosition() == null) {
+            throw new IllegalArgumentException("Object can't be placed on position " + animal.getPosition());
+        }
+
+        if (!this.animals.containsKey(animal.getPosition())) {
+            this.animals.put(animal.getPosition(), new TreeSet<>());
+//            this.incrementSlotsTaken(animal.getPosition());
+        }
+        this.animals.get(animal.getPosition()).add(new MapAnimalContainer(animal.getLifeEnergy(), animal));
+//jakies obserwatory
+//        animal.addPositionObserver(this);
+//        animal.addEnergyObserver(this);
+//        animal.addLifeObserver(this);
+        return true;
+    }
+
+    public void growGrass() {
+        int numberOfGrown = 0;
+        for (int i = 0; i < numberOfPlant; i++) {
+            if (this.mapBoundary.havePlace()) {
                 Vector2d grassPosition;
                 do {
-                    grassPosition = Vector2d.getRandomVectorBetween(
-                            this.getJungleBoundary().lowerLeft(),
-                            this.getJungleBoundary().upperRight());
+                    double los = Math.random();
+                    if (los<0.8){
+                        grassPosition = Vector2d.getRandomVectorBetween(
+                                this.mapBoundary.lowerLeft(),
+                                this.mapBoundary.upperRight());
+                    }
+                    else{
+                        grassPosition = Vector2d.getRandomVectorBetween(
+                                this.jungleBoundary.lowerLeft(),
+                                this.jungleBoundary.upperRight());
+                    }
+
                 } while (this.isOccupied(grassPosition));
 
-                this.map.put(grassPosition, new Grass(grassPosition));
-                this.incrementSlotsTaken(grassPosition);
-
-                noOfGrownGrassTufts++;
+                this.grasses.put(grassPosition, new Grass(grassPosition));
+//                this.incrementSlotsTaken(grassPosition);
+                numberOfGrown++;
             }
         }
-        for (int i = 0; i < noOfTuftsInSteppes; i++) {
-            if (this.mapBoundary.area() - this.jungleBoundary.area() > this.mapBoundary.getSlotsTaken() - this.jungleBoundary.getSlotsTaken()) {
-                Vector2d grassPosition;
-                do {
-                    grassPosition = Vector2d.getRandomVectorBetween(
-                            this.getMapBoundary().lowerLeft(),
-                            this.getMapBoundary().upperRight());
-                } while (
-                        this.getJungleBoundary().isInside(grassPosition) || this.isOccupied(grassPosition));
 
-                this.map.put(grassPosition, new Grass(grassPosition));
-                this.incrementSlotsTaken(grassPosition);
-
-                noOfGrownGrassTufts++;
-            }
-        }
 //        for (var observer : this.grassActionObservers) {
 //            observer.grassGrow(noOfGrownGrassTufts);
 //        }
 //        coś z obserwatorem
     }
+
+
+
     @Override
     public boolean canMoveTo(Vector2d position) {
         return (!animals.containsKey(position));
@@ -59,43 +79,27 @@ public abstract class AbstractWorldMap implements IWorldMap,IPositionChangeObser
     public MapBoundary getBound(){ return this.mapBoundary; }
     @Override
     public String toString() {
-        this.mapBoundary.sortuj();
-        int x = this.mapBoundary.X_el.get(0).getPosition().x;
-        int y = this.mapBoundary.Y_el.get(0).getPosition().y;
-        Vector2d vectorL = new Vector2d(x,y);
-        x = this.mapBoundary.X_el.get(this.mapBoundary.X_el.size()-1).getPosition().x;
-        y = this.mapBoundary.Y_el.get(this.mapBoundary.Y_el.size()-1).getPosition().y;
-        Vector2d vectorR = new Vector2d(x,y);
+//        this.mapBoundary.sortuj();
+//        int x = this.mapBoundary.X_el.get(0).getPosition().x;
+//        int y = this.mapBoundary.Y_el.get(0).getPosition().y;
+//        Vector2d vectorL = new Vector2d(x,y);
+//        x = this.mapBoundary.X_el.get(this.mapBoundary.X_el.size()-1).getPosition().x;
+//        y = this.mapBoundary.Y_el.get(this.mapBoundary.Y_el.size()-1).getPosition().y;
+//        Vector2d vectorR = new Vector2d(x,y);
 //        return this.visualize.draw(vectorL,vectorR);
         return "";
     }
-    public Vector2d getLowerLeftDrawLimit(){
-        this.mapBoundary.sortuj();
-        int x = this.mapBoundary.X_el.get(0).getPosition().x;
-        int y = this.mapBoundary.Y_el.get(0).getPosition().y;
-        return new Vector2d(x,y);
+    public Vector2d getLowerLeftDrawLimit() {
+        return this.mapBoundary.lowerLeft();
     }
-    public Vector2d getUpperRightDrawLimit(){
-        this.mapBoundary.sortuj();
-        int x = this.mapBoundary.X_el.get(this.mapBoundary.X_el.size()-1).getPosition().x;
-        int y = this.mapBoundary.Y_el.get(this.mapBoundary.Y_el.size()-1).getPosition().y;
-        return new Vector2d(x,y);
+    public Vector2d getUpperRightDrawLimit() {
+        return this.mapBoundary.upperRight();
     }
-    @Override
-    public boolean place(Animal animal) {
-        if(this.animals.get(animal.getPosition()) != null){
-//            return false;
-            throw new IllegalArgumentException(animal.getPosition()+ " is already occupied");
-        }
-        this.animalsList.add(animal);
-        this.animals.put(animal.getPosition(),animal);
-        mapBoundary.put(animal);
-        return true;
-    }
+
 
     @Override
     public boolean isOccupied(Vector2d position) {
-        return this.animals.get(position) != null || this.grasses.get(position) != null;
+        return this.grasses.containsKey(position) || this.animals.containsKey(position);
     }
 
     @Override
@@ -111,8 +115,8 @@ public abstract class AbstractWorldMap implements IWorldMap,IPositionChangeObser
     @Override
     public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
         if(!newPosition.equals(oldPosition)) {
-            Animal a = animals.remove(oldPosition);
-            animals.put(newPosition, a);
+//            Animal a = animals.remove(oldPosition);
+//            animals.put(newPosition, a);
         }
     }
     @Override

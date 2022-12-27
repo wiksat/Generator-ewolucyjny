@@ -3,41 +3,80 @@ package agh.oop;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
-public class MapBoundary implements IPositionChangeObserver{
-    public List<AbstractWorldMapElement> X_el = new ArrayList<>();
-    public List<AbstractWorldMapElement> Y_el = new ArrayList<>();
-    Comparator<AbstractWorldMapElement> yComparator = (o1, o2) -> {
-        if (o1.getPosition().y == o2.getPosition().y)
-            return Integer.compare(o1.getPosition().x, o2.getPosition().x);
-        return Integer.compare(o1.getPosition().y, o2.getPosition().y);
-    };
-    Comparator<AbstractWorldMapElement> xComparator = (o1, o2) -> {
-        if (o1.getPosition().x == o2.getPosition().x)
-            return Integer.compare(o1.getPosition().y, o2.getPosition().y);
-        return Integer.compare(o1.getPosition().x, o2.getPosition().x);
-    };
-    public void printer(){
-        for(AbstractWorldMapElement el: X_el){
-            System.out.print(el.getPosition() + " " + el);
-        }
-        System.out.print('\n');
-        for(AbstractWorldMapElement el: Y_el){
-            System.out.print(el.getPosition() + " " + el);
-        }
-        System.out.print('\n');
+
+public final class MapBoundary implements IPositionChangeObserver {
+    final Vector2d lowerLeft;
+    final Vector2d upperRight;
+    int slotsTaken = 0;
+
+    public MapBoundary(Vector2d lowerLeft, Vector2d upperRight, int slotsTaken) {
+        this.lowerLeft = lowerLeft;
+        this.upperRight = upperRight;
+        this.slotsTaken = slotsTaken;
     }
 
-    public void put(AbstractWorldMapElement Element){
-        this.X_el.add(Element);
-        this.Y_el.add(Element);
+    public MapBoundary(Vector2d lowerLeft, Vector2d upperRight) {
+        this.lowerLeft = lowerLeft;
+        this.upperRight = upperRight;
     }
-    public void sortuj(){
-        X_el.sort(xComparator);
-        Y_el.sort(yComparator);
+
+    public boolean isInside(Vector2d position) {
+        return position != null && position.precedes(this.upperRight) && position.follows(this.lowerLeft);
     }
+
+    public int area() {
+        return (upperRight.x - lowerLeft.x+ 1) * (upperRight.y - lowerLeft.y + 1);
+    }
+
+    public Vector2d lowerLeft() {
+        return lowerLeft;
+    }
+
+    public Vector2d upperRight() {
+        return upperRight;
+    }
+
+    public int getSlotsTaken() {
+        return slotsTaken;
+    }
+
+    public void incrementSlotsTaken() {
+        this.slotsTaken += 1;
+    }
+    public void decrementSlotsTaken() {
+        this.slotsTaken -= 1;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (obj == null || obj.getClass() != this.getClass()) return false;
+        var that = (MapBoundary) obj;
+        return Objects.equals(this.lowerLeft, that.lowerLeft) &&
+                Objects.equals(this.upperRight, that.upperRight) &&
+                this.slotsTaken == that.slotsTaken;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lowerLeft, upperRight, slotsTaken);
+    }
+
+    @Override
+    public String toString() {
+        return "Boundary[" +
+                "lowerLeft=" + lowerLeft + ", " +
+                "upperRight=" + upperRight + ", " +
+                "slotsTaken=" + slotsTaken + ']';
+    }
+
     @Override
     public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
 
+    }
+    public boolean havePlace() {
+        return true;
     }
 }
