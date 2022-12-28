@@ -26,10 +26,9 @@ public class Animal extends AbstractWorldMapElement  {
     private int amountOfEnergyFromParentToChild=3;
     private int energyFromPlant=2;
 
-    Animal(IWorldMap map, Vector2d initialPosition, List<MoveDirection> genotype){
+    Animal(IWorldMap map, Vector2d initialPosition){
         this.map=map;
         this.position=initialPosition;
-        this.genotype = genotype;
         List<MoveDirection> genes = new ArrayList<>();
         for (int i = 0; i < this.geneLength; i++) {
             double randNum = Math.random()*8;
@@ -37,6 +36,7 @@ public class Animal extends AbstractWorldMapElement  {
         }
         this.orientation=MapDirection.createRandom();
         this.lifeEnergy=10;
+        this.genotype = genes;
 
     }
     public Animal(AbstractWorldMap map, Vector2d initialPosition, int startingEnergy, List<MoveDirection> genotype) {
