@@ -12,7 +12,7 @@ public class Animal extends AbstractWorldMapElement  {
     private MapDirection orientation;
     private Vector2d position;
     private int age;
-    private IWorldMap map;
+    private AbstractWorldMap map;
     private StatusOfAnimal status = StatusOfAnimal.ALIVE;
     private List<IPositionChangeObserver> observers = new ArrayList<IPositionChangeObserver>();
     private final List<MoveDirection> genotype;
@@ -25,8 +25,10 @@ public class Animal extends AbstractWorldMapElement  {
     private int minLifeEnergyToReproduce=5;
     private int amountOfEnergyFromParentToChild=3;
     private int energyFromPlant=2;
+    private int mapWariant=0;  //0 kula ziamska, 1 piekielny portal
+    private int costOfTeleport=3;
 
-    Animal(IWorldMap map, Vector2d initialPosition){
+    Animal(AbstractWorldMap map, Vector2d initialPosition){
         this.map=map;
         this.position=initialPosition;
         List<MoveDirection> genes = new ArrayList<>();
@@ -89,7 +91,38 @@ public class Animal extends AbstractWorldMapElement  {
             case NORTHWEST -> "NW";
         };
     }
+    public Vector2d mapMode( Vector2d newPosition) {
+        int x=0;
+        int y=0;
+        if (mapWariant==0){
+            if ( newPosition.x < 0){
+                x =  this.map.mapBoundary.upperRight().x;
+                y = newPosition.y;
+            }
+            else if ( newPosition.x > this.map.mapBoundary.upperRight().x){
+                x =  0;
+                y = newPosition.y;
+            }
+            else if(newPosition.y<0){
+                x=newPosition.x;
+                y = 1;
+                move(MoveDirection.TURN180);
+            }
+            else if (newPosition.x > this.map.mapBoundary.lowerLeft().y){
+                x= newPosition.x;
+                y = this.map.mapBoundary.lowerLeft().y;
+                move(MoveDirection.TURN180);
+            }
+            return new Vector2d(x,y);
+        }
+        else{
+            setLifeEnergy(getLifeEnergy()-costOfTeleport);
+            return Vector2d.getRandomVectorBetween(
+                    this.map.mapBoundary.lowerLeft(),
+                    this.map.mapBoundary.upperRight());
+        }
 
+    }
     public void move(MoveDirection direction){
 
         switch (direction) {
@@ -98,7 +131,7 @@ public class Animal extends AbstractWorldMapElement  {
                 Vector2d newPosition = this.position.add(orientationVector);
 
                 if (this.map.canMoveTo(newPosition)) {
-//                    newPosition = this.map.correctMovePosition(this.getPosition(), newPosition);
+                    newPosition = this.mapMode(newPosition);
                     this.positionChanged(this.position, newPosition);
                     this.position = newPosition;
                 }

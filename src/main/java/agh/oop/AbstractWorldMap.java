@@ -1,5 +1,7 @@
 package agh.oop;
 
+import javafx.util.Pair;
+
 import java.util.*;
 
 public abstract class AbstractWorldMap implements IWorldMap,IPositionChangeObserver {
@@ -16,6 +18,18 @@ public abstract class AbstractWorldMap implements IWorldMap,IPositionChangeObser
 
     //variable from user
     int numberOfPlant=10;
+
+    public AbstractWorldMap(int width, int height, int jungleHeight) {
+        this.mapBoundary = new MapBoundary(new Vector2d(0, 0), new Vector2d(width-1, height-1));
+        int centerX = width / 2;
+        int centerY = height / 2;
+
+        Vector2d jungleLowerLeft = new Vector2d(0, centerY - jungleHeight / 2);
+
+        this.jungleBoundary = new MapBoundary(jungleLowerLeft,
+                jungleLowerLeft.add(new Vector2d(width-1, jungleHeight-1)));
+    }
+
 
     @Override
 
@@ -36,7 +50,47 @@ public abstract class AbstractWorldMap implements IWorldMap,IPositionChangeObser
 //        animal.addLifeObserver(this);
         return true;
     }
+    public NavigableSet<MapAnimalContainer> getAnimalsAt(Vector2d position) {
+        return this.animals.getOrDefault(position, new TreeSet<>());
+    }
+    public MapBoundary getJungleBoundary() {
+        return jungleBoundary;
+    }
+    public MapBoundary getMapBoundary() {
+        return mapBoundary;
+    }
+    public AbstractWorldMapElement getTopWorldMapElementAt(Vector2d position) {
+        var animals = this.getAnimalsAt(position);
+        if (!animals.isEmpty()) {
+            return animals.last().animal();
+        }
+        return this.grasses.get(position);
+    }
+    private void removeAnimalsEntryIfPossible(Vector2d position) {
+        if (this.animals.get(position).isEmpty()) {
+            this.animals.remove(position);
+//            this.decrementSlotsTaken(position);
+        }
+    }
+    public void energyChanged(Animal animal, int oldEnergy, int newEnergy) {
+        MapAnimalContainer oldMapAnimalContainer = new MapAnimalContainer(oldEnergy, animal);
+        var positionSet = this.animals.get(animal.getPosition());
+        positionSet.remove(oldMapAnimalContainer);
 
+        MapAnimalContainer newMapAnimalContainer = new MapAnimalContainer(newEnergy, animal);
+        positionSet.add(newMapAnimalContainer);
+    }
+    public Optional<Pair<Animal, Animal>> getPairOfStrongestAnimalsAt(Vector2d position) {
+        NavigableSet<MapAnimalContainer> allAnimals = this.getAnimalsAt(position);
+
+        if (allAnimals.size() >= 2) {
+            var iterator = allAnimals.descendingIterator();
+
+            return Optional.of(new Pair<>(iterator.next().animal(), iterator.next().animal()));
+        }
+
+        return Optional.empty();
+    }
     public void growGrass() {
         int numberOfGrown = 0;
         for (int i = 0; i < numberOfPlant; i++) {

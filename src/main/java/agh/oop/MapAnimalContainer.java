@@ -16,9 +16,10 @@ public record MapAnimalContainer(int animalEnergy, Animal animal) implements Com
         if(this.animalEnergy() == o.animalEnergy()){
             if (this.animal().getAge()== o.animal().getAge()) {
                 if (this.animal().getHowManyChildren() == o.animal().getHowManyChildren()) {
-                    return this.animal().getHowManyChildren() - o.animal().getHowManyChildren();
+
+                    return this.animal().getAge() - o.animal().getHowManyChildren();
                 }
-                return this.animal().getAge() - o.animal().getHowManyChildren();
+                return this.animal().getHowManyChildren() - o.animal().getHowManyChildren();
             }
             return this.animal().getAge() - o.animal().getAge();
         }
