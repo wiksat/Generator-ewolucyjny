@@ -127,7 +127,7 @@ public abstract class AbstractWorldMap implements IWorldMap,IPositionChangeObser
 
     @Override
     public boolean canMoveTo(Vector2d position) {
-        return (!animals.containsKey(position));
+        return (position != null);
     }
     @Override
     public MapBoundary getBound(){ return this.mapBoundary; }

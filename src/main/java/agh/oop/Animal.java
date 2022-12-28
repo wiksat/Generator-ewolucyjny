@@ -16,6 +16,9 @@ public class Animal extends AbstractWorldMapElement  {
     private StatusOfAnimal status = StatusOfAnimal.ALIVE;
     private List<IPositionChangeObserver> observers = new ArrayList<IPositionChangeObserver>();
     private final List<MoveDirection> genotype;
+    private int genLength;
+    private int genCounter;
+    private int lastUsedGene;
 
     //variables from userentry
     private int geneLength=10;
@@ -25,7 +28,7 @@ public class Animal extends AbstractWorldMapElement  {
     private int minLifeEnergyToReproduce=5;
     private int amountOfEnergyFromParentToChild=3;
     private int energyFromPlant=2;
-    private int mapWariant=0;  //0 kula ziamska, 1 piekielny portal
+    private boolean mapWariant=true;  //0 kula ziamska, 1 piekielny portal
     private int costOfTeleport=3;
 
     public Animal(AbstractWorldMap map, Vector2d initialPosition){
@@ -39,13 +42,18 @@ public class Animal extends AbstractWorldMapElement  {
         this.orientation=MapDirection.createRandom();
         this.lifeEnergy=10;
         this.genotype = genes;
-
+        this.genLength=genotype.size();
+        this.genCounter=0;
+        this.lastUsedGene=-1;
     }
     public Animal(AbstractWorldMap map, Vector2d initialPosition, int startingEnergy, List<MoveDirection> genotype) {
         this.position=initialPosition;
         this.map = map;
         this.lifeEnergy = startingEnergy;
         this.genotype = genotype;
+        this.genLength=genotype.size();
+        this.genCounter=0;
+        this.lastUsedGene=-1;
     }
     public Vector2d getPosition() {
         return this.position;
@@ -98,7 +106,7 @@ public class Animal extends AbstractWorldMapElement  {
     public Vector2d mapMode( Vector2d newPosition) {
         int x=0;
         int y=0;
-        if (mapWariant==0){
+        if (mapWariant){
             if ( newPosition.x < 0){
                 x =  this.map.mapBoundary.upperRight().x;
                 y = newPosition.y;
@@ -251,5 +259,18 @@ public class Animal extends AbstractWorldMapElement  {
         for (IPositionChangeObserver Observer: this.observers) {
             Observer.positionChanged(oldPosition,newPosition);
         }
+    }
+
+    public void selectDirectionAndMove(boolean behaviourVariant) {
+        if (behaviourVariant){
+            if (Math.random()<0.8){
+
+            }else{
+                int t= (int) (Math.random()*this.genLength);
+
+            }
+        }
+
+
     }
 }
