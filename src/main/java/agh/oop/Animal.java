@@ -44,7 +44,7 @@ public class Animal extends AbstractWorldMapElement  {
         this.genotype = genes;
         this.genLength=genotype.size();
         this.genCounter=0;
-        this.lastUsedGene=-1;
+        this.lastUsedGene=(int) (Math.random()*this.genLength);
     }
     public Animal(AbstractWorldMap map, Vector2d initialPosition, int startingEnergy, List<MoveDirection> genotype) {
         this.position=initialPosition;
@@ -53,7 +53,7 @@ public class Animal extends AbstractWorldMapElement  {
         this.genotype = genotype;
         this.genLength=genotype.size();
         this.genCounter=0;
-        this.lastUsedGene=-1;
+        this.lastUsedGene=(int) (Math.random()*this.genLength);
     }
     public Vector2d getPosition() {
         return this.position;
@@ -264,13 +264,20 @@ public class Animal extends AbstractWorldMapElement  {
     public void selectDirectionAndMove(boolean behaviourVariant) {
         if (behaviourVariant){
             if (Math.random()<0.8){
-
+                this.move(this.genotype.get( this.lastUsedGene+1));
+                this.lastUsedGene= this.lastUsedGene+1;
             }else{
                 int t= (int) (Math.random()*this.genLength);
-
+                this.move(this.genotype.get(t));
+                this.lastUsedGene=t;
             }
         }
-
-
+        else{
+            this.move(this.genotype.get( this.lastUsedGene+1));
+            this.lastUsedGene= this.lastUsedGene+1;
+        }
+        if (this.lastUsedGene>=this.genLength){
+            this.lastUsedGene=-1;
+        }
     }
 }
