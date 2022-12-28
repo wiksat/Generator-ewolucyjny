@@ -189,11 +189,26 @@ public class AbstractWorldMap implements IWorldMap,IPositionChangeObserver {
     }
 
     @Override
-    public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
-        if(!newPosition.equals(oldPosition)) {
-//            Animal a = animals.remove(oldPosition);
-//            animals.put(newPosition, a);
-        }
+    public boolean positionChanged(Animal animal, Vector2d oldPosition, Vector2d newPosition) {
+//        if (worldMapElement instanceof Animal animal) {
+            MapAnimalContainer mapAnimalContainer = new MapAnimalContainer(animal.getLifeEnergy(), animal);
+            this.animals.get(oldPosition).remove(mapAnimalContainer);
+            removeAnimalsEntryIfPossible(oldPosition);
+            if (!this.animals.containsKey(newPosition)) {
+                this.animals.put(newPosition, new TreeSet<>());
+//                this.incrementSlotsTaken(newPosition);
+            }
+            this.animals.get(newPosition).add(mapAnimalContainer);
+
+//        }
+//        else {
+//            this.grasses.remove(oldPosition);
+////            this.decrementSlotsTaken(oldPosition);
+//            this.grasses.put(newPosition, worldMapElement);
+////            this.incrementSlotsTaken(newPosition);
+//        }
+
+        return true;
     }
     @Override
     public List<Animal> getAnimals(){

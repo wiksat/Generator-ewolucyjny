@@ -1,5 +1,7 @@
 package agh.oop;
 
+import agh.simulation.SimulationParameters;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -30,6 +32,7 @@ public class Animal extends AbstractWorldMapElement  {
     private int energyFromPlant=2;
     private boolean mapWariant=true;  //0 kula ziamska, 1 piekielny portal
     private int costOfTeleport=3;
+    private boolean mutationVariant=false;
 
     public Animal(AbstractWorldMap map, Vector2d initialPosition){
         this.map=map;
@@ -191,39 +194,29 @@ public class Animal extends AbstractWorldMapElement  {
 
         List<MoveDirection> newGenotype;
         boolean side=Math.random() < 0.5;
-//        if (precentOfGenesAnotherAnimal > precentOfGenesThisAnimal) {
             if (side) {
-//                newGenotype = new Genotype(otherAnimal.getGenotype().getLeftSlice(precentOfGenesAnotherAnimal),
-//                        this.getGenotype().getRightSlice(precentOfGenesThisAnimal));
                 newGenotype=(otherAnimal.getLeftSlice((int)precentOfGenesAnotherAnimal*otherAnimal.getGenotype().size()));
                 newGenotype.addAll((this.getRightSlice((int)precentOfGenesThisAnimal*this.getGenotype().size())));
 
             }
             else {
-//                newGenotype = new Genotype(this.getGenotype().getLeftSlice(precentOfGenesThisAnimal),
-//                        otherAnimal.getGenotype().getRightSlice(precentOfGenesAnotherAnimal));
                 newGenotype=(this.getLeftSlice((int)precentOfGenesThisAnimal*this.getGenotype().size()));
                 newGenotype.addAll((otherAnimal.getRightSlice((int)precentOfGenesAnotherAnimal*otherAnimal.getGenotype().size())));
             }
-//        }
-//        else {
-//            if (side) {
-////                newGenotype = new Genotype(this.getGenotype().getLeftSlice(precentOfGenesAnotherAnimal),
-////                        otherAnimal.getGenotype().getRightSlice(precentOfGenesThisAnimal));
-//
-//                newGenotype=(this.getLeftSlice((int)precentOfGenesAnotherAnimal*otherAnimal.getGenotype().size()));
-//                newGenotype.addAll((otherAnimal.getRightSlice((int)precentOfGenesThisAnimal*this.getGenotype().size())));
-//            }
-//            else {
-////                newGenotype = new Genotype(otherAnimal.getGenotype().getLeftSlice(precentOfGenesThisAnimal),
-////                        this.getGenotype().getRightSlice(precentOfGenesAnotherAnimal));
-//                newGenotype=(otherAnimal.getLeftSlice((int)precentOfGenesThisAnimal*this.getGenotype().size()));
-//                newGenotype.addAll((this.getRightSlice((int)precentOfGenesAnotherAnimal*otherAnimal.getGenotype().size())));
-//            }
-//        }
+            if (mutationVariant){
+                int ile=SimulationParameters.maxNumberOfMutations-SimulationParameters.minNumberOfMutations;
+                int l= (int) (Math.random()*ile+SimulationParameters.minNumberOfMutations);
+                for (int i = 0; i < l; i++) {
+                    int ind= (int) (Math.random()*this.genLength);
+                    if (Math.random()>0.5){
+                        newGenotype.set(ind,newGenotype.get(ind).next());
+                    }else{
+                        newGenotype.set(ind,newGenotype.get(ind).prev());
+                    }
 
-//        int thisEnergyCost = (int) (this.getEnergy() * SimulationConfig.procreationEnergyCostFraction);
-//        int otherEnergyCost = (int) (otherAnimal.getEnergy() * SimulationConfig.procreationEnergyCostFraction);
+                }
+            }
+
         this.setLifeEnergy(this.getLifeEnergy() - this.amountOfEnergyFromParentToChild);
         otherAnimal.setLifeEnergy(otherAnimal.getLifeEnergy() - this.amountOfEnergyFromParentToChild);
 
@@ -236,6 +229,22 @@ public class Animal extends AbstractWorldMapElement  {
         otherAnimal.incrementChildren();
         return child;
     }
+
+    public MapDirection getOrientation() {return orientation;}
+    public String getImageResource() {
+        String basePath = "src/main/resources/";
+        return basePath + "animal/" + switch (this.getOrientation()) {
+            case NORTH -> "0.png";
+            case NORTHEAST -> "45.png";
+            case EAST -> "90.png";
+            case SOUTHEAST -> "135.png";
+            case SOUTH -> "180.png";
+            case SOUTHWEST -> "225.png";
+            case WEST -> "270.png";
+            case NORTHWEST -> "315.png";
+        };
+    }
+
     public void incrementChildren(){
         this.howManyChildren++;
     }
@@ -257,7 +266,7 @@ public class Animal extends AbstractWorldMapElement  {
     void positionChanged(Vector2d oldPosition, Vector2d newPosition){
 //        this.map.getBound().sortuj();
         for (IPositionChangeObserver Observer: this.observers) {
-            Observer.positionChanged(oldPosition,newPosition);
+            Observer.positionChanged(this,oldPosition,newPosition);
         }
     }
 
