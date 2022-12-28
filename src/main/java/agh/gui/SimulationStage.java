@@ -19,20 +19,17 @@ public class SimulationStage extends Stage {
 
     private SimulationThreadController sThreadController;
 
-    public SimulationStage(int mapHight, int mapWidth) {
+    public SimulationStage(int mapHeight, int mapWidth, int jungleHeight) {
         AbstractWorldMap aWorldMap;
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
         this.setX(bounds.getMinX());
 
-        if (SimulationParameters.mapVariant) {
-            aWorldMap = new AbstractWorldMap()
-        } else {
+        aWorldMap = new AbstractWorldMap(mapWidth, mapHeight, jungleHeight);
 
-        }
 
-        this.guiWorldMap = new GuiWorldMap(aWorldMap, this);
-        this.sThreadController = new SimulationThreadController(aWorldMap, this.guiWorldMap);
+        guiWorldMap = new GuiWorldMap(aWorldMap, this);
+        this.sThreadController = new SimulationThreadController(aWorldMap, guiWorldMap);
 
 
         Region spacer = new Region();
@@ -53,7 +50,7 @@ public class SimulationStage extends Stage {
 
         simulationControls.getChildren().addAll(startButton);
 
-        layout.getChildren().addAll(this.guiWorldMap, spacer, rightBox);
+        layout.getChildren().addAll(guiWorldMap, spacer, rightBox);
 
         this.setY(bounds.getMinY());
         this.setScene(new Scene(layout, bounds.getWidth() / 2, bounds.getHeight()));

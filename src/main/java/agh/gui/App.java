@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 public class App extends Application {
 
+    SimulationStage WorldMapSimulationStage;
     @Override
     public void start(Stage primaryStage) throws Exception {
         Scene firstScene = createFirstScene();
@@ -24,73 +25,69 @@ public class App extends Application {
 
         GridPane grid = new GridPane();
 
-        var mapHightNTBox = new NumberTextField(GuiParameters.mapHight);
-        grid.addRow(1, new Label("Wysokosc mapy: "), mapHightNTBox);
+        var mapHeightNTBox = new NumberTextField(GuiParameters.mapHeight);
+        grid.addRow(1, new Label("Wysokosc mapy: "), mapHeightNTBox);
 
         var mapWidthNTBox = new NumberTextField(GuiParameters.mapWidth);
         grid.addRow(2, new Label("Szerokosc mapy: "), mapWidthNTBox);
 
+        var jungleHightNTBox = new NumberTextField(GuiParameters.jungleHight);
+        grid.addRow(3, new Label("Wysokosc pasa rownikowego: "), jungleHightNTBox);
+
         var mapVariantComboBox = new ComboBox<>();
         mapVariantComboBox.getItems().addAll("kula ziemska", "magiczny portal");
-//        mapVariantComboBox.setOnAction(e -> {
-//            if (mapVariantComboBox.getValue() == "kula ziemska") {
-//                GuiParameters.mapVariant = false;
-//            }
-//            else {
-//                GuiParameters.mapVariant = true;
-//            }
-//        });
-        grid.addRow(3, new Label("Wybierz wariant mapy: "), mapVariantComboBox);
+        grid.addRow(4, new Label("Wybierz wariant mapy: "), mapVariantComboBox);
 
         var startNumberOfPlantsNTBox = new NumberTextField(GuiParameters.startNumberOfPlants);
-        grid.addRow(4, new Label("Startowa liczba roslin: "), startNumberOfPlantsNTBox);
+        grid.addRow(5, new Label("Startowa liczba roslin: "), startNumberOfPlantsNTBox);
 
         var plantEnergyNTBox = new NumberTextField(GuiParameters.plantEnergy);
-        grid.addRow(5, new Label("Energia zapewniana przez zjedzenie jednej rosliny: "), plantEnergyNTBox);
+        grid.addRow(6, new Label("Energia zapewniana przez zjedzenie jednej rosliny: "), plantEnergyNTBox);
 
         var numberOfNewPlantNTBox = new NumberTextField(GuiParameters.numberOfNewPlant);
-        grid.addRow(6, new Label("Liczba roslin wyrastajaca kazdego dnia: "), numberOfNewPlantNTBox);
+        grid.addRow(7, new Label("Liczba roslin wyrastajaca kazdego dnia: "), numberOfNewPlantNTBox);
 
         var plantGrowthVariantComboBox = new ComboBox<>();
         plantGrowthVariantComboBox.getItems().addAll("zalesione rowniki", "toksyczne trupt");
-        grid.addRow(7, new Label("Wybierz wariant wzrostu roslin: "), plantGrowthVariantComboBox);
+        grid.addRow(8, new Label("Wybierz wariant wzrostu roslin: "), plantGrowthVariantComboBox);
 
         var startNumberOfAnimalsNTBox = new NumberTextField(GuiParameters.startNumberOfAnimals);
-        grid.addRow(8, new Label("Startowa liczba zwierzakow: "), startNumberOfAnimalsNTBox);
+        grid.addRow(9, new Label("Startowa liczba zwierzakow: "), startNumberOfAnimalsNTBox);
 
         var startAnimalEnergyNTBox = new NumberTextField(GuiParameters.startAnimalEnergy);
-        grid.addRow(9, new Label("Startowa energia zwierzakow: "), startAnimalEnergyNTBox);
+        grid.addRow(10, new Label("Startowa energia zwierzakow: "), startAnimalEnergyNTBox);
 
         var animalEnergyToReproduceNTBox = new NumberTextField(GuiParameters.animalEnergyToReproduce);
-        grid.addRow(10, new Label("Energia konieczna, by uznac zwierzaka za najedzonego: "), animalEnergyToReproduceNTBox);
+        grid.addRow(11, new Label("Energia konieczna, by uznac zwierzaka za najedzonego: "), animalEnergyToReproduceNTBox);
 
         var animalEnergySpendForPropagationNTBox = new NumberTextField(GuiParameters.animalEnergySpendForPropagation);
-        grid.addRow(11, new Label("Energia rodzicow zuzywana by stworzyc potomka: "), animalEnergySpendForPropagationNTBox);
+        grid.addRow(12, new Label("Energia rodzicow zuzywana by stworzyc potomka: "), animalEnergySpendForPropagationNTBox);
 
         var minNumberOfMutationsNTBox = new NumberTextField(GuiParameters.minNumberOfMutations);
-        grid.addRow(12, new Label("Minimalna liczba mutacji u potomkow: "), minNumberOfMutationsNTBox);
+        grid.addRow(13, new Label("Minimalna liczba mutacji u potomkow: "), minNumberOfMutationsNTBox);
 
         var maxNumberOfMutationsNTBox = new NumberTextField(GuiParameters.maxNumberOfMutations);
-        grid.addRow(13, new Label("Maksymalna liczba mutacji u potomkow: "), maxNumberOfMutationsNTBox);
+        grid.addRow(14, new Label("Maksymalna liczba mutacji u potomkow: "), maxNumberOfMutationsNTBox);
 
         var mutationVariantComboBox = new ComboBox<>();
         mutationVariantComboBox.getItems().addAll("pelna losowosc", "lekka korekta");
-        grid.addRow(14, new Label("Wybierz wariant mutacji: "), mutationVariantComboBox);
+        grid.addRow(15, new Label("Wybierz wariant mutacji: "), mutationVariantComboBox);
 
         var lengthOfAnimalGenomeNTBox = new NumberTextField(GuiParameters.lengthOfAnimalGenome);
-        grid.addRow(15, new Label("Dlugosc genomu zwierzakow: "), lengthOfAnimalGenomeNTBox);
+        grid.addRow(16, new Label("Dlugosc genomu zwierzakow: "), lengthOfAnimalGenomeNTBox);
 
         var behaviourVariantComboBox = new ComboBox<>();
         behaviourVariantComboBox.getItems().addAll("pelna predestynacja", "nieco szalenstwa");
-        grid.addRow(16, new Label("Wybierz wariant zachowania zwierzakow"), behaviourVariantComboBox);
+        grid.addRow(17, new Label("Wybierz wariant zachowania zwierzakow"), behaviourVariantComboBox);
 
 
         Button startSimulation = new Button("Wlacz symulacje");
-        grid.addRow(17, startSimulation);
+        grid.addRow(18, startSimulation);
 
         startSimulation.setOnAction(e -> {
-            int mapHight = mapHightNTBox.getNumber();
+            int mapHeight = mapHeightNTBox.getNumber();
             int mapWidth = mapWidthNTBox.getNumber();
+            int jungleHeight = jungleHightNTBox.getNumber();
 
             SimulationParameters.startNumberOfPlants = startNumberOfPlantsNTBox.getNumber();
             SimulationParameters.plantEnergy = plantEnergyNTBox.getNumber();
@@ -102,31 +99,33 @@ public class App extends Application {
             SimulationParameters.minNumberOfMutations = minNumberOfMutationsNTBox.getNumber();
             SimulationParameters.maxNumberOfMutations = maxNumberOfMutationsNTBox.getNumber();
             SimulationParameters.lengthOfAnimalGenome = lengthOfAnimalGenomeNTBox.getNumber();
-            if (mapVariantComboBox.getValue().toString().equals("kula ziemska")) {
+            if (mapVariantComboBox.getValue() != null && mapVariantComboBox.getValue().toString().equals("kula ziemska")) {
                 SimulationParameters.mapVariant = false;
             } else {
                 SimulationParameters.mapVariant = true;
             }
-            if (plantGrowthVariantComboBox.getValue().toString().equals("zalesione rowniki")) {
+            if (plantGrowthVariantComboBox.getValue() != null && plantGrowthVariantComboBox.getValue().toString().equals("zalesione rowniki")) {
                 SimulationParameters.plantGrowthVariant = false;
             } else {
                 SimulationParameters.plantGrowthVariant = true;
             }
-            if (mutationVariantComboBox.getValue().toString().equals("pelna losowosc")) {
+            if (mutationVariantComboBox.getValue() != null && mutationVariantComboBox.getValue().toString().equals("pelna losowosc")) {
                 SimulationParameters.mutationVariant = false;
             } else {
                 SimulationParameters.mutationVariant = true;
             }
-            if (behaviourVariantComboBox.getValue().toString().equals("pelna predestynacja")) {
+            if (behaviourVariantComboBox.getValue() != null && behaviourVariantComboBox.getValue().toString().equals("pelna predestynacja")) {
                 SimulationParameters.behaviourVariant = false;
             } else {
                 SimulationParameters.behaviourVariant = true;
             }
+
+            WorldMapSimulationStage = new SimulationStage(mapWidth, mapHeight, jungleHeight);
+            WorldMapSimulationStage.setTitle("Symulacja swiata zwierzat");
+
         });
 
-
-
-
+//        grid.getChildren().add(startSimulation);
         return new Scene(grid, 500, 700);
     }
 
