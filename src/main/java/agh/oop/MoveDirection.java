@@ -15,6 +15,32 @@ public enum MoveDirection {
         this.numerValue = value;
     }
 
+    public MoveDirection next() {
+        return switch (this) {
+            case FORWARD -> MoveDirection.TURN45;
+            case TURN45 -> MoveDirection.TURN90;
+            case TURN90 -> MoveDirection.TURN135;
+            case TURN135 -> MoveDirection.TURN180;
+            case TURN180 -> MoveDirection.TURN225;
+            case TURN225 -> MoveDirection.TURN270;
+            case TURN270 -> MoveDirection.TURN315;
+            case TURN315 -> MoveDirection.FORWARD;
+        };
+    }
+    public MoveDirection prev() {
+        return switch (this) {
+            case FORWARD -> MoveDirection.TURN315;
+            case TURN45 -> MoveDirection.FORWARD;
+            case TURN90 -> MoveDirection.TURN45;
+            case TURN135 -> MoveDirection.TURN90;
+            case TURN180 -> MoveDirection.TURN135;
+            case TURN225 -> MoveDirection.TURN180;
+            case TURN270 -> MoveDirection.TURN225;
+            case TURN315 -> MoveDirection.TURN270;
+        };
+    }
+
+
     public static MoveDirection extract(int value){
         switch (value){
             case 0 ->{
