@@ -120,7 +120,7 @@ public abstract class AbstractWorldMap implements IWorldMap,IPositionChangeObser
 //        for (var observer : this.grassActionObservers) {
 //            observer.grassGrow(noOfGrownGrassTufts);
 //        }
-//        coś z obserwatorem
+//        cos z obserwatorem
     }
 
 
@@ -166,6 +166,14 @@ public abstract class AbstractWorldMap implements IWorldMap,IPositionChangeObser
         }
         return null;
     }
+
+    public Object getGrassAt(Vector2d position){
+        if(this.grasses.get(position) != null){
+            return this.grasses.get(position);
+        }
+        return null;
+    }
+
     @Override
     public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
         if(!newPosition.equals(oldPosition)) {
