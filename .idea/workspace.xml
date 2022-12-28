@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4aa76a78-281e-4a75-ba85-5abd33576347" name="Changes" comment="poprawiony Animal">
+    <list default="true" id="4aa76a78-281e-4a75-ba85-5abd33576347" name="Changes" comment="poprawiony Animal2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/agh/oop/AbstractWorldMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/oop/AbstractWorldMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agh/oop/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/oop/Animal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agh/oop/MapAnimalContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/oop/MapAnimalContainer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +95,7 @@
       <option name="presentableId" value="Default" />
       <updated>1670847956387</updated>
       <workItem from="1670847959827" duration="3567000" />
-      <workItem from="1672132419164" duration="35890000" />
+      <workItem from="1672132419164" duration="36765000" />
     </task>
     <task id="LOCAL-00001" summary="changed package">
       <created>1670849139968</created>
@@ -155,7 +153,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672222810749</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="poprawiony Animal2">
+      <created>1672260812934</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1672260812934</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,6 +186,7 @@
     <MESSAGE value="zaczęty AbstractWorldMap" />
     <MESSAGE value="dalsza praca nad AbstractWorldMap" />
     <MESSAGE value="poprawiony Animal" />
-    <option name="LAST_COMMIT_MESSAGE" value="poprawiony Animal" />
+    <MESSAGE value="poprawiony Animal2" />
+    <option name="LAST_COMMIT_MESSAGE" value="poprawiony Animal2" />
   </component>
 </project>

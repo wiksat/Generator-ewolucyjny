@@ -71,7 +71,7 @@ public class SimulationEngine implements Runnable {
 
         for (Vector2d grassPosition : eatenGrassPosition) {
             //grass element
-            this.map.removeMapElementAt(grassPosition);
+            this.map.removeGrassAt(grassPosition);
         }
     }
     private void makeAnimalReproduce() {

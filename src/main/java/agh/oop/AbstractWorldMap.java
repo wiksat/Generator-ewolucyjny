@@ -174,6 +174,20 @@ public abstract class AbstractWorldMap implements IWorldMap,IPositionChangeObser
         return null;
     }
 
+    public void removeGrassAt(Vector2d position) {
+        var obj = this.grasses.remove(position);
+        if (obj != null) {
+//            this.decrementSlotsTaken(position);
+
+            if (obj instanceof Grass) {
+//                for (var observer : grassActionObservers) {
+//                    observer.grassEaten();
+//                }
+                //observery
+            }
+        }
+    }
+
     @Override
     public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
         if(!newPosition.equals(oldPosition)) {
