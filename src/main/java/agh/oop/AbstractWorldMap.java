@@ -131,6 +131,8 @@ public class AbstractWorldMap implements IWorldMap,IPositionChangeObserver {
     }
     @Override
     public MapBoundary getBound(){ return this.mapBoundary; }
+
+
     @Override
     public String toString() {
 //        this.mapBoundary.sortuj();
