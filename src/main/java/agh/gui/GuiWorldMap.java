@@ -70,6 +70,7 @@ public class GuiWorldMap extends VBox {
                 Vector2d position = new Vector2d(i, j);
                 StackPane stackPane = new StackPane();
                 stackPane.setBackground(new Background(new BackgroundFill(Color.rgb(5, 105, 25), null, null)));
+                System.out.println("JEBAC JAVE" + i + j);
 //                if równik
 
 //                if isOccupied
