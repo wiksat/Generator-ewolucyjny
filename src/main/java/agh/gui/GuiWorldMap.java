@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 import static javafx.geometry.VPos.*;
 
-public class GuiWorldMap {
+public class GuiWorldMap extends VBox {
 
     AbstractWorldMap aWorldMap;
     private GridPane gridMap = new GridPane();
@@ -25,7 +25,7 @@ public class GuiWorldMap {
         this.stage = stage;
         this.gridMap.setGridLinesVisible(true);
         gridMap.setBackground(new Background(new BackgroundFill(Color.rgb(115, 180, 110), null, null)));
-
+        getChildren().addAll(gridMap);
         createGrid();
     }
 
@@ -35,25 +35,33 @@ public class GuiWorldMap {
 
         int minX = 0;
         int minY = 0;
-        int maxX = GuiParameters.mapWidth;
-        int maxY = GuiParameters.mapHight;
+        int maxX = GuiParameters.gridCellWidth;
+        int maxY = GuiParameters.gridCellHeight;
 
 
 
-        this.gridMap.getRowConstraints().add(new RowConstraints(GuiParameters.mapHight));
-        this.gridMap.getColumnConstraints().add(new ColumnConstraints(GuiParameters.mapWidth));
+//        this.gridMap.getRowConstraints().add(new RowConstraints(GuiParameters.gridCellHeight));
+//        this.gridMap.getColumnConstraints().add(new ColumnConstraints(GuiParameters.gridCellWidth));
+
+
+        Label xyLabel = new Label("y\\x");
+        GridPane.setHalignment(xyLabel, HPos.CENTER);
+        this.gridMap.getColumnConstraints().add(new ColumnConstraints(GuiParameters.gridCellWidth));
+        this.gridMap.getRowConstraints().add(new RowConstraints(GuiParameters.gridCellHeight));
+        this.gridMap.add(xyLabel, 0, 0, 1, 1);
+
 
         for (int i = minX; i < maxX; i++) {
             Label label = new Label(Integer.toString(i));
             this.gridMap.add(label, i + 1, 0, 1, 1);
-            this.gridMap.getColumnConstraints().add(new ColumnConstraints(GuiParameters.mapWidth));
+            this.gridMap.getColumnConstraints().add(new ColumnConstraints(GuiParameters.gridCellWidth));
             GridPane.setHalignment(label, HPos.CENTER);
         }
 
         for (int i = minY; i < maxY; i++) {
             Label label = new Label(Integer.toString(i));
-            this.gridMap.add(label, 0, maxY - i - 1, 1, 1);
-            this.gridMap.getRowConstraints().add(new RowConstraints(GuiParameters.mapHight));
+            this.gridMap.add(label, 0, maxY - i, 1, 1);
+            this.gridMap.getRowConstraints().add(new RowConstraints(GuiParameters.gridCellHeight));
             GridPane.setHalignment(label, HPos.CENTER);
         }
 
@@ -70,6 +78,7 @@ public class GuiWorldMap {
                 this.gridMap.add(stackPane, i + 1, j + 1, 1, 1);
             }
         }
+
     }
     public void refresh(AbstractWorldMap map) {
         Platform.runLater(this::createGrid);

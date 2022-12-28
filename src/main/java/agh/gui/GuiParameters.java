@@ -1,7 +1,11 @@
 package agh.gui;
 
 public interface GuiParameters {
-    int mapHight = 10;
+
+    int gridCellWidth = 20;
+    int gridCellHeight = 20;
+    
+    int mapHeight = 10;
     int mapWidth = 10;
     int jungleHight = 2;
     boolean mapVariant = false;  /* false - kula ziemska, true - magiczny portal */

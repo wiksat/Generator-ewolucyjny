@@ -32,7 +32,7 @@ public class SimulationEngine implements Runnable {
             Vector2d position;
             do {
                 int x = ThreadLocalRandom.current().nextInt(0, GuiParameters.mapWidth);
-                int y = ThreadLocalRandom.current().nextInt(0, GuiParameters.mapHight);
+                int y = ThreadLocalRandom.current().nextInt(0, GuiParameters.mapHeight);
                 position = new Vector2d(x, y);
             } while (this.map.isOccupied(position));
 
@@ -123,7 +123,7 @@ public class SimulationEngine implements Runnable {
 
         this.map.growGrass();
     }
-    
+
     @Override
     public void run() {
         while(true) {
