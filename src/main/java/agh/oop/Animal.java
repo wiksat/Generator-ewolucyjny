@@ -231,17 +231,18 @@ public class Animal extends AbstractWorldMapElement  {
     }
 
     public MapDirection getOrientation() {return orientation;}
-    public String getImageResource() {
-        String basePath = "src/main/resources/";
-        return basePath + "animal/" + switch (this.getOrientation()) {
-            case NORTH -> "0.png";
-            case NORTHEAST -> "45.png";
-            case EAST -> "90.png";
-            case SOUTHEAST -> "135.png";
-            case SOUTH -> "180.png";
-            case SOUTHWEST -> "225.png";
-            case WEST -> "270.png";
-            case NORTHWEST -> "315.png";
+
+    public String getImageSRC() {
+        String path = "src/main/resources/";
+        return path + "animal/" + switch (this.getOrientation()) {
+            case NORTH -> "turtle0.png";
+            case NORTHEAST -> "turtle45.png";
+            case EAST -> "turtle90.png";
+            case SOUTHEAST -> "turtle135.png";
+            case SOUTH -> "turtle180.png";
+            case SOUTHWEST -> "turtle225.png";
+            case WEST -> "turtle270.png";
+            case NORTHWEST -> "turtle315.png";
         };
     }
 
