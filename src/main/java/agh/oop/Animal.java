@@ -28,7 +28,7 @@ public class Animal extends AbstractWorldMapElement  {
     private int mapWariant=0;  //0 kula ziamska, 1 piekielny portal
     private int costOfTeleport=3;
 
-    Animal(AbstractWorldMap map, Vector2d initialPosition){
+    public Animal(AbstractWorldMap map, Vector2d initialPosition){
         this.map=map;
         this.position=initialPosition;
         List<MoveDirection> genes = new ArrayList<>();
@@ -49,6 +49,10 @@ public class Animal extends AbstractWorldMapElement  {
     }
     public Vector2d getPosition() {
         return this.position;
+    }
+
+    public StatusOfAnimal getStatus() {
+        return status;
     }
     public String getA(){
         return position+" "+orientation;
