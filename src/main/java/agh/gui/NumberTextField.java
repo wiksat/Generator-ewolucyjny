@@ -23,8 +23,8 @@ public class NumberTextField extends TextField {
     private final NumberFormat nf;
     private ObjectProperty<BigDecimal> number = new SimpleObjectProperty<>();
 
-    public final BigDecimal getNumber() {
-        return number.get();
+    public final int getNumber() {
+        return number.get().intValue();
     }
 
     public final void setNumber(BigDecimal value) {

@@ -12,8 +12,8 @@ public interface GuiParameters {
 
     int startNumberOfAnimals = 10;
     int startAnimalEnergy = 20;
-    int animalEnergyToBeFull = 10;
-    int animalEnergyNeededToPropagation = 10;
+    int animalEnergyToReproduce = 10;
+    int animalEnergySpendForPropagation = 10;
 
     int minNumberOfMutations = 0;
     int maxNumberOfMutations = 1;

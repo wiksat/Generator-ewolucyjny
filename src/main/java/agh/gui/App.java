@@ -1,5 +1,6 @@
 package agh.gui;
 
+import agh.simulation.SimulationParameters;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -60,11 +61,11 @@ public class App extends Application {
         var startAnimalEnergyNTBox = new NumberTextField(GuiParameters.startAnimalEnergy);
         grid.addRow(9, new Label("Startowa energia zwierzakow: "), startAnimalEnergyNTBox);
 
-        var animalEnergyToBeFullNTBox = new NumberTextField(GuiParameters.animalEnergyToBeFull);
-        grid.addRow(10, new Label("Energia konieczna, by uznac zwierzaka za najedzonego: "), animalEnergyToBeFullNTBox);
+        var animalEnergyToReproduceNTBox = new NumberTextField(GuiParameters.animalEnergyToReproduce);
+        grid.addRow(10, new Label("Energia konieczna, by uznac zwierzaka za najedzonego: "), animalEnergyToReproduceNTBox);
 
-        var animalEnergyNeededToPropagationNTBox = new NumberTextField(GuiParameters.animalEnergyNeededToPropagation);
-        grid.addRow(11, new Label("Energia rodzicow zuzywana by stworzyc potomka: "), animalEnergyNeededToPropagationNTBox);
+        var animalEnergySpendForPropagationNTBox = new NumberTextField(GuiParameters.animalEnergySpendForPropagation);
+        grid.addRow(11, new Label("Energia rodzicow zuzywana by stworzyc potomka: "), animalEnergySpendForPropagationNTBox);
 
         var minNumberOfMutationsNTBox = new NumberTextField(GuiParameters.minNumberOfMutations);
         grid.addRow(12, new Label("Minimalna liczba mutacji u potomkow: "), minNumberOfMutationsNTBox);
@@ -84,14 +85,50 @@ public class App extends Application {
         grid.addRow(16, new Label("Wybierz wariant zachowania zwierzakow"), behaviourVariantComboBox);
 
 
-        Button startSimulationButton = new Button("Wlacz symulacje");
-        startSimulationButton.setOnAction(e -> startSimulation());
-        grid.addRow(17, startSimulationButton);
+        Button startSimulation = new Button("Wlacz symulacje");
+        grid.addRow(17, startSimulation);
+
+        startSimulation.setOnAction(e -> {
+            int mapHight = mapHightNTBox.getNumber();
+            int mapWidth = mapWidthNTBox.getNumber();
+
+            SimulationParameters.startNumberOfPlants = startNumberOfPlantsNTBox.getNumber();
+            SimulationParameters.plantEnergy = plantEnergyNTBox.getNumber();
+            SimulationParameters.numberOfNewPlant = numberOfNewPlantNTBox.getNumber();
+            SimulationParameters.startNumberOfAnimals = startNumberOfAnimalsNTBox.getNumber();
+            SimulationParameters.startAnimalEnergy = startAnimalEnergyNTBox.getNumber();
+            SimulationParameters.minLifeEnergyToReproduce = animalEnergyToReproduceNTBox.getNumber();
+            SimulationParameters.lifeEnergySpendForPropagation = animalEnergyToReproduceNTBox.getPrefColumnCount();
+            SimulationParameters.minNumberOfMutations = minNumberOfMutationsNTBox.getNumber();
+            SimulationParameters.maxNumberOfMutations = maxNumberOfMutationsNTBox.getNumber();
+            SimulationParameters.lengthOfAnimalGenome = lengthOfAnimalGenomeNTBox.getNumber();
+            if (mapVariantComboBox.getValue().toString().equals("kula ziemska")) {
+                SimulationParameters.mapVariant = false;
+            } else {
+                SimulationParameters.mapVariant = true;
+            }
+            if (plantGrowthVariantComboBox.getValue().toString().equals("zalesione rowniki")) {
+                SimulationParameters.plantGrowthVariant = false;
+            } else {
+                SimulationParameters.plantGrowthVariant = true;
+            }
+            if (mutationVariantComboBox.getValue().toString().equals("pelna losowosc")) {
+                SimulationParameters.mutationVariant = false;
+            } else {
+                SimulationParameters.mutationVariant = true;
+            }
+            if (behaviourVariantComboBox.getValue().toString().equals("pelna predestynacja")) {
+                SimulationParameters.behaviourVariant = false;
+            } else {
+                SimulationParameters.behaviourVariant = true;
+            }
+        });
+
+
+
 
         return new Scene(grid, 500, 700);
     }
 
-    private void startSimulation() {
 
-    }
 }
