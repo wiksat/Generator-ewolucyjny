@@ -50,6 +50,10 @@ public class Animal extends AbstractWorldMapElement  {
     public Vector2d getPosition() {
         return this.position;
     }
+
+    public StatusOfAnimal getStatus() {
+        return status;
+    }
     public String getA(){
         return position+" "+orientation;
     }
