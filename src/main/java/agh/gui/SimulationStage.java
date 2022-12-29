@@ -53,7 +53,7 @@ public class SimulationStage extends Stage {
         layout.getChildren().addAll(guiWorldMap, spacer, rightBox);
 
         this.setY(bounds.getMinY());
-        this.setScene(new Scene(layout, bounds.getWidth() / 2, bounds.getHeight()));
+        this.setScene(new Scene(layout, bounds.getWidth() / 3, bounds.getHeight() / 2));
         this.show();
     }
 

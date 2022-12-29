@@ -26,7 +26,7 @@ public class SimulationEngine implements Runnable {
         this.guiWorldMap = guiWorldMap;
         this.map = map;
 
-        MapBoundary mapBoundary = this.map.getMapBoundary();
+//        MapBoundary mapBoundary = this.map.getMapBoundary();
 
         for (int i = 0; i < SimulationParameters.startNumberOfAnimals; i++) {
             Vector2d position;
@@ -59,12 +59,12 @@ public class SimulationEngine implements Runnable {
             if (this.map.getGrassAt(animal.getPosition()) instanceof Grass) {
                 eatenGrassPosition.add(animal.getPosition());
 
-                var animals = this.map.getAnimalsAt(animal.getPosition());
-                var theStrongestAnimal = animals.last();
-                if (animal.getLifeEnergy() == theStrongestAnimal.animalEnergy()) {
-//                    var limitAnimal = new MapAnimalContainer(theStrongestAnimal.animalEnergy(), null);
-                    animal.setLifeEnergy(animal.getLifeEnergy() + SimulationParameters.plantEnergy);
-                }
+//                var animals = this.map.getAnimalsAt(animal.getPosition());
+//                var theStrongestAnimal = animals.last();
+//                if (animal.getLifeEnergy() == theStrongestAnimal.animalEnergy()) {
+////                    var limitAnimal = new MapAnimalContainer(theStrongestAnimal.animalEnergy(), null);
+//                    animal.setLifeEnergy(animal.getLifeEnergy() + SimulationParameters.plantEnergy);
+//                }
 
             }
         }
@@ -95,11 +95,12 @@ public class SimulationEngine implements Runnable {
                 });
             }
 
-            for (Animal child : children) {
-                this.map.place(child);
-            }
-            this.animals.addAll(children);
+
         }
+        for (Animal child : children) {
+            this.map.place(child);
+        }
+        this.animals.addAll(children);
     }
 
 
@@ -115,8 +116,10 @@ public class SimulationEngine implements Runnable {
 
 
         for (Animal animal : this.animals) {
-            animal.selectDirectionAndMove(SimulationParameters.behaviourVariant);
+            animal.selectDirectionAndMove();
+            System.out.println(animal.getPosition().toString());
         }
+        System.out.println("_______");
 
         feedAnimals();
         makeAnimalReproduce();
@@ -143,9 +146,5 @@ public class SimulationEngine implements Runnable {
                 return;
             }
         }
-    }
-
-    private void nextDay() {
-
     }
 }

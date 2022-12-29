@@ -2,8 +2,8 @@ package agh.gui;
 
 public interface GuiParameters {
 
-    int gridCellWidth = 20;
-    int gridCellHeight = 20;
+    int gridCellWidth = 50;
+    int gridCellHeight = 50;
     
     int mapHeight = 10;
     int mapWidth = 10;
