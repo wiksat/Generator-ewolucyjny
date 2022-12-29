@@ -66,8 +66,8 @@ public class SimulationEngine implements Runnable {
 //                var theStrongestAnimal = animals.last();
 //                if (animal.getLifeEnergy() == theStrongestAnimal.animalEnergy()) {
 ////                    var limitAnimal = new MapAnimalContainer(theStrongestAnimal.animalEnergy(), null);
-//                    animal.setLifeEnergy(animal.getLifeEnergy() + SimulationParameters.plantEnergy);
-//                }
+//                    animal.eatPlant();
+//               }
 
             }
         }

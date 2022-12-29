@@ -179,10 +179,10 @@ public class AbstractWorldMap implements IWorldMap {
 //        if (worldMapElement instanceof Animal animal) {
         System.out.println("zmiana pozycji się wykonuje: " + oldPosition.toString() + " -> " + newPosition.toString());
             MapAnimalContainer mapAnimalContainer = new MapAnimalContainer(animal.getLifeEnergy(), animal);
-                System.out.println(this.animals.get(oldPosition));
-                System.out.println(mapAnimalContainer);
+//                System.out.println(this.animals.get(oldPosition));
+//                System.out.println(mapAnimalContainer);
             this.animals.get(oldPosition).remove(mapAnimalContainer);
-                System.out.println(this.animals.get(oldPosition));
+//                System.out.println(this.animals.get(oldPosition));
 //            removeAnimalsEntryIfPossible(oldPosition);
             if (!this.animals.containsKey(newPosition)) {
                 this.animals.put(newPosition, new TreeSet<>());
