@@ -9,12 +9,12 @@ import java.util.Objects;
 public final class MapBoundary implements IPositionChangeObserver {
     final Vector2d lowerLeft;
     final Vector2d upperRight;
-    int slotsTaken = 0;
+//    int slotsTaken = 0;
 
     public MapBoundary(Vector2d lowerLeft, Vector2d upperRight, int slotsTaken) {
         this.lowerLeft = lowerLeft;
         this.upperRight = upperRight;
-        this.slotsTaken = slotsTaken;
+//        this.slotsTaken = slotsTaken;
     }
 
     public MapBoundary(Vector2d lowerLeft, Vector2d upperRight) {
@@ -38,16 +38,16 @@ public final class MapBoundary implements IPositionChangeObserver {
         return upperRight;
     }
 
-    public int getSlotsTaken() {
-        return slotsTaken;
-    }
-
-    public void incrementSlotsTaken() {
-        this.slotsTaken += 1;
-    }
-    public void decrementSlotsTaken() {
-        this.slotsTaken -= 1;
-    }
+//    public int getSlotsTaken() {
+//        return slotsTaken;
+//    }
+//
+//    public void incrementSlotsTaken() {
+//        this.slotsTaken += 1;
+//    }
+//    public void decrementSlotsTaken() {
+//        this.slotsTaken -= 1;
+//    }
 
     @Override
     public boolean equals(Object obj) {
@@ -55,22 +55,30 @@ public final class MapBoundary implements IPositionChangeObserver {
         if (obj == null || obj.getClass() != this.getClass()) return false;
         var that = (MapBoundary) obj;
         return Objects.equals(this.lowerLeft, that.lowerLeft) &&
-                Objects.equals(this.upperRight, that.upperRight) &&
-                this.slotsTaken == that.slotsTaken;
+                Objects.equals(this.upperRight, that.upperRight) ;
+//                && this.slotsTaken == that.slotsTaken;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lowerLeft, upperRight, slotsTaken);
+        return Objects.hash(lowerLeft, upperRight);
     }
+//    public int hashCode() {
+//        return Objects.hash(lowerLeft, upperRight, slotsTaken);
+//    }
 
     @Override
     public String toString() {
         return "Boundary[" +
                 "lowerLeft=" + lowerLeft + ", " +
-                "upperRight=" + upperRight + ", " +
-                "slotsTaken=" + slotsTaken + ']';
+                "upperRight=" + upperRight;
     }
+//    public String toString() {
+//        return "Boundary[" +
+//                "lowerLeft=" + lowerLeft + ", " +
+//                "upperRight=" + upperRight + ", " +
+//                "slotsTaken=" + slotsTaken + ']';
+//    }
 
 
     public boolean havePlace() {

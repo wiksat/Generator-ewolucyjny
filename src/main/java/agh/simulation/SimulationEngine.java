@@ -127,13 +127,13 @@ public class SimulationEngine implements Runnable {
                 newDeadAnimals.add(animal);
             }
         }
-        System.out.println("DEADDD: " + newDeadAnimals);
+//        System.out.println("DEADDD: " + newDeadAnimals);
         this.animals.removeAll(newDeadAnimals);
         this.deadAnimals.addAll(newDeadAnimals);
 
         for (Animal animal : this.animals) {
             animal.selectDirectionAndMove();
-            System.out.println(animal.getPosition().toString());
+//            System.out.println(animal.getPosition().toString());
         }
         System.out.println("_______");
 

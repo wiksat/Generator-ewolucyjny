@@ -17,6 +17,7 @@ public class AbstractWorldMap implements IWorldMap {
     private final StatisticsModule statisticsModule;
 
     private int numberOfPlant;
+    private int usedPlaces=0;
 
     public AbstractWorldMap(int width, int height, int jungleHeight, StatisticsModule statisticsModule) {
         this.mapBoundary = new MapBoundary(new Vector2d(0, 0), new Vector2d(width-1, height-1));
@@ -42,9 +43,10 @@ public class AbstractWorldMap implements IWorldMap {
 
         if (!this.animals.containsKey(animal.getPosition())) {
             this.animals.put(animal.getPosition(), new TreeSet<>());
-//            this.incrementSlotsTaken(animal.getPosition());
+            usedPlaces++;
         }
         this.animals.get(animal.getPosition()).add(new MapAnimalContainer(animal.getLifeEnergy(), animal));
+        System.out.println(this.animals.get(animal.getPosition()));
 //jakies obserwatory
 //        animal.addPositionObserver(this);
 //        animal.addEnergyObserver(this);
@@ -70,7 +72,7 @@ public class AbstractWorldMap implements IWorldMap {
     private void removeAnimalsEntryIfPossible(Vector2d position) {
         if (this.animals.get(position).isEmpty()) {
             this.animals.remove(position);
-//            this.decrementSlotsTaken(position);
+            usedPlaces--;
         }
     }
     public void energyChanged(Animal animal, int oldEnergy, int newEnergy) {
@@ -80,7 +82,13 @@ public class AbstractWorldMap implements IWorldMap {
 
         MapAnimalContainer newMapAnimalContainer = new MapAnimalContainer(newEnergy, animal);
         positionSet.add(newMapAnimalContainer);
+        System.out.println("zmiana energii"+"   " +animal.uniqueID+"   " +animal.getA());
+        System.out.println(oldMapAnimalContainer);
+        System.out.println(newMapAnimalContainer);
+        System.out.println(this.animals.get(animal.getPosition()));
     }
+
+
     public Optional<Pair<Animal, Animal>> getPairOfStrongestAnimalsAt(Vector2d position) {
         NavigableSet<MapAnimalContainer> allAnimals = this.getAnimalsAt(position);
 
@@ -93,7 +101,6 @@ public class AbstractWorldMap implements IWorldMap {
         return Optional.empty();
     }
     public void growGrass() {
-        int numberOfGrown = 0;
         for (int i = 0; i < numberOfPlant; i++) {
             if (this.mapBoundary.havePlace()) {
                 Vector2d grassPosition;
@@ -114,8 +121,7 @@ public class AbstractWorldMap implements IWorldMap {
 
                 this.grasses.put(grassPosition, new Grass(grassPosition));
                 statisticsModule.incrementGrasses();
-//                this.incrementSlotsTaken(grassPosition);
-                numberOfGrown++;
+                usedPlaces++;
             }
         }
     }
@@ -169,6 +175,7 @@ public class AbstractWorldMap implements IWorldMap {
         if (this.grasses.get(position)!=null) {
             this.grasses.remove(position);
             statisticsModule.decrementGrasses();
+            usedPlaces--;
             }
         }
 
@@ -177,16 +184,25 @@ public class AbstractWorldMap implements IWorldMap {
     @Override
     public boolean positionChanged(Animal animal, Vector2d oldPosition, Vector2d newPosition) {
 //        if (worldMapElement instanceof Animal animal) {
-        System.out.println("zmiana pozycji się wykonuje");
+//        System.out.println("zmiana pozycji się wykonuje");
             MapAnimalContainer mapAnimalContainer = new MapAnimalContainer(animal.getLifeEnergy(), animal);
+
+        System.out.println("zmiana pozycjii"+"   " +animal.uniqueID+"   " +animal.getA()+"  now apozycja to: "+newPosition);
+        System.out.println(mapAnimalContainer);
+        System.out.println(this.animals.get(oldPosition));
+
             this.animals.get(oldPosition).remove(mapAnimalContainer);
+
             removeAnimalsEntryIfPossible(oldPosition);
             if (!this.animals.containsKey(newPosition)) {
                 this.animals.put(newPosition, new TreeSet<>());
-//                this.incrementSlotsTaken(newPosition);
+                usedPlaces++;
             }
             this.animals.get(newPosition).add(mapAnimalContainer);
 
+
+        System.out.println(this.animals.get(oldPosition));
+//        System.out.println(this.animals.get(newPosition));
 //        }
 //        else {
 //            this.grasses.remove(oldPosition);
