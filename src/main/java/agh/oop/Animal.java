@@ -146,12 +146,14 @@ public class Animal extends AbstractWorldMapElement  {
         int x = 0;
         int y = 0;
         if (mapWariant) {
+                System.out.println("TELEPORT");
             setLifeEnergy(getLifeEnergy() - costOfTeleport);
             return Vector2d.getRandomVectorBetween(
                     this.map.mapBoundary.lowerLeft(),
                     this.map.mapBoundary.upperRight());
         }
         else {
+                System.out.println("KULA Ziemska  " + this.map.mapBoundary.upperRight().x + " " + this.map.mapBoundary.upperRight().y);
             if (newPosition.x < 0) {
                 x =  this.map.mapBoundary.upperRight().x;
                 y = newPosition.y;
