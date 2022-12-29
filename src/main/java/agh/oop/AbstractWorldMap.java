@@ -18,11 +18,16 @@ public class AbstractWorldMap implements IWorldMap {
 
     private int numberOfPlant;
     private int usedPlaces=0;
+    private boolean growVarinat;
+    private int width;
+    private int height;
 
     public AbstractWorldMap(int width, int height, int jungleHeight, StatisticsModule statisticsModule) {
         this.mapBoundary = new MapBoundary(new Vector2d(0, 0), new Vector2d(width-1, height-1));
-        int centerX = width / 2;
+
         int centerY = height / 2;
+        this.width=width;
+        this.height=height;
 
         Vector2d jungleLowerLeft = new Vector2d(0, centerY - jungleHeight / 2);
         this.statisticsModule=statisticsModule;
@@ -30,6 +35,7 @@ public class AbstractWorldMap implements IWorldMap {
                 jungleLowerLeft.add(new Vector2d(width-1, jungleHeight-1)));
 
         this.numberOfPlant = SimulationParameters.numberOfNewPlant;
+        this.growVarinat=SimulationParameters.plantGrowthVariant;
     }
 
 
@@ -44,6 +50,7 @@ public class AbstractWorldMap implements IWorldMap {
         if (!this.animals.containsKey(animal.getPosition())) {
             this.animals.put(animal.getPosition(), new TreeSet<>());
             usedPlaces++;
+            statisticsModule.changeAmountOfFreePlaces(this.usedPlaces);
         }
         this.animals.get(animal.getPosition()).add(new MapAnimalContainer(animal.getLifeEnergy(), animal));
 
@@ -69,11 +76,8 @@ public class AbstractWorldMap implements IWorldMap {
         if (this.animals.get(position).isEmpty()) {
             this.animals.remove(position);
             usedPlaces--;
+            statisticsModule.changeAmountOfFreePlaces(this.usedPlaces);
         }
-    }
-    public int getUsedPlaces(){
-
-        return 0;
     }
     public void energyChanged(Animal animal, int oldEnergy, int newEnergy) {
         MapAnimalContainer oldMapAnimalContainer = new MapAnimalContainer(oldEnergy, animal);
@@ -94,28 +98,46 @@ public class AbstractWorldMap implements IWorldMap {
 
         return Optional.empty();
     }
+    public boolean havePlace(){
+        return usedPlaces < width * height;
+    }
     public void growGrass() {
         for (int i = 0; i < numberOfPlant; i++) {
-            if (this.mapBoundary.havePlace()) {
+            if (this.havePlace()) {
                 Vector2d grassPosition;
-                do {
-                    double los = Math.random();
-                    if (los<0.8){
+                if (growVarinat){
+                    do {
+
                         grassPosition = Vector2d.getRandomVectorBetween(
                                 this.mapBoundary.lowerLeft(),
                                 this.mapBoundary.upperRight());
-                    }
-                    else{
-                        grassPosition = Vector2d.getRandomVectorBetween(
-                                this.jungleBoundary.lowerLeft(),
-                                this.jungleBoundary.upperRight());
-                    }
 
-                } while (this.isOccupied(grassPosition));
+
+                    } while (this.isOccupied(grassPosition));
+                }else{
+
+                    //zalesione równiki
+                    do {
+                        double los = Math.random();
+                        if (los<0.8){
+                            grassPosition = Vector2d.getRandomVectorBetween(
+                                    this.jungleBoundary.lowerLeft(),
+                                    this.jungleBoundary.upperRight());
+                        }
+                        else{
+                            grassPosition = Vector2d.getRandomVectorBetween(
+                                    this.mapBoundary.lowerLeft(),
+                                    this.mapBoundary.upperRight());
+                        }
+
+                    } while (this.isOccupied(grassPosition));
+                }
+
 
                 this.grasses.put(grassPosition, new Grass(grassPosition));
                 statisticsModule.incrementGrasses();
                 usedPlaces++;
+                statisticsModule.changeAmountOfFreePlaces(this.usedPlaces);
             }
         }
     }
@@ -170,6 +192,7 @@ public class AbstractWorldMap implements IWorldMap {
             this.grasses.remove(position);
             statisticsModule.decrementGrasses();
             usedPlaces--;
+            statisticsModule.changeAmountOfFreePlaces(this.usedPlaces);
             }
         }
 
@@ -184,6 +207,7 @@ public class AbstractWorldMap implements IWorldMap {
             if (!this.animals.containsKey(newPosition)) {
                 this.animals.put(newPosition, new TreeSet<>());
                 usedPlaces++;
+                statisticsModule.changeAmountOfFreePlaces(this.usedPlaces);
             }
             this.animals.get(newPosition).add(mapAnimalContainer);
 

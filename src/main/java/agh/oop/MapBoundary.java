@@ -81,10 +81,6 @@ public final class MapBoundary implements IPositionChangeObserver {
 //    }
 
 
-    public boolean havePlace() {
-        return true;
-    }
-
     @Override
     public boolean positionChanged(Animal animal, Vector2d oldPosition, Vector2d newPosition) {
         return false;

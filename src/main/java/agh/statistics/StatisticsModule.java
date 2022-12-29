@@ -15,6 +15,9 @@ public class StatisticsModule {
     public void decrementGrasses() {
         amountOfGrasses--;
     }
+    public void changeAmountOfFreePlaces(int amount){
+        amountOfFreePlaces=amount;
+    }
 
     public void changeAmountOfAnimal(int amount) {
         this.amountOfAnimals=amount;

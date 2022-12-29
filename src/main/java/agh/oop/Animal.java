@@ -166,38 +166,40 @@ public class Animal extends AbstractWorldMapElement  {
             else if (newPosition.y < 0) {
 //                x = newPosition.x;
                 y = 0;
-                move(MoveDirection.TURN180);
+                turnMove(MoveDirection.TURN180);
             }
             else if (newPosition.y > this.map.mapBoundary.upperRight().y) {
 //                x = newPosition.x;
                 y = this.map.mapBoundary.upperRight().y;
-                move(MoveDirection.TURN180);
+                turnMove(MoveDirection.TURN180);
             }
             return new Vector2d(x,y);
         }
     }
-
+    public void turnMove(MoveDirection direction){
+        int n = direction.numerValue;
+        for (int i = 0; i < n; i++) {
+            this.orientation = this.orientation.next();
+        }
+    }
     public void move(MoveDirection direction){
 
-        switch (direction) {
-            case FORWARD -> {
-                    System.out.println(direction + "  " + this.uniqueID);
-                Vector2d orientationVector = this.orientation.toUnitVector();
-                Vector2d newPosition = this.position.add(orientationVector);
+        if (direction == MoveDirection.FORWARD) {
+            System.out.println(direction + "  " + this.uniqueID);
+            Vector2d orientationVector = this.orientation.toUnitVector();
+            Vector2d newPosition = this.position.add(orientationVector);
 
-                if (this.map.canMoveTo(newPosition)) {
-                    newPosition = this.mapMode(newPosition);
-                    this.positionChanged(this.position, newPosition);
-                    this.position = newPosition;
-                }
+            if (this.map.canMoveTo(newPosition)) {
+                newPosition = this.mapMode(newPosition);
+                this.positionChanged(this.position, newPosition);
+                this.position = newPosition;
             }
-            default -> {
-                int n = direction.numerValue;
-                for (int i = 0; i < n; i++) {
-                    this.orientation = this.orientation.next();
-                }
-                move(MoveDirection.FORWARD);
+        } else {
+            int n = direction.numerValue;
+            for (int i = 0; i < n; i++) {
+                this.orientation = this.orientation.next();
             }
+            move(MoveDirection.FORWARD);
         }
     }
 
