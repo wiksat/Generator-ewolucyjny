@@ -31,19 +31,20 @@ public class SimulationStage extends Stage {
 
 
         guiWorldMap = new GuiWorldMap(aWorldMap, this);
-        this.sThreadController = new SimulationThreadController(aWorldMap, guiWorldMap, statisticsModule);
+        GuiStatisticsModule guiStatisticsModule = new GuiStatisticsModule(statisticsModule, this);
+        this.sThreadController = new SimulationThreadController(aWorldMap, guiWorldMap, statisticsModule, guiStatisticsModule);
 
 
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
 //        HBox.setHgrow(statisticsModule, Priority.ALWAYS);
-        GuiStatisticsModule guiStatistics = new GuiStatisticsModule(statisticsModule, this);
+
 
         HBox layout = new HBox();
         VBox rightBox = new VBox();
         HBox simulationControls = new HBox();
-        rightBox.getChildren().addAll(simulationControls, guiStatistics);
+        rightBox.getChildren().addAll(simulationControls);
 
 
         this.setOnCloseRequest(e -> this.sThreadController.stopSimulation());
@@ -57,7 +58,7 @@ public class SimulationStage extends Stage {
 
         simulationControls.getChildren().addAll(startButton);
 
-        layout.getChildren().addAll(guiWorldMap, spacer, rightBox);
+        layout.getChildren().addAll(guiWorldMap, spacer, guiStatisticsModule, rightBox);
 
         this.setY(bounds.getMinY());
         this.setScene(new Scene(layout, bounds.getWidth() / 3, bounds.getHeight() / 2));

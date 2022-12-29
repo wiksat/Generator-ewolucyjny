@@ -1,5 +1,6 @@
 package agh.simulation;
 
+import agh.gui.GuiStatisticsModule;
 import agh.gui.GuiWorldMap;
 import agh.oop.AbstractWorldMap;
 import agh.statistics.StatisticsModule;
@@ -10,9 +11,9 @@ public class SimulationThreadController {
     private Thread thread;
     private SimulationEngine engine;
 
-    public SimulationThreadController(AbstractWorldMap map, GuiWorldMap guiWorldMap, StatisticsModule statisticsModule) {
+    public SimulationThreadController(AbstractWorldMap map, GuiWorldMap guiWorldMap, StatisticsModule statisticsModule, GuiStatisticsModule guiStatisticsModule) {
         this.statisticsModule=statisticsModule;
-        this.engine = new SimulationEngine(map, guiWorldMap, statisticsModule);
+        this.engine = new SimulationEngine(map, guiWorldMap, statisticsModule, guiStatisticsModule);
 
     }
 

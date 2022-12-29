@@ -1,6 +1,7 @@
 package agh.simulation;
 
 import agh.gui.GuiParameters;
+import agh.gui.GuiStatisticsModule;
 import agh.gui.GuiWorldMap;
 import agh.oop.*;
 
@@ -16,6 +17,7 @@ public class SimulationEngine implements Runnable {
 
     private final AbstractWorldMap map;
     private GuiWorldMap guiWorldMap;
+    private GuiStatisticsModule guiStatisticsModule;
     private final List<Animal> animals = new ArrayList<>();
     private final List<Animal> deadAnimals = new ArrayList<>();
 //    private final List<IMapRefreshNeededObserver> mapRefreshNeededObservers = new ArrayList<>();
@@ -25,10 +27,11 @@ public class SimulationEngine implements Runnable {
     private int day = 0;
     private int moveDelay = SimulationParameters.simulationMoveDelay;
     public StatisticsModule statisticsModule;
-    public SimulationEngine(AbstractWorldMap map, GuiWorldMap guiWorldMap, StatisticsModule statisticsModule) {
+    public SimulationEngine(AbstractWorldMap map, GuiWorldMap guiWorldMap, StatisticsModule statisticsModule, GuiStatisticsModule guiStatisticsModule) {
         this.guiWorldMap = guiWorldMap;
         this.map = map;
         this.statisticsModule = statisticsModule;
+        this.guiStatisticsModule = guiStatisticsModule;
 //        MapBoundary mapBoundary = this.map.getMapBoundary();
 
         for (int i = 0; i < SimulationParameters.startNumberOfAnimals; i++) {
@@ -160,6 +163,7 @@ public class SimulationEngine implements Runnable {
             day++;
 
             guiWorldMap.refresh(this.map);
+            guiStatisticsModule.refresh();
 
             try {
                 Thread.sleep(this.moveDelay);
