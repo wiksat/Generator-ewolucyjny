@@ -183,7 +183,7 @@ public class AbstractWorldMap implements IWorldMap {
 //                System.out.println(mapAnimalContainer);
             this.animals.get(oldPosition).remove(mapAnimalContainer);
 //                System.out.println(this.animals.get(oldPosition));
-//            removeAnimalsEntryIfPossible(oldPosition);
+            removeAnimalsEntryIfPossible(oldPosition);
             if (!this.animals.containsKey(newPosition)) {
                 this.animals.put(newPosition, new TreeSet<>());
                 usedPlaces++;
