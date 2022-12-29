@@ -257,7 +257,10 @@ public class Animal extends AbstractWorldMapElement  {
         otherAnimal.setLifeEnergy(otherAnimal.getLifeEnergy() - this.amountOfEnergyFromParentToChild);
 
         var child = new Animal( this.map, this.position, statisticsModule, this.amountOfEnergyFromParentToChild*2, newGenotype);
-
+System.out.println("utworzono dziecko z genotypem");
+        System.out.println(newGenotype);
+        System.out.println(newGenotype.size());
+        System.out.println(child.uniqueID);
 
         this.incrementChildren();
         otherAnimal.incrementChildren();
@@ -320,6 +323,11 @@ public class Animal extends AbstractWorldMapElement  {
             if (this.lastUsedGene+1>=this.genLength){
                 this.lastUsedGene=-1;
             }
+//            System.out.println(this.genotype);
+//            System.out.println(this.genLength+"   "+this.lastUsedGene+"    "+this.genotype.size());
+            System.out.println(this.uniqueID+ "  "+getA());
+            System.out.println(this.genotype);
+            System.out.println(this.lastUsedGene);
             this.move(this.genotype.get( this.lastUsedGene+1));
             this.lastUsedGene= this.lastUsedGene+1;
         }

@@ -20,7 +20,7 @@ public class SimulationStage extends Stage {
 
     private SimulationThreadController sThreadController;
 
-    public SimulationStage(int mapHeight, int mapWidth, int jungleHeight) {
+    public SimulationStage( int mapWidth,int mapHeight, int jungleHeight) {
         AbstractWorldMap aWorldMap;
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();

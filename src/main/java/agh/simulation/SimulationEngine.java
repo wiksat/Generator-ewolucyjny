@@ -133,9 +133,9 @@ public class SimulationEngine implements Runnable {
         for (Animal animal : this.animals) {
             animal.selectDirectionAndMove();
         }
-        for (Animal animal : this.animals) {
-            System.out.println(animal.getPosition().toString() + " " + animal.getUniqueID());
-        }
+//        for (Animal animal : this.animals) {
+//            System.out.println(animal.getPosition().toString() + " " + animal.getUniqueID());
+//        }
 
 
         feedAnimals();

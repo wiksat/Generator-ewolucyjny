@@ -18,7 +18,7 @@ public class SimulationParameters {
     public static int lengthOfAnimalGenome = 16;
 
     public static int costOfTheDay = 1;
-    public static int simulationMoveDelay = 300;
+    public static int simulationMoveDelay = 100;
 
     public static boolean mapVariant = false;  /* false - kula ziemska, true - magiczny portal */
     public static boolean plantGrowthVariant = false; /* false - zalesione rowniki, true - toksyczne trupt */

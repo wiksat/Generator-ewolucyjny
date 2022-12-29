@@ -197,8 +197,11 @@ public class AbstractWorldMap implements IWorldMap {
     public void deadAnimal(Animal animal, Vector2d position) {
 
         MapAnimalContainer mapAnimalContainer = new MapAnimalContainer(animal.getLifeEnergy(), animal);
-        this.animals.get(position).remove(mapAnimalContainer);
-        removeAnimalsEntryIfPossible(position);
+        if ( this.animals.get(position)!=null){
+            this.animals.get(position).remove(mapAnimalContainer);
+            removeAnimalsEntryIfPossible(position);
+        }
+
 
     }
 

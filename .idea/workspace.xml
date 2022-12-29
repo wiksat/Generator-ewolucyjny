@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4aa76a78-281e-4a75-ba85-5abd33576347" name="Changes" comment="poprawione to i owo">
+    <list default="true" id="4aa76a78-281e-4a75-ba85-5abd33576347" name="Changes" comment="poprawione to i owo2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/gui/SimulationStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/gui/SimulationStage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/oop/AbstractWorldMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/oop/AbstractWorldMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/oop/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/oop/Animal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/simulation/SimulationEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/simulation/SimulationEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/simulation/SimulationParameters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/simulation/SimulationParameters.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +106,7 @@
       <updated>1670847956387</updated>
       <workItem from="1670847959827" duration="3567000" />
       <workItem from="1672132419164" duration="60650000" />
-      <workItem from="1672325539458" duration="15699000" />
+      <workItem from="1672325539458" duration="18780000" />
     </task>
     <task id="LOCAL-00001" summary="changed package">
       <created>1670849139968</created>
@@ -278,7 +283,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672340667244</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="poprawione to i owo2">
+      <created>1672341676101</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1672341676101</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -296,7 +308,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed package" />
     <MESSAGE value="dodane pliki" />
     <MESSAGE value="dodane pliki2" />
     <MESSAGE value="zaczęty animal (idzie opornie)" />
@@ -321,6 +332,7 @@
     <MESSAGE value="poprawione ruchy" />
     <MESSAGE value="poprawione ruchy i trawka" />
     <MESSAGE value="poprawione to i owo" />
-    <option name="LAST_COMMIT_MESSAGE" value="poprawione to i owo" />
+    <MESSAGE value="poprawione to i owo2" />
+    <option name="LAST_COMMIT_MESSAGE" value="poprawione to i owo2" />
   </component>
 </project>
