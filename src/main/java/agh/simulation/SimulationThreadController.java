@@ -5,12 +5,13 @@ import agh.oop.AbstractWorldMap;
 import agh.statistics.StatisticsModule;
 
 public class SimulationThreadController {
-    private final StatisticsModule statisticsModule = new StatisticsModule();
+    private final StatisticsModule statisticsModule;
 
     private Thread thread;
     private SimulationEngine engine;
 
-    public SimulationThreadController(AbstractWorldMap map, GuiWorldMap guiWorldMap) {
+    public SimulationThreadController(AbstractWorldMap map, GuiWorldMap guiWorldMap, StatisticsModule statisticsModule) {
+        this.statisticsModule=statisticsModule;
         this.engine = new SimulationEngine(map, guiWorldMap, statisticsModule);
 
     }
