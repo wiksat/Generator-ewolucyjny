@@ -196,6 +196,7 @@ public class Animal extends AbstractWorldMapElement  {
                 for (int i = 0; i < n; i++) {
                     this.orientation = this.orientation.next();
                 }
+                move(MoveDirection.FORWARD);
             }
         }
     }

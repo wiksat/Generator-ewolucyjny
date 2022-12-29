@@ -46,10 +46,7 @@ public class AbstractWorldMap implements IWorldMap {
             usedPlaces++;
         }
         this.animals.get(animal.getPosition()).add(new MapAnimalContainer(animal.getLifeEnergy(), animal));
-//jakies obserwatory
-//        animal.addPositionObserver(this);
-//        animal.addEnergyObserver(this);
-//        animal.addLifeObserver(this);
+
         return true;
     }
     public NavigableSet<MapAnimalContainer> getAnimalsAt(Vector2d position) {
@@ -73,6 +70,10 @@ public class AbstractWorldMap implements IWorldMap {
             this.animals.remove(position);
             usedPlaces--;
         }
+    }
+    public int getUsedPlaces(){
+
+        return 0;
     }
     public void energyChanged(Animal animal, int oldEnergy, int newEnergy) {
         MapAnimalContainer oldMapAnimalContainer = new MapAnimalContainer(oldEnergy, animal);
@@ -176,27 +177,15 @@ public class AbstractWorldMap implements IWorldMap {
 
     @Override
     public boolean positionChanged(Animal animal, Vector2d oldPosition, Vector2d newPosition) {
-//        if (worldMapElement instanceof Animal animal) {
-        System.out.println("zmiana pozycji się wykonuje: " + oldPosition.toString() + " -> " + newPosition.toString());
+
             MapAnimalContainer mapAnimalContainer = new MapAnimalContainer(animal.getLifeEnergy(), animal);
-//                System.out.println(this.animals.get(oldPosition));
-//                System.out.println(mapAnimalContainer);
             this.animals.get(oldPosition).remove(mapAnimalContainer);
-//                System.out.println(this.animals.get(oldPosition));
             removeAnimalsEntryIfPossible(oldPosition);
             if (!this.animals.containsKey(newPosition)) {
                 this.animals.put(newPosition, new TreeSet<>());
                 usedPlaces++;
             }
             this.animals.get(newPosition).add(mapAnimalContainer);
-
-//        }
-//        else {
-//            this.grasses.remove(oldPosition);
-////            this.decrementSlotsTaken(oldPosition);
-//            this.grasses.put(newPosition, worldMapElement);
-////            this.incrementSlotsTaken(newPosition);
-//        }
 
         return true;
     }
