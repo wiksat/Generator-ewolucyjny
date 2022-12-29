@@ -7,12 +7,13 @@ import agh.statistics.StatisticsModule;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.Label;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+
+import java.util.Locale;
 
 public class SimulationStage extends Stage {
     private final StatisticsModule statisticsModule;
@@ -26,28 +27,33 @@ public class SimulationStage extends Stage {
         Rectangle2D bounds = screen.getVisualBounds();
         this.setX(bounds.getMinX());
         statisticsModule = new StatisticsModule();
-        aWorldMap = new AbstractWorldMap(mapWidth, mapHeight, jungleHeight,statisticsModule);
+        aWorldMap = new AbstractWorldMap(mapWidth, mapHeight, jungleHeight, statisticsModule);
 
 
         guiWorldMap = new GuiWorldMap(aWorldMap, this);
-        this.sThreadController = new SimulationThreadController(aWorldMap, guiWorldMap,statisticsModule);
+        this.sThreadController = new SimulationThreadController(aWorldMap, guiWorldMap, statisticsModule);
 
 
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
-//        HBox.setHgrow(statisticsBox, Priority.ALWAYS);
+//        HBox.setHgrow(statisticsModule, Priority.ALWAYS);
+        GuiStatisticsModule guiStatistics = new GuiStatisticsModule(statisticsModule, this);
 
         HBox layout = new HBox();
         VBox rightBox = new VBox();
         HBox simulationControls = new HBox();
-        rightBox.getChildren().addAll(simulationControls);
+        rightBox.getChildren().addAll(simulationControls, guiStatistics);
 
 
         this.setOnCloseRequest(e -> this.sThreadController.stopSimulation());
 
         Button startButton = new Button("Start");
         startButton.setOnAction(e -> startSimulationButton(startButton));
+
+
+
+
 
         simulationControls.getChildren().addAll(startButton);
 

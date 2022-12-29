@@ -105,22 +105,22 @@ public class App extends Application {
             SimulationParameters.minNumberOfMutations = minNumberOfMutationsNTBox.getNumber();
             SimulationParameters.maxNumberOfMutations = maxNumberOfMutationsNTBox.getNumber();
             SimulationParameters.lengthOfAnimalGenome = lengthOfAnimalGenomeNTBox.getNumber();
-            if (mapVariantComboBox.getValue() == null || mapVariantComboBox.getValue().toString().equals("kula ziemska")) {
+            if (mapVariantComboBox.getValue().toString().equals("kula ziemska")) {
                 SimulationParameters.mapVariant = false;
             } else {
                 SimulationParameters.mapVariant = true;
             }
-            if (plantGrowthVariantComboBox.getValue() == null || plantGrowthVariantComboBox.getValue().toString().equals("zalesione rowniki")) {
+            if (plantGrowthVariantComboBox.getValue().toString().equals("zalesione rowniki")) {
                 SimulationParameters.plantGrowthVariant = false;
             } else {
                 SimulationParameters.plantGrowthVariant = true;
             }
-            if (mutationVariantComboBox.getValue() == null || mutationVariantComboBox.getValue().toString().equals("pelna losowosc")) {
+            if (mutationVariantComboBox.getValue().toString().equals("pelna losowosc")) {
                 SimulationParameters.mutationVariant = false;
             } else {
                 SimulationParameters.mutationVariant = true;
             }
-            if (behaviourVariantComboBox.getValue() == null || behaviourVariantComboBox.getValue().toString().equals("pelna predestynacja")) {
+            if (behaviourVariantComboBox.getValue().toString().equals("pelna predestynacja")) {
                 SimulationParameters.behaviourVariant = false;
             } else {
                 SimulationParameters.behaviourVariant = true;

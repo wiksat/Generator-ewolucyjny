@@ -1,9 +1,13 @@
 package agh.statistics;
 
 import agh.oop.Animal;
+import javafx.scene.layout.VBox;
 
 public class StatisticsModule {
     int amountOfAnimals;
+    public int getAmountOfAnimals() {
+        return amountOfAnimals;
+    }
     int amountOfGrasses;
     int amountOfFreePlaces;
     double averageEnergyLifeForAlive;
