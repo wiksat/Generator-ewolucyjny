@@ -140,7 +140,7 @@ public class SimulationEngine implements Runnable {
 
 
         feedAnimals();
-//        makeAnimalReproduce();
+        makeAnimalReproduce();
 
         setStatistics();
         this.map.growGrass();
