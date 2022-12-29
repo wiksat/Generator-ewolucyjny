@@ -80,12 +80,16 @@ public class AbstractWorldMap implements IWorldMap {
         }
     }
     public void energyChanged(Animal animal, int oldEnergy, int newEnergy) {
-        MapAnimalContainer oldMapAnimalContainer = new MapAnimalContainer(oldEnergy, animal);
-        var positionSet = this.animals.get(animal.getPosition());
-        positionSet.remove(oldMapAnimalContainer);
+        if (animal.getStatus()!=StatusOfAnimal.DEAD){
+            MapAnimalContainer oldMapAnimalContainer = new MapAnimalContainer(oldEnergy, animal);
+            var positionSet = this.animals.get(animal.getPosition());
+            positionSet.remove(oldMapAnimalContainer);
 
-        MapAnimalContainer newMapAnimalContainer = new MapAnimalContainer(newEnergy, animal);
-        positionSet.add(newMapAnimalContainer);
+            MapAnimalContainer newMapAnimalContainer = new MapAnimalContainer(newEnergy, animal);
+            positionSet.add(newMapAnimalContainer);
+        }
+
+//        System.out.println("zmieniono energie  "+oldEnergy+"  "+newEnergy);
     }
     public Optional<Pair<Animal, Animal>> getPairOfStrongestAnimalsAt(Vector2d position) {
         NavigableSet<MapAnimalContainer> allAnimals = this.getAnimalsAt(position);
@@ -207,7 +211,7 @@ public class AbstractWorldMap implements IWorldMap {
 
     @Override
     public boolean positionChanged(Animal animal, Vector2d oldPosition, Vector2d newPosition) {
-
+        if (animal.getStatus()!=StatusOfAnimal.DEAD){
             MapAnimalContainer mapAnimalContainer = new MapAnimalContainer(animal.getLifeEnergy(), animal);
             this.animals.get(oldPosition).remove(mapAnimalContainer);
             removeAnimalsEntryIfPossible(oldPosition);
@@ -217,8 +221,10 @@ public class AbstractWorldMap implements IWorldMap {
                 statisticsModule.changeAmountOfFreePlaces(this.usedPlaces);
             }
             this.animals.get(newPosition).add(mapAnimalContainer);
-
+//            System.out.println("zmieniono pozycje "+oldPosition+"  "+newPosition);
         return true;
+    }
+        return false;
     }
     @Override
     public List<Animal> getAnimals(){
