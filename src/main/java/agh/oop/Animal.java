@@ -1,6 +1,7 @@
 package agh.oop;
 
 import agh.simulation.SimulationParameters;
+import agh.statistics.StatisticsModule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,13 +31,13 @@ public class Animal extends AbstractWorldMapElement  {
     private int costOfTeleport;
     private boolean mutationVariant;
     private boolean behaviourVariant;
+    public StatisticsModule statisticsModule;
 
-
-    public Animal(AbstractWorldMap map, Vector2d initialPosition){
+    public Animal(AbstractWorldMap map, Vector2d initialPosition,StatisticsModule statisticsModule){
         this.map = map;
         this.orientation = MapDirection.createRandom();
         this.position = initialPosition;
-
+        this.statisticsModule = statisticsModule;
         this.genLength = SimulationParameters.lengthOfAnimalGenome;
         this.lifeEnergy = SimulationParameters.startAnimalEnergy;
         this.genCounter = 0;
@@ -55,14 +56,15 @@ public class Animal extends AbstractWorldMapElement  {
             double randNum = Math.random()*8;
             genes.add(MoveDirection.extract((int)randNum));
         }
+//        System.out.println(genes);
         this.genotype = genes;
     }
 
-    public Animal(AbstractWorldMap map, Vector2d initialPosition, int startingEnergy, List<MoveDirection> genotype) {
+    public Animal(AbstractWorldMap map, Vector2d initialPosition,StatisticsModule statisticsModule, int startingEnergy, List<MoveDirection> genotype) {
         this.map = map;
         this.orientation = MapDirection.createRandom();
         this.position=initialPosition;
-
+        this.statisticsModule = statisticsModule;
         this.genLength=genotype.size();
         this.genotype = genotype;
         this.lifeEnergy = startingEnergy;
@@ -77,6 +79,8 @@ public class Animal extends AbstractWorldMapElement  {
         this.behaviourVariant = SimulationParameters.behaviourVariant;
         this.lastUsedGene = (int) (Math.random()*this.genLength);
     }
+
+
 
     public Vector2d getPosition() {
         return this.position;
@@ -260,7 +264,7 @@ public class Animal extends AbstractWorldMapElement  {
         this.setLifeEnergy(this.getLifeEnergy() - this.amountOfEnergyFromParentToChild);
         otherAnimal.setLifeEnergy(otherAnimal.getLifeEnergy() - this.amountOfEnergyFromParentToChild);
 
-        var child = new Animal((AbstractWorldMap) this.map, this.position, this.amountOfEnergyFromParentToChild*2, newGenotype);
+        var child = new Animal( this.map, this.position,statisticsModule, this.amountOfEnergyFromParentToChild*2, newGenotype);
         //observery
 //        this.becameParent(child);
 //        otherAnimal.becameParent(child);
