@@ -114,9 +114,8 @@ public class AbstractWorldMap implements IWorldMap {
 
 
                     } while (this.isOccupied(grassPosition));
-                }else{
-
-                    //zalesione równiki
+                }
+                else{
                     do {
                         double los = Math.random();
                         if (los<0.8){
@@ -132,7 +131,6 @@ public class AbstractWorldMap implements IWorldMap {
 
                     } while (this.isOccupied(grassPosition));
                 }
-
 
                 this.grasses.put(grassPosition, new Grass(grassPosition));
                 statisticsModule.incrementGrasses();
@@ -196,7 +194,13 @@ public class AbstractWorldMap implements IWorldMap {
             }
         }
 
+    public void deadAnimal(Animal animal, Vector2d position) {
 
+        MapAnimalContainer mapAnimalContainer = new MapAnimalContainer(animal.getLifeEnergy(), animal);
+        this.animals.get(position).remove(mapAnimalContainer);
+        removeAnimalsEntryIfPossible(position);
+
+    }
 
     @Override
     public boolean positionChanged(Animal animal, Vector2d oldPosition, Vector2d newPosition) {

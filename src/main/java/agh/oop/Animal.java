@@ -28,7 +28,7 @@ public class Animal extends AbstractWorldMapElement  {
     private int minLifeEnergyToReproduce;
     private int amountOfEnergyFromParentToChild;
     private int energyFromPlant;
-    private boolean mapWariant;  //0 kula ziamska, 1 piekielny portal
+    private boolean mapWariant;
     private int costOfTeleport;
     private boolean mutationVariant;
     private boolean behaviourVariant;
@@ -57,14 +57,13 @@ public class Animal extends AbstractWorldMapElement  {
             double randNum = Math.random()*8;
             genes.add(MoveDirection.extract((int)randNum));
         }
-//        System.out.println(genes);
         this.genotype = genes;
     }
 
     public String getUniqueID() {
         return uniqueID;
     }
-//    public Animal(AbstractWorldMap map, Vector2d initialPosition, int startingEnergy, List<MoveDirection> genotype) {
+
     public Animal(AbstractWorldMap map, Vector2d initialPosition,StatisticsModule statisticsModule, int startingEnergy, List<MoveDirection> genotype) {
         this.map = map;
         this.orientation = MapDirection.createRandom();
@@ -101,24 +100,11 @@ public class Animal extends AbstractWorldMapElement  {
 
     public void makeDead(){
         this.status = StatusOfAnimal.DEAD;
-        //cos z observerem trzeba bedzie zrobic
+        map.deadAnimal(this,this.getPosition());
     }
 
     public void eatPlant(){
         this.setLifeEnergy(this.getLifeEnergy() + this.energyFromPlant);
-    }
-
-    public String toString(){
-        return switch(orientation) {
-            case NORTH -> "N";
-            case NORTHEAST -> "NE";
-            case EAST -> "E";
-            case WEST -> "W";
-            case SOUTHEAST -> "SE";
-            case SOUTH -> "S";
-            case SOUTHWEST -> "SW";
-            case NORTHWEST -> "NW";
-        };
     }
 
     public boolean isAt(Vector2d position){
@@ -157,19 +143,15 @@ public class Animal extends AbstractWorldMapElement  {
                 System.out.println("KULA Ziemska ");
             if (newPosition.x < 0) {
                 x =  this.map.mapBoundary.upperRight().x;
-//                y = newPosition.y;
             }
             else if (newPosition.x > this.map.mapBoundary.upperRight().x) {
                 x = 0;
-//                y = newPosition.y;
             }
             else if (newPosition.y < 0) {
-//                x = newPosition.x;
                 y = 0;
                 turnMove(MoveDirection.TURN180);
             }
             else if (newPosition.y > this.map.mapBoundary.upperRight().y) {
-//                x = newPosition.x;
                 y = this.map.mapBoundary.upperRight().y;
                 turnMove(MoveDirection.TURN180);
             }
@@ -230,7 +212,6 @@ public class Animal extends AbstractWorldMapElement  {
     }
 
     public List<MoveDirection> getLeftSlice(int howMany){
-
         return this.genotype.subList(0, howMany);
     }
 
@@ -275,9 +256,7 @@ public class Animal extends AbstractWorldMapElement  {
         otherAnimal.setLifeEnergy(otherAnimal.getLifeEnergy() - this.amountOfEnergyFromParentToChild);
 
         var child = new Animal( this.map, this.position,statisticsModule, this.amountOfEnergyFromParentToChild*2, newGenotype);
-        //observery
-//        this.becameParent(child);
-//        otherAnimal.becameParent(child);
+
 
         this.incrementChildren();
         otherAnimal.incrementChildren();
@@ -320,23 +299,7 @@ public class Animal extends AbstractWorldMapElement  {
         }
     }
 
-    public void addObserver(IPositionChangeObserver observer){
-        this.observers.add(observer);
-    }
-
-    public void removeObserver(IPositionChangeObserver observer){
-        this.observers.remove(observer);
-    }
-
-//    void positionChanged(Vector2d oldPosition, Vector2d newPosition){
-////        this.map.getBound().sortuj();
-//        for (IPositionChangeObserver Observer: this.observers) {
-//            Observer.positionChanged(this,oldPosition,newPosition);
-//        }
-//    }
-
     public void selectDirectionAndMove() {
-
         if (this.behaviourVariant){
             if (Math.random()<0.8){
                 if (this.lastUsedGene+1>=this.genLength){
