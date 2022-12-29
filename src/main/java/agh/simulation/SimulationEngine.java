@@ -127,15 +127,17 @@ public class SimulationEngine implements Runnable {
                 newDeadAnimals.add(animal);
             }
         }
-        System.out.println("DEADDD: " + newDeadAnimals);
+//        System.out.println("DEADDD: " + newDeadAnimals);
         this.animals.removeAll(newDeadAnimals);
         this.deadAnimals.addAll(newDeadAnimals);
 
         for (Animal animal : this.animals) {
             animal.selectDirectionAndMove();
-            System.out.println(animal.getPosition().toString());
         }
-        System.out.println("_______");
+        for (Animal animal : this.animals) {
+            System.out.println(animal.getPosition().toString() + " " + animal.getUniqueID());
+        }
+
 
         feedAnimals();
 //        makeAnimalReproduce();
@@ -148,8 +150,14 @@ public class SimulationEngine implements Runnable {
     public void run() {
         while(true) {
             guiWorldMap.refresh(this.map);
-
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        return;
+                    }
             oneDayActions();
+
+                System.out.println("______________");
             day++;
 
 //            guiWorldMap.refresh(this.map);

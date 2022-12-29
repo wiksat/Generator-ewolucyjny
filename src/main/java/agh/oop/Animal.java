@@ -143,8 +143,8 @@ public class Animal extends AbstractWorldMapElement  {
     }
 
     public Vector2d mapMode(Vector2d newPosition) {
-        int x = 0;
-        int y = 0;
+        int x = newPosition.x;
+        int y = newPosition.y;
         if (mapWariant) {
                 System.out.println("TELEPORT");
             setLifeEnergy(getLifeEnergy() - costOfTeleport);
@@ -153,22 +153,22 @@ public class Animal extends AbstractWorldMapElement  {
                     this.map.mapBoundary.upperRight());
         }
         else {
-                System.out.println("KULA Ziemska  " + this.map.mapBoundary.upperRight().x + " " + this.map.mapBoundary.upperRight().y);
+                System.out.println("KULA Ziemska ");
             if (newPosition.x < 0) {
                 x =  this.map.mapBoundary.upperRight().x;
-                y = newPosition.y;
+//                y = newPosition.y;
             }
             else if (newPosition.x > this.map.mapBoundary.upperRight().x) {
                 x = 0;
-                y = newPosition.y;
+//                y = newPosition.y;
             }
             else if (newPosition.y < 0) {
-                x = newPosition.x;
+//                x = newPosition.x;
                 y = 0;
                 move(MoveDirection.TURN180);
             }
             else if (newPosition.y > this.map.mapBoundary.upperRight().y) {
-                x = newPosition.x;
+//                x = newPosition.x;
                 y = this.map.mapBoundary.upperRight().y;
                 move(MoveDirection.TURN180);
             }
@@ -180,7 +180,7 @@ public class Animal extends AbstractWorldMapElement  {
 
         switch (direction) {
             case FORWARD -> {
-                    System.out.println("TTT: "+direction);
+                    System.out.println(direction + "  " + this.uniqueID);
                 Vector2d orientationVector = this.orientation.toUnitVector();
                 Vector2d newPosition = this.position.add(orientationVector);
 
@@ -191,7 +191,6 @@ public class Animal extends AbstractWorldMapElement  {
                 }
             }
             default -> {
-                    System.out.println("TTT: "+direction);
                 int n = direction.numerValue;
                 for (int i = 0; i < n; i++) {
                     this.orientation = this.orientation.next();
@@ -209,8 +208,8 @@ public class Animal extends AbstractWorldMapElement  {
     }
 
     public void setLifeEnergy(int energy){
-        this.lifeEnergy=energy;
         map.energyChanged(this,getLifeEnergy(),energy);
+        this.lifeEnergy = energy;
         if (this.getLifeEnergy() <= 0) {
             makeDead();
         }
