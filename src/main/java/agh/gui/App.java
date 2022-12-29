@@ -89,6 +89,8 @@ public class App extends Application {
             int mapWidth = mapWidthNTBox.getNumber();
             int jungleHeight = jungleHightNTBox.getNumber();
 
+            SimulationParameters.mapWidth = mapWidthNTBox.getNumber();
+            SimulationParameters.mapHeight = mapHeightNTBox.getNumber();
             SimulationParameters.startNumberOfPlants = startNumberOfPlantsNTBox.getNumber();
             SimulationParameters.plantEnergy = plantEnergyNTBox.getNumber();
             SimulationParameters.numberOfNewPlant = numberOfNewPlantNTBox.getNumber();

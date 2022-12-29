@@ -4,6 +4,7 @@ import agh.oop.AbstractWorldMap;
 import agh.oop.AbstractWorldMapElement;
 import agh.oop.Animal;
 import agh.oop.Vector2d;
+import agh.simulation.SimulationParameters;
 import javafx.application.Platform;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -37,8 +38,8 @@ public class GuiWorldMap extends VBox {
 
         int minX = 0;
         int minY = 0;
-        int maxX = GuiParameters.mapWidth;
-        int maxY = GuiParameters.mapHeight;
+        int maxX = SimulationParameters.mapWidth;
+        int maxY = SimulationParameters.mapHeight;
 
 
 

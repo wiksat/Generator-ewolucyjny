@@ -44,7 +44,7 @@ public class Animal extends AbstractWorldMapElement  {
         this.genCounter = 0;
         this.costOfTheDay = SimulationParameters.costOfTheDay;
         this.minLifeEnergyToReproduce = SimulationParameters.minLifeEnergyToReproduce;
-        this.amountOfEnergyFromParentToChild = SimulationParameters.minLifeEnergyToReproduce;
+        this.amountOfEnergyFromParentToChild = SimulationParameters.lifeEnergySpendForPropagation;
         this.energyFromPlant = SimulationParameters.plantEnergy;
         this.mapWariant = SimulationParameters.mapVariant;
         this.costOfTeleport = SimulationParameters.minLifeEnergyToReproduce;
@@ -57,6 +57,7 @@ public class Animal extends AbstractWorldMapElement  {
             double randNum = Math.random()*8;
             genes.add(MoveDirection.extract((int)randNum));
         }
+//        System.out.println(genes);
         this.genotype = genes;
     }
 
@@ -64,7 +65,7 @@ public class Animal extends AbstractWorldMapElement  {
         return uniqueID;
     }
 
-    public Animal(AbstractWorldMap map, Vector2d initialPosition,StatisticsModule statisticsModule, int startingEnergy, List<MoveDirection> genotype) {
+    public Animal(AbstractWorldMap map, Vector2d initialPosition, StatisticsModule statisticsModule, int startingEnergy, List<MoveDirection> genotype) {
         this.map = map;
         this.orientation = MapDirection.createRandom();
         this.position=initialPosition;
@@ -75,7 +76,7 @@ public class Animal extends AbstractWorldMapElement  {
         this.genCounter=0;
         this.costOfTheDay = SimulationParameters.costOfTheDay;
         this.minLifeEnergyToReproduce = SimulationParameters.minLifeEnergyToReproduce;
-        this.amountOfEnergyFromParentToChild = SimulationParameters.minLifeEnergyToReproduce;
+        this.amountOfEnergyFromParentToChild = SimulationParameters.lifeEnergySpendForPropagation;
         this.energyFromPlant = SimulationParameters.plantEnergy;
         this.mapWariant = SimulationParameters.mapVariant;
         this.costOfTeleport = SimulationParameters.minLifeEnergyToReproduce;
@@ -255,7 +256,7 @@ public class Animal extends AbstractWorldMapElement  {
         this.setLifeEnergy(this.getLifeEnergy() - this.amountOfEnergyFromParentToChild);
         otherAnimal.setLifeEnergy(otherAnimal.getLifeEnergy() - this.amountOfEnergyFromParentToChild);
 
-        var child = new Animal( this.map, this.position,statisticsModule, this.amountOfEnergyFromParentToChild*2, newGenotype);
+        var child = new Animal( this.map, this.position, statisticsModule, this.amountOfEnergyFromParentToChild*2, newGenotype);
 
 
         this.incrementChildren();
@@ -300,6 +301,7 @@ public class Animal extends AbstractWorldMapElement  {
     }
 
     public void selectDirectionAndMove() {
+
         if (this.behaviourVariant){
             if (Math.random()<0.8){
                 if (this.lastUsedGene+1>=this.genLength){

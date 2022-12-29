@@ -1,6 +1,9 @@
 package agh.simulation;
 
 public class SimulationParameters {
+    public static int mapWidth = 10;
+    public static int mapHeight = 10;
+
     public static int startNumberOfPlants = 20;
     public static int plantEnergy = 5;
     public static int numberOfNewPlant = 10;
