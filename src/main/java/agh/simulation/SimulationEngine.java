@@ -62,12 +62,12 @@ public class SimulationEngine implements Runnable {
             if (this.map.getGrassAt(animal.getPosition()) instanceof Grass) {
                 eatenGrassPosition.add(animal.getPosition());
 
-//                var animals = this.map.getAnimalsAt(animal.getPosition());
-//                var theStrongestAnimal = animals.last();
-//                if (animal.getLifeEnergy() == theStrongestAnimal.animalEnergy()) {
-////                    var limitAnimal = new MapAnimalContainer(theStrongestAnimal.animalEnergy(), null);
-//                    animal.eatPlant();
-//               }
+                var animals = this.map.getAnimalsAt(animal.getPosition());
+                var theStrongestAnimal = animals.last();
+                if (animal.getLifeEnergy() == theStrongestAnimal.animalEnergy()) {
+//                    var limitAnimal = new MapAnimalContainer(theStrongestAnimal.animalEnergy(), null);
+                    animal.eatPlant();
+               }
 
             }
         }
@@ -107,13 +107,13 @@ public class SimulationEngine implements Runnable {
     }
 
     private void setStatistics(){
-        int sum=0;
+        int sum = 0;
         for (Animal animal : animals) {
             sum += animal.getLifeEnergy();
         }
         statisticsModule.changeAverageEnergyLifeForAlive(sum,animals.size());
         statisticsModule.changeAmountOfAnimal(animals.size());
-        int sumDead=0;
+        int sumDead = 0;
         for (Animal animal : deadAnimals) {
             sumDead += animal.getAge();
         }
