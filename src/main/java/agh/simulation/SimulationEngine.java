@@ -4,6 +4,8 @@ import agh.gui.GuiParameters;
 import agh.gui.GuiWorldMap;
 import agh.oop.*;
 
+import agh.statistics.StatisticsModule;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -15,17 +17,18 @@ public class SimulationEngine implements Runnable {
     private final AbstractWorldMap map;
     private GuiWorldMap guiWorldMap;
     private final List<Animal> animals = new ArrayList<>();
+    private final List<Animal> deadAnimals = new ArrayList<>();
 //    private final List<IMapRefreshNeededObserver> mapRefreshNeededObservers = new ArrayList<>();
 //    private final List<IAnimalLifeObserver> animalLifeObservers = new ArrayList<>();
 //    private final List<INextDayObserver> nextDayObservers = new ArrayList<>();
 //    private final List<ISimulationEventObserver> simulationEventObservers = new ArrayList<>();
     private int day = 0;
     private int moveDelay = SimulationParameters.simulationMoveDelay;
-
-    public SimulationEngine(AbstractWorldMap map, GuiWorldMap guiWorldMap) {
+    public StatisticsModule statisticsModule;
+    public SimulationEngine(AbstractWorldMap map, GuiWorldMap guiWorldMap, StatisticsModule statisticsModule) {
         this.guiWorldMap = guiWorldMap;
         this.map = map;
-
+        this.statisticsModule = statisticsModule;
 //        MapBoundary mapBoundary = this.map.getMapBoundary();
 
         for (int i = 0; i < SimulationParameters.startNumberOfAnimals; i++) {
@@ -36,7 +39,7 @@ public class SimulationEngine implements Runnable {
                 position = new Vector2d(x, y);
             } while (this.map.isOccupied(position));
 
-            Animal animal = new Animal(this.map, position);
+            Animal animal = new Animal(this.map, position, statisticsModule);
             this.map.place(animal);
             this.animals.add(animal);
         }
@@ -103,7 +106,19 @@ public class SimulationEngine implements Runnable {
         this.animals.addAll(children);
     }
 
-
+    private void setStatistics(){
+        int sum=0;
+        for (Animal animal : animals) {
+            sum += animal.getLifeEnergy();
+        }
+        statisticsModule.changeAverageEnergyLifeForAlive(sum,animals.size());
+        statisticsModule.changeAmountOfAnimal(animals.size());
+        int sumDead=0;
+        for (Animal animal : deadAnimals) {
+            sumDead += animal.getAge();
+        }
+        statisticsModule.changeAverageAgeForDead(sumDead,deadAnimals.size());
+    }
     private void oneDayActions() {
         List<Animal> newDeadAnimals = new ArrayList<>();
         for (Animal animal : this.animals) {
@@ -114,7 +129,7 @@ public class SimulationEngine implements Runnable {
         }
         System.out.println("DEADDD: " + newDeadAnimals);
         this.animals.removeAll(newDeadAnimals);
-
+        this.deadAnimals.addAll(newDeadAnimals);
 
         for (Animal animal : this.animals) {
             animal.selectDirectionAndMove();
@@ -125,6 +140,7 @@ public class SimulationEngine implements Runnable {
         feedAnimals();
 //        makeAnimalReproduce();
 
+        setStatistics();
         this.map.growGrass();
     }
 

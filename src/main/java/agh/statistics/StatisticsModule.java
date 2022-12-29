@@ -6,8 +6,8 @@ public class StatisticsModule {
     int amountOfAnimals;
     int amountOfGrasses;
     int amountOfFreePlaces;
-    float averageEnergyLifeForAlive;
-    float averageAgeForDead;
+    double averageEnergyLifeForAlive;
+    double averageAgeForDead;
 
     public void incrementGrasses() {
         amountOfGrasses++;
@@ -16,13 +16,14 @@ public class StatisticsModule {
         amountOfGrasses--;
     }
 
-    public void incrementAmountOfAnimal() {
-        amountOfAnimals++;
+    public void changeAmountOfAnimal(int amount) {
+        this.amountOfAnimals=amount;
     }
-    public void changeAverageEnergyLifeForAlive() {
 
+    public void changeAverageEnergyLifeForAlive(int sumOfAlive,int amountAlive) {
+    this.averageEnergyLifeForAlive=(double) sumOfAlive/amountAlive;
     }
-    public void changeAverageAgeForDead() {
-
+    public void changeAverageAgeForDead(int sumOfDead,int amountDead) {
+    this.averageAgeForDead=(double) sumOfDead/amountDead;
     }
 }

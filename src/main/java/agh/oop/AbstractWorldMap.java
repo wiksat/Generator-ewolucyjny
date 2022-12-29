@@ -11,7 +11,6 @@ public class AbstractWorldMap implements IWorldMap {
 
     protected final Map<Vector2d, AbstractWorldMapElement> grasses = new LinkedHashMap<>();
 
-//    protected final MapVisualizer visualize = new MapVisualizer(this);
     protected MapBoundary mapBoundary;
     protected MapBoundary jungleBoundary;
 
@@ -194,6 +193,7 @@ public class AbstractWorldMap implements IWorldMap {
     @Override
     public boolean positionChanged(Animal animal, Vector2d oldPosition, Vector2d newPosition) {
 //        if (worldMapElement instanceof Animal animal) {
+        System.out.println("zmiana pozycji się wykonuje");
             MapAnimalContainer mapAnimalContainer = new MapAnimalContainer(animal.getLifeEnergy(), animal);
             this.animals.get(oldPosition).remove(mapAnimalContainer);
             removeAnimalsEntryIfPossible(oldPosition);
