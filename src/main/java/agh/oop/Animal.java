@@ -189,12 +189,17 @@ public class Animal extends AbstractWorldMapElement  {
         }
     }
 
+    private void positionChanged(Vector2d position, Vector2d newPosition) {
+        map.positionChanged(this,position,newPosition);
+    }
+
     public int getLifeEnergy(){
         return this.lifeEnergy;
     }
 
     public void setLifeEnergy(int energy){
         this.lifeEnergy=energy;
+        map.energyChanged(this,getLifeEnergy(),energy);
         if (this.getLifeEnergy() <= 0) {
             makeDead();
         }
@@ -309,12 +314,12 @@ public class Animal extends AbstractWorldMapElement  {
         this.observers.remove(observer);
     }
 
-    void positionChanged(Vector2d oldPosition, Vector2d newPosition){
-//        this.map.getBound().sortuj();
-        for (IPositionChangeObserver Observer: this.observers) {
-            Observer.positionChanged(this,oldPosition,newPosition);
-        }
-    }
+//    void positionChanged(Vector2d oldPosition, Vector2d newPosition){
+////        this.map.getBound().sortuj();
+//        for (IPositionChangeObserver Observer: this.observers) {
+//            Observer.positionChanged(this,oldPosition,newPosition);
+//        }
+//    }
 
     public void selectDirectionAndMove() {
 

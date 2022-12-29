@@ -4,7 +4,7 @@ import javafx.util.Pair;
 
 import java.util.*;
 
-public class AbstractWorldMap implements IWorldMap,IPositionChangeObserver {
+public class AbstractWorldMap implements IWorldMap {
     protected List<Animal> animalsList = new ArrayList<>();
     protected final Map<Vector2d, NavigableSet<MapAnimalContainer>> animals = new LinkedHashMap<>();
 
