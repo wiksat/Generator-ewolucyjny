@@ -36,6 +36,7 @@ public class App extends Application {
 
         var mapVariantComboBox = new ComboBox<>();
         mapVariantComboBox.getItems().addAll("kula ziemska", "magiczny portal");
+        mapVariantComboBox.getSelectionModel().selectFirst();
         grid.addRow(4, new Label("Wybierz wariant mapy: "), mapVariantComboBox);
 
         var startNumberOfPlantsNTBox = new NumberTextField(GuiParameters.startNumberOfPlants);
@@ -49,6 +50,7 @@ public class App extends Application {
 
         var plantGrowthVariantComboBox = new ComboBox<>();
         plantGrowthVariantComboBox.getItems().addAll("zalesione rowniki", "toksyczne trupt");
+        plantGrowthVariantComboBox.getSelectionModel().selectFirst();
         grid.addRow(8, new Label("Wybierz wariant wzrostu roslin: "), plantGrowthVariantComboBox);
 
         var startNumberOfAnimalsNTBox = new NumberTextField(GuiParameters.startNumberOfAnimals);
@@ -71,6 +73,7 @@ public class App extends Application {
 
         var mutationVariantComboBox = new ComboBox<>();
         mutationVariantComboBox.getItems().addAll("pelna losowosc", "lekka korekta");
+        mutationVariantComboBox.getSelectionModel().selectFirst();
         grid.addRow(15, new Label("Wybierz wariant mutacji: "), mutationVariantComboBox);
 
         var lengthOfAnimalGenomeNTBox = new NumberTextField(GuiParameters.lengthOfAnimalGenome);
@@ -78,6 +81,7 @@ public class App extends Application {
 
         var behaviourVariantComboBox = new ComboBox<>();
         behaviourVariantComboBox.getItems().addAll("pelna predestynacja", "nieco szalenstwa");
+        behaviourVariantComboBox.getSelectionModel().selectFirst();
         grid.addRow(17, new Label("Wybierz wariant zachowania zwierzakow"), behaviourVariantComboBox);
 
 
