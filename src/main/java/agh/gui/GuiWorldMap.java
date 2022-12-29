@@ -1,6 +1,7 @@
 package agh.gui;
 
 import agh.oop.AbstractWorldMap;
+import agh.oop.AbstractWorldMapElement;
 import agh.oop.Vector2d;
 import javafx.application.Platform;
 import javafx.geometry.HPos;
@@ -35,8 +36,8 @@ public class GuiWorldMap extends VBox {
 
         int minX = 0;
         int minY = 0;
-        int maxX = GuiParameters.gridCellWidth;
-        int maxY = GuiParameters.gridCellHeight;
+        int maxX = GuiParameters.mapWidth;
+        int maxY = GuiParameters.mapHeight;
 
 
 
@@ -69,11 +70,21 @@ public class GuiWorldMap extends VBox {
             for (int j = minY; j < maxY; j++) {
                 Vector2d position = new Vector2d(i, j);
                 StackPane stackPane = new StackPane();
-                stackPane.setBackground(new Background(new BackgroundFill(Color.rgb(5, 105, 25), null, null)));
-                System.out.println("JEBAC JAVE" + i + j);
+                stackPane.setBackground(new Background(new BackgroundFill(Color.rgb(5, 155, 25), null, null)));
 //                if równik
 
 //                if isOccupied
+
+                if (this.aWorldMap.getJungleBoundary().isInside(position)) {
+                    stackPane.setBackground(new Background(new BackgroundFill(Color.rgb(15, 95, 20), null, null)));
+                }
+
+                if (aWorldMap.isOccupied(position)) {
+                    AbstractWorldMapElement worldMapElement = aWorldMap.getTopWorldMapElementAt(position);
+                    GuiWorldMapElement element = new GuiWorldMapElement(worldMapElement);
+//                    element.addGuiWorldMapElementClickObservers((IGuiWorldMapElementClickObserver) parentStage);
+                    stackPane.getChildren().add(element);
+                }
 
                 GridPane.setHalignment(stackPane, HPos.CENTER);
                 this.gridMap.add(stackPane, i + 1, j + 1, 1, 1);
