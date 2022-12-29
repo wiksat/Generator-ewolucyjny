@@ -1,6 +1,7 @@
 package agh.oop;
 
 import agh.simulation.SimulationParameters;
+import agh.statistics.StatisticsModule;
 import javafx.util.Pair;
 
 import java.util.*;
@@ -13,17 +14,17 @@ public class AbstractWorldMap implements IWorldMap {
 
     protected MapBoundary mapBoundary;
     protected MapBoundary jungleBoundary;
-
+    private final StatisticsModule statisticsModule;
 
     private int numberOfPlant;
 
-    public AbstractWorldMap(int width, int height, int jungleHeight) {
+    public AbstractWorldMap(int width, int height, int jungleHeight, StatisticsModule statisticsModule) {
         this.mapBoundary = new MapBoundary(new Vector2d(0, 0), new Vector2d(width-1, height-1));
         int centerX = width / 2;
         int centerY = height / 2;
 
         Vector2d jungleLowerLeft = new Vector2d(0, centerY - jungleHeight / 2);
-
+        this.statisticsModule=statisticsModule;
         this.jungleBoundary = new MapBoundary(jungleLowerLeft,
                 jungleLowerLeft.add(new Vector2d(width-1, jungleHeight-1)));
 
@@ -112,15 +113,11 @@ public class AbstractWorldMap implements IWorldMap {
                 } while (this.isOccupied(grassPosition));
 
                 this.grasses.put(grassPosition, new Grass(grassPosition));
+                statisticsModule.incrementGrasses();
 //                this.incrementSlotsTaken(grassPosition);
                 numberOfGrown++;
             }
         }
-
-//        for (var observer : this.grassActionObservers) {
-//            observer.grassGrow(noOfGrownGrassTufts);
-//        }
-//        cos z obserwatorem
     }
 
 
@@ -135,14 +132,6 @@ public class AbstractWorldMap implements IWorldMap {
 
     @Override
     public String toString() {
-//        this.mapBoundary.sortuj();
-//        int x = this.mapBoundary.X_el.get(0).getPosition().x;
-//        int y = this.mapBoundary.Y_el.get(0).getPosition().y;
-//        Vector2d vectorL = new Vector2d(x,y);
-//        x = this.mapBoundary.X_el.get(this.mapBoundary.X_el.size()-1).getPosition().x;
-//        y = this.mapBoundary.Y_el.get(this.mapBoundary.Y_el.size()-1).getPosition().y;
-//        Vector2d vectorR = new Vector2d(x,y);
-//        return this.visualize.draw(vectorL,vectorR);
         return "";
     }
     public Vector2d getLowerLeftDrawLimit() {
@@ -177,18 +166,13 @@ public class AbstractWorldMap implements IWorldMap {
     }
 
     public void removeGrassAt(Vector2d position) {
-        var obj = this.grasses.remove(position);
-        if (obj != null) {
-//            this.decrementSlotsTaken(position);
-
-            if (obj instanceof Grass) {
-//                for (var observer : grassActionObservers) {
-//                    observer.grassEaten();
-//                }
-                //observery
+        if (this.grasses.get(position)!=null) {
+            this.grasses.remove(position);
+            statisticsModule.decrementGrasses();
             }
         }
-    }
+
+
 
     @Override
     public boolean positionChanged(Animal animal, Vector2d oldPosition, Vector2d newPosition) {

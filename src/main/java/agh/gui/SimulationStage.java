@@ -3,6 +3,7 @@ package agh.gui;
 import agh.oop.AbstractWorldMap;
 import agh.simulation.SimulationParameters;
 import agh.simulation.SimulationThreadController;
+import agh.statistics.StatisticsModule;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,7 +15,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class SimulationStage extends Stage {
-
+    private final StatisticsModule statisticsModule;
     private GuiWorldMap guiWorldMap;
 
     private SimulationThreadController sThreadController;
@@ -24,12 +25,12 @@ public class SimulationStage extends Stage {
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
         this.setX(bounds.getMinX());
-
-        aWorldMap = new AbstractWorldMap(mapWidth, mapHeight, jungleHeight);
+        statisticsModule = new StatisticsModule();
+        aWorldMap = new AbstractWorldMap(mapWidth, mapHeight, jungleHeight,statisticsModule);
 
 
         guiWorldMap = new GuiWorldMap(aWorldMap, this);
-        this.sThreadController = new SimulationThreadController(aWorldMap, guiWorldMap);
+        this.sThreadController = new SimulationThreadController(aWorldMap, guiWorldMap,statisticsModule);
 
 
         Region spacer = new Region();
