@@ -272,8 +272,12 @@ public class Animal extends AbstractWorldMapElement  {
     }
 
     public void selectDirectionAndMove(boolean behaviourVariant) {
+
         if (behaviourVariant){
             if (Math.random()<0.8){
+                if (this.lastUsedGene+1>=this.genLength){
+                    this.lastUsedGene=-1;
+                }
                 this.move(this.genotype.get( this.lastUsedGene+1));
                 this.lastUsedGene= this.lastUsedGene+1;
             }else{
@@ -283,11 +287,12 @@ public class Animal extends AbstractWorldMapElement  {
             }
         }
         else{
+            if (this.lastUsedGene+1>=this.genLength){
+                this.lastUsedGene=-1;
+            }
             this.move(this.genotype.get( this.lastUsedGene+1));
             this.lastUsedGene= this.lastUsedGene+1;
         }
-        if (this.lastUsedGene>=this.genLength){
-            this.lastUsedGene=-1;
-        }
+
     }
 }
