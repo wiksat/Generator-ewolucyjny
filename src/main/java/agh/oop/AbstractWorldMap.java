@@ -1,5 +1,6 @@
 package agh.oop;
 
+import agh.simulation.SimulationParameters;
 import javafx.util.Pair;
 
 import java.util.*;
@@ -15,9 +16,7 @@ public class AbstractWorldMap implements IWorldMap {
     protected MapBoundary jungleBoundary;
 
 
-
-    //variable from user
-    int numberOfPlant=10;
+    private int numberOfPlant;
 
     public AbstractWorldMap(int width, int height, int jungleHeight) {
         this.mapBoundary = new MapBoundary(new Vector2d(0, 0), new Vector2d(width-1, height-1));
@@ -28,6 +27,8 @@ public class AbstractWorldMap implements IWorldMap {
 
         this.jungleBoundary = new MapBoundary(jungleLowerLeft,
                 jungleLowerLeft.add(new Vector2d(width-1, jungleHeight-1)));
+
+        this.numberOfPlant = SimulationParameters.numberOfNewPlant;
     }
 
 

@@ -58,6 +58,9 @@ public class Animal extends AbstractWorldMapElement  {
         this.genotype = genes;
     }
 
+    public String getUniqueID() {
+        return uniqueID;
+    }
     public Animal(AbstractWorldMap map, Vector2d initialPosition, int startingEnergy, List<MoveDirection> genotype) {
         this.map = map;
         this.orientation = MapDirection.createRandom();
@@ -134,43 +137,44 @@ public class Animal extends AbstractWorldMapElement  {
         };
     }
 
-    public Vector2d mapMode( Vector2d newPosition) {
-        int x=0;
-        int y=0;
-        if (mapWariant){
-            if ( newPosition.x < 0){
-                x =  this.map.mapBoundary.upperRight().x;
-                y = newPosition.y;
-            }
-            else if ( newPosition.x > this.map.mapBoundary.upperRight().x){
-                x =  0;
-                y = newPosition.y;
-            }
-            else if(newPosition.y<0){
-                x=newPosition.x;
-                y = 1;
-                move(MoveDirection.TURN180);
-            }
-            else if (newPosition.x > this.map.mapBoundary.lowerLeft().y){
-                x= newPosition.x;
-                y = this.map.mapBoundary.lowerLeft().y;
-                move(MoveDirection.TURN180);
-            }
-            return new Vector2d(x,y);
-        }
-        else{
-            setLifeEnergy(getLifeEnergy()-costOfTeleport);
+    public Vector2d mapMode(Vector2d newPosition) {
+        int x = 0;
+        int y = 0;
+        if (mapWariant) {
+            setLifeEnergy(getLifeEnergy() - costOfTeleport);
             return Vector2d.getRandomVectorBetween(
                     this.map.mapBoundary.lowerLeft(),
                     this.map.mapBoundary.upperRight());
         }
-
+        else {
+            if (newPosition.x < 0) {
+                x =  this.map.mapBoundary.upperRight().x;
+                y = newPosition.y;
+            }
+            else if (newPosition.x > this.map.mapBoundary.upperRight().x) {
+                x = 0;
+                y = newPosition.y;
+            }
+            else if (newPosition.y < 0) {
+                x = newPosition.x;
+                y = 0;
+                move(MoveDirection.TURN180);
+            }
+            else if (newPosition.y > this.map.mapBoundary.upperRight().y) {
+                x = newPosition.x;
+                y = this.map.mapBoundary.upperRight().y;
+                move(MoveDirection.TURN180);
+            }
+            return new Vector2d(x,y);
+        }
     }
 
     public void move(MoveDirection direction){
 
         switch (direction) {
+
             case FORWARD -> {
+                    System.out.println("TTT: "+direction);
                 Vector2d orientationVector = this.orientation.toUnitVector();
                 Vector2d newPosition = this.position.add(orientationVector);
 
@@ -181,6 +185,7 @@ public class Animal extends AbstractWorldMapElement  {
                 }
             }
             default -> {
+                    System.out.println("TTT: "+direction);
                 int n = direction.numerValue;
                 for (int i = 0; i < n; i++) {
                     this.orientation = this.orientation.next();

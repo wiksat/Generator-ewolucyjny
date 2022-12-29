@@ -2,6 +2,7 @@ package agh.gui;
 
 import agh.oop.AbstractWorldMap;
 import agh.oop.AbstractWorldMapElement;
+import agh.oop.Animal;
 import agh.oop.Vector2d;
 import javafx.application.Platform;
 import javafx.geometry.HPos;
@@ -80,6 +81,17 @@ public class GuiWorldMap extends VBox {
                 }
 
                 if (aWorldMap.isOccupied(position)) {
+
+                    if (aWorldMap.getTopWorldMapElementAt(position) instanceof Animal){
+                        System.out.print(((Animal) aWorldMap.getTopWorldMapElementAt(position)).getLifeEnergy() + "__");
+                        System.out.print(((Animal) aWorldMap.getTopWorldMapElementAt(position)).getStatus() + "  ");
+                        System.out.print(((Animal) aWorldMap.getTopWorldMapElementAt(position)).getUniqueID() + "  ");
+                        System.out.println(aWorldMap.getTopWorldMapElementAt(position).toString() + position.toString());
+                    }
+                    else {
+                        System.out.println(aWorldMap.getTopWorldMapElementAt(position).toString() + position.toString());
+                    }
+
                     AbstractWorldMapElement worldMapElement = aWorldMap.getTopWorldMapElementAt(position);
                     GuiWorldMapElement element = new GuiWorldMapElement(worldMapElement);
 //                    element.addGuiWorldMapElementClickObservers((IGuiWorldMapElementClickObserver) parentStage);
@@ -87,7 +99,7 @@ public class GuiWorldMap extends VBox {
                 }
 
                 GridPane.setHalignment(stackPane, HPos.CENTER);
-                this.gridMap.add(stackPane, i + 1, j + 1, 1, 1);
+                this.gridMap.add(stackPane, i + 1 , maxY - j, 1, 1);
             }
         }
 

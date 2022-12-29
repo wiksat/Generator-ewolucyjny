@@ -112,6 +112,7 @@ public class SimulationEngine implements Runnable {
                 newDeadAnimals.add(animal);
             }
         }
+        System.out.println("DEADDD: " + newDeadAnimals);
         this.animals.removeAll(newDeadAnimals);
 
 
@@ -122,7 +123,7 @@ public class SimulationEngine implements Runnable {
         System.out.println("_______");
 
         feedAnimals();
-        makeAnimalReproduce();
+//        makeAnimalReproduce();
 
         this.map.growGrass();
     }
@@ -130,11 +131,12 @@ public class SimulationEngine implements Runnable {
     @Override
     public void run() {
         while(true) {
+            guiWorldMap.refresh(this.map);
 
             oneDayActions();
             day++;
 
-            guiWorldMap.refresh(this.map);
+//            guiWorldMap.refresh(this.map);
 //            for (var observer : this.mapRefreshNeededObservers) {
 //                observer.;
 //            }

@@ -10,13 +10,13 @@ public interface GuiParameters {
     int jungleHight = 2;
     boolean mapVariant = false;  /* false - kula ziemska, true - magiczny portal */
 
-    int startNumberOfPlants = 20;
-    int plantEnergy = 5;
-    int numberOfNewPlant = 10;
+    int startNumberOfPlants = 10;
+    int plantEnergy = 10;
+    int numberOfNewPlant = 5;
     boolean plantGrowthVariant = false; /* false - zalesione rowniki, true - toksyczne trupt */
 
-    int startNumberOfAnimals = 10;
-    int startAnimalEnergy = 20;
+    int startNumberOfAnimals = 5;
+    int startAnimalEnergy = 25;
     int animalEnergyToReproduce = 10;
     int animalEnergySpendForPropagation = 10;
 
