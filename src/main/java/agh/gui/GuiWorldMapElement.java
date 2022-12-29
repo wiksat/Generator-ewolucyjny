@@ -19,8 +19,6 @@ import java.util.List;
 public class GuiWorldMapElement extends StackPane {
 
     protected AbstractWorldMapElement worldMapElement;
-//    private final List<IGuiWorldworldMapElementClickObserver> guiWorldworldMapElementClickObservers = new ArrayList<>();
-
 
     public GuiWorldMapElement(AbstractWorldMapElement worldMapElement) {
         super();
@@ -36,24 +34,16 @@ public class GuiWorldMapElement extends StackPane {
             else {
                 System.out.println("GUIWorldMapElement" + worldMapElement.getPosition());
             }
-
         }
         catch (FileNotFoundException e) {
-            if (worldMapElement instanceof Animal) {
-            }
-            else if (worldMapElement instanceof Grass) {
-            }
-            else {
-
-            }
+            System.out.println("File Not Found Exception from GUIWorldMapElement");
         }
         catch (NullPointerException e) {
-            image = new WritableImage(32, 32);
+            System.out.println("Null Pointer Exception from GUIWorldMapElement");
         }
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(40);
         imageView.setFitHeight(40);
-
 
         this.getChildren().add(imageView);
         this.setAlignment(Pos.CENTER);

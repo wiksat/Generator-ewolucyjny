@@ -127,7 +127,6 @@ public class SimulationEngine implements Runnable {
                 newDeadAnimals.add(animal);
             }
         }
-//        System.out.println("DEADDD: " + newDeadAnimals);
         this.animals.removeAll(newDeadAnimals);
         this.deadAnimals.addAll(newDeadAnimals);
 
@@ -160,11 +159,7 @@ public class SimulationEngine implements Runnable {
                 System.out.println("______________");
             day++;
 
-//            guiWorldMap.refresh(this.map);
-//            for (var observer : this.mapRefreshNeededObservers) {
-//                observer.;
-//            }
-
+            guiWorldMap.refresh(this.map);
 
             try {
                 Thread.sleep(this.moveDelay);
