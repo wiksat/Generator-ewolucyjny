@@ -18,7 +18,7 @@ public class Animal extends AbstractWorldMapElement  {
     private int age;
     private AbstractWorldMap map;
     private StatusOfAnimal status = StatusOfAnimal.ALIVE;
-    private List<IPositionChangeObserver> observers = new ArrayList<IPositionChangeObserver>();
+
     private final ArrayList<MoveDirection> genotype;
     private int genLength;
     private int genCounter;
@@ -134,7 +134,7 @@ public class Animal extends AbstractWorldMapElement  {
         int x = newPosition.x;
         int y = newPosition.y;
         if (mapWariant) {
-//                System.out.println("TELEPORT");
+                System.out.println("TELEPORT");
             setLifeEnergy(getLifeEnergy() - costOfTeleport);
             return Vector2d.getRandomVectorBetween(
                     this.map.mapBoundary.lowerLeft(),
@@ -174,8 +174,11 @@ public class Animal extends AbstractWorldMapElement  {
 
             if (this.map.canMoveTo(newPosition)) {
                 newPosition = this.mapMode(newPosition);
-                this.positionChanged(this.position, newPosition);
-                this.position = newPosition;
+//                if (this.getStatus()!=StatusOfAnimal.DEAD){
+                    this.positionChanged(this.position, newPosition);
+                    this.position = newPosition;
+//                }
+
             }
         } else {
             int n = direction.numerValue;
