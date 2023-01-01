@@ -16,7 +16,6 @@ public class AbstractWorldMap implements IWorldMap {
     protected MapBoundary jungleBoundary;
     private final StatisticsModule statisticsModule;
 
-    private int numberOfPlant;
     private int usedPlaces=0;
     private boolean growVarinat;
     private int width;
@@ -34,7 +33,6 @@ public class AbstractWorldMap implements IWorldMap {
         this.jungleBoundary = new MapBoundary(jungleLowerLeft,
                 jungleLowerLeft.add(new Vector2d(width-1, jungleHeight-1)));
 
-        this.numberOfPlant = SimulationParameters.numberOfNewPlant;
         this.growVarinat=SimulationParameters.plantGrowthVariant;
     }
 
@@ -105,7 +103,7 @@ public class AbstractWorldMap implements IWorldMap {
     public boolean havePlace(){
         return usedPlaces < width * height;
     }
-    public void growGrass() {
+    public void growGrass(int numberOfPlant) {
         for (int i = 0; i < numberOfPlant; i++) {
             if (this.havePlace()) {
                 Vector2d grassPosition;
