@@ -2,11 +2,14 @@ package agh.gui;
 
 import agh.simulation.SimulationParameters;
 import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -22,8 +25,14 @@ public class App extends Application {
     }
 
     private Scene createFirstScene() {
-
+        HBox layout = new HBox();
         GridPane grid = new GridPane();
+        layout.setAlignment(Pos.TOP_CENTER);
+        layout.getChildren().add(grid);
+        VBox.setMargin(grid, new Insets(0,0,0,0));
+        grid.setHgap(30);
+        layout.setSpacing(40);
+        grid.setVgap(8);
 
         var mapHeightNTBox = new NumberTextField(GuiParameters.mapHeight);
         grid.addRow(1, new Label("Wysokosc mapy: "), mapHeightNTBox);
@@ -85,8 +94,19 @@ public class App extends Application {
         grid.addRow(17, new Label("Wybierz wariant zachowania zwierzakow"), behaviourVariantComboBox);
 
 
+        Button loadParameters = new Button("Wczytaj konfiguracje z pliku");
+        grid.addRow(18,loadParameters);
+
+        var saveStatisticsComboBox = new ComboBox<>();
+        saveStatisticsComboBox.getItems().addAll("Tak", "Nie");
+        saveStatisticsComboBox.getSelectionModel().selectFirst();
+        grid.addRow(19, new Label("Zapisuj statystyki do pliku"), saveStatisticsComboBox);
+
+//        Button saveStatistics = new Button("Zapisuj statystyki do pliku");
+//        grid.addRow(19, saveStatistics);
+
         Button startSimulation = new Button("Wlacz symulacje");
-        grid.addRow(18, startSimulation);
+        grid.addRow(20, startSimulation);
 
         startSimulation.setOnAction(e -> {
             int mapHeight = mapHeightNTBox.getNumber();
@@ -132,7 +152,7 @@ public class App extends Application {
         });
 
 //        grid.getChildren().add(startSimulation);
-        return new Scene(grid, 500, 700);
+        return new Scene(layout, 600, 800);
     }
 
 
