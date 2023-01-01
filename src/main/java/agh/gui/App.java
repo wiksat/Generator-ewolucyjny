@@ -7,8 +7,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 public class App extends Application {
 
@@ -21,7 +24,13 @@ public class App extends Application {
         primaryStage.show();
     }
 
-    private Scene createFirstScene() {
+    private Scene createFirstScene() throws IOException {
+
+
+        String[] cars = {"Volvo", "BMW", "Ford", "Mazda"};
+
+
+        OptionReader.save(cars);
 
         GridPane grid = new GridPane();
 
