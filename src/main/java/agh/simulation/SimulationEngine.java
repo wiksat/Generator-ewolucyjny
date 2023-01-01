@@ -20,10 +20,7 @@ public class SimulationEngine implements Runnable {
     private GuiStatisticsModule guiStatisticsModule;
     private final List<Animal> animals = new ArrayList<>();
     private final List<Animal> deadAnimals = new ArrayList<>();
-//    private final List<IMapRefreshNeededObserver> mapRefreshNeededObservers = new ArrayList<>();
-//    private final List<IAnimalLifeObserver> animalLifeObservers = new ArrayList<>();
-//    private final List<INextDayObserver> nextDayObservers = new ArrayList<>();
-//    private final List<ISimulationEventObserver> simulationEventObservers = new ArrayList<>();
+    private final int numberOfNewPlants;
     private int day = 0;
     private int moveDelay = SimulationParameters.simulationMoveDelay;
     public StatisticsModule statisticsModule;
@@ -32,7 +29,7 @@ public class SimulationEngine implements Runnable {
         this.map = map;
         this.statisticsModule = statisticsModule;
         this.guiStatisticsModule = guiStatisticsModule;
-//        MapBoundary mapBoundary = this.map.getMapBoundary();
+        this.numberOfNewPlants = SimulationParameters.numberOfNewPlant;
 
         for (int i = 0; i < SimulationParameters.startNumberOfAnimals; i++) {
             Vector2d position;
@@ -47,28 +44,18 @@ public class SimulationEngine implements Runnable {
             this.animals.add(animal);
         }
 
-//        for (Animal animal : this.animals) {
-//            animal.addLifeObserver(simpleStatisticsHandler);
-//            animal.addEnergyObserver(simpleStatisticsHandler);
-//        }
-//        this.map.addGrassObserver(simpleStatisticsHandler);
-//        this.addAnimalLifeObserver(simpleStatisticsHandler);
-//        for (Animal animal : this.animals) {
-//            animalCreated(animal);
-//        }
+        this.map.growGrass(SimulationParameters.startNumberOfPlants);
     }
 
     private void feedAnimals() {
         Set<Vector2d> eatenGrassPosition = new HashSet<>();
         for (Animal animal : this.animals) {
-//            if (this.map.objectAt(animal.getPosition()) instanceof Grass) {
             if (this.map.getGrassAt(animal.getPosition()) instanceof Grass) {
                 eatenGrassPosition.add(animal.getPosition());
 
                 var animals = this.map.getAnimalsAt(animal.getPosition());
                 var theStrongestAnimal = animals.last();
                 if (animal.getLifeEnergy() == theStrongestAnimal.animalEnergy()) {
-//                    var limitAnimal = new MapAnimalContainer(theStrongestAnimal.animalEnergy(), null);
                     animal.eatPlant();
                }
 
@@ -76,7 +63,6 @@ public class SimulationEngine implements Runnable {
         }
 
         for (Vector2d grassPosition : eatenGrassPosition) {
-            //grass element
             this.map.removeGrassAt(grassPosition);
         }
     }
@@ -100,7 +86,6 @@ public class SimulationEngine implements Runnable {
                     }
                 });
             }
-
 
         }
         for (Animal child : children) {
@@ -143,9 +128,8 @@ public class SimulationEngine implements Runnable {
 
         feedAnimals();
         makeAnimalReproduce();
-
         setStatistics();
-        this.map.growGrass();
+        this.map.growGrass(this.numberOfNewPlants);
     }
 
     @Override
