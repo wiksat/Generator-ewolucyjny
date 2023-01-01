@@ -25,6 +25,7 @@ public class SimulationEngine implements Runnable {
     private int day = 0;
     private int moveDelay = SimulationParameters.simulationMoveDelay;
     public StatisticsModule statisticsModule;
+    private boolean withSaveStatistics;
     public int nrOfDay=0;
     public SimulationEngine(AbstractWorldMap map, GuiWorldMap guiWorldMap, StatisticsModule statisticsModule, GuiStatisticsModule guiStatisticsModule) throws Exception {
         this.guiWorldMap = guiWorldMap;
@@ -32,6 +33,7 @@ public class SimulationEngine implements Runnable {
         this.statisticsModule = statisticsModule;
         this.guiStatisticsModule = guiStatisticsModule;
         this.numberOfNewPlants = SimulationParameters.numberOfNewPlant;
+        this.withSaveStatistics=SimulationParameters.withSaveStatistics;
 
         for (int i = 0; i < SimulationParameters.startNumberOfAnimals; i++) {
             Vector2d position;
@@ -47,7 +49,10 @@ public class SimulationEngine implements Runnable {
         }
 
         this.map.growGrass(SimulationParameters.startNumberOfPlants);
-        this.statisticsModule.statisticsWriter.createFile();
+        if (withSaveStatistics){
+            this.statisticsModule.statisticsWriter.createFile();
+        }
+
     }
 
     private void feedAnimals() {
@@ -109,7 +114,9 @@ public class SimulationEngine implements Runnable {
             sumDead += animal.getAge();
         }
         statisticsModule.changeAverageAgeForDead(sumDead,deadAnimals.size());
-        statisticsModule.saveDataToLists(nrOfDay);
+        if (withSaveStatistics){
+            statisticsModule.saveDataToLists(nrOfDay);
+        }
         nrOfDay++;
     }
     private void oneDayActions() throws IOException {

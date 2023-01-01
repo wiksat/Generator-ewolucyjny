@@ -24,5 +24,6 @@ public class SimulationParameters {
     public static boolean plantGrowthVariant = false; /* false - zalesione rowniki, true - toksyczne trupt */
     public static boolean mutationVariant = false; /* false - pelna losowosc, true - lekka korekta */
     public static boolean behaviourVariant = false; /* false - pelna predestynacja, true - nieco szaleństwa */
+    public static boolean withSaveStatistics = false; /* false - bez zapisu statystyk, true - z zapisem statystyk */
 
 }

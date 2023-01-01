@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4aa76a78-281e-4a75-ba85-5abd33576347" name="Changes" comment="naprawione co ożóg zepsuł2">
-      <change afterPath="$PROJECT_DIR$/src/main/java/agh/statistics/StatisticsWriter.java" afterDir="false" />
+    <list default="true" id="4aa76a78-281e-4a75-ba85-5abd33576347" name="Changes" comment="statystyki do pliku">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agh/gui/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/gui/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agh/gui/SimulationStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/gui/SimulationStage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/gui/OptionReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/gui/OptionReader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/agh/simulation/SimulationEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/simulation/SimulationEngine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agh/simulation/SimulationThreadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/simulation/SimulationThreadController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agh/statistics/StatisticsModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/statistics/StatisticsModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/simulation/SimulationParameters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/simulation/SimulationParameters.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -330,7 +327,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672605039029</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="statystyki do pliku">
+      <created>1672609235338</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1672609235338</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -348,7 +352,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="dalsza praca nad AbstractWorldMap" />
     <MESSAGE value="poprawiony Animal" />
     <MESSAGE value="poprawiony Animal2" />
     <MESSAGE value="poprawki wspólne" />
@@ -373,6 +376,7 @@
     <MESSAGE value="naprawiony magiczny teleport" />
     <MESSAGE value="naprawione co ożóg zepsuł" />
     <MESSAGE value="naprawione co ożóg zepsuł2" />
-    <option name="LAST_COMMIT_MESSAGE" value="naprawione co ożóg zepsuł2" />
+    <MESSAGE value="statystyki do pliku" />
+    <option name="LAST_COMMIT_MESSAGE" value="statystyki do pliku" />
   </component>
 </project>
