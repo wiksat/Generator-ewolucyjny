@@ -16,6 +16,7 @@ public class OptionReader {
         options = new LinkedList<>();
         BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE));
 
+        List<String[]> options = new LinkedList<>();
         String line;
         while (true) {
             try {

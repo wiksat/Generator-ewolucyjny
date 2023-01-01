@@ -217,10 +217,14 @@ public class App extends Application {
                 }
             }
 
-            WorldMapSimulationStage = new SimulationStage(
-                    SimulationParameters.mapWidth,
-                    SimulationParameters.mapHeight,
-                    SimulationParameters.jungleHeight);
+            try {
+                WorldMapSimulationStage = new SimulationStage(
+                        SimulationParameters.mapWidth,
+                        SimulationParameters.mapHeight,
+                        SimulationParameters.jungleHeight);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
             WorldMapSimulationStage.setTitle("Symulacja swiata zwierzat");
 
         });

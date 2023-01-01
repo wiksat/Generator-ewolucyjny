@@ -11,7 +11,7 @@ public class SimulationThreadController {
     private Thread thread;
     private SimulationEngine engine;
 
-    public SimulationThreadController(AbstractWorldMap map, GuiWorldMap guiWorldMap, StatisticsModule statisticsModule, GuiStatisticsModule guiStatisticsModule) {
+    public SimulationThreadController(AbstractWorldMap map, GuiWorldMap guiWorldMap, StatisticsModule statisticsModule, GuiStatisticsModule guiStatisticsModule) throws Exception {
         this.statisticsModule=statisticsModule;
         this.engine = new SimulationEngine(map, guiWorldMap, statisticsModule, guiStatisticsModule);
 
@@ -20,7 +20,6 @@ public class SimulationThreadController {
     public void startSimulation() {
         this.thread = new Thread(this.engine);
         this.thread.start();
-        //observary
     }
     public StatisticsModule getStatisticsModule() {
         return statisticsModule;
@@ -28,10 +27,7 @@ public class SimulationThreadController {
     public void stopSimulation() {
         if (this.thread != null && thread.isAlive()) {
             this.thread.interrupt();
-            // observary
         }
-        return;
-
     }
 
     public SimulationEngine getEngine() {
