@@ -16,7 +16,7 @@ public class OptionReader {
         options = new LinkedList<>();
         BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE));
 
-        List<String[]> options = new LinkedList<>();
+        options = new LinkedList<>();
         String line;
         while (true) {
             try {
@@ -26,6 +26,7 @@ public class OptionReader {
             }
             options.add(line.split("="));
         }
+        System.out.println(options);
     }
 
     public static List<String[]> getOptions() {

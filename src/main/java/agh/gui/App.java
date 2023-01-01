@@ -164,7 +164,6 @@ public class App extends Application {
                 }
 
                 List<String[]> options = OptionReader.getOptions();
-
                 String[] temp = options.get(0);
                 SimulationParameters.mapHeight = Integer.parseInt(String.valueOf(temp[1]));
                 temp = options.get(1);

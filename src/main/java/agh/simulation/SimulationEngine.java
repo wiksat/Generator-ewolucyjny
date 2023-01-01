@@ -26,7 +26,7 @@ public class SimulationEngine implements Runnable {
     private int moveDelay;
     public StatisticsModule statisticsModule;
     private boolean withSaveStatistics;
-    public int nrOfDay=0;
+    public int nrOfDay = 0;
     public SimulationEngine(AbstractWorldMap map, GuiWorldMap guiWorldMap, StatisticsModule statisticsModule, GuiStatisticsModule guiStatisticsModule) throws Exception {
         this.guiWorldMap = guiWorldMap;
         this.map = map;

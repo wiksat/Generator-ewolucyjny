@@ -18,13 +18,13 @@ public class StatisticsWriter {
         date += calendar.get(Calendar.MINUTE);
         date += calendar.get(Calendar.SECOND);
 
-        name_of_file = "src/main/resources/stats/" +  date;
+        name_of_file = "src/main/resources/stats/" +  date + ".csv";
         if (new File(name_of_file).exists()) {
             throw new Exception("this simulation already exist");
         }
 
         FileWriter writer = new FileWriter(name_of_file, true);
-        String header = "day,animals quantity,grass quantity,amount of free places,average energy life of alive animals,average age of dead animals\n";
+        String header = "day;animals quantity;grass quantity;amount of free places;average energy life of alive animals;average age of dead animals\n";
         writer.write(header);
         writer.flush();
         writer.close();
