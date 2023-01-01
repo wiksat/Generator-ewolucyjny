@@ -22,7 +22,7 @@ public class SimulationEngine implements Runnable {
     private final List<Animal> deadAnimals = new ArrayList<>();
     private final int numberOfNewPlants;
     private int day = 0;
-    private int moveDelay = SimulationParameters.simulationMoveDelay;
+    private int moveDelay;
     public StatisticsModule statisticsModule;
     public SimulationEngine(AbstractWorldMap map, GuiWorldMap guiWorldMap, StatisticsModule statisticsModule, GuiStatisticsModule guiStatisticsModule) {
         this.guiWorldMap = guiWorldMap;
@@ -30,6 +30,7 @@ public class SimulationEngine implements Runnable {
         this.statisticsModule = statisticsModule;
         this.guiStatisticsModule = guiStatisticsModule;
         this.numberOfNewPlants = SimulationParameters.numberOfNewPlant;
+        this.moveDelay = SimulationParameters.simulationMoveDelay;
 
         for (int i = 0; i < SimulationParameters.startNumberOfAnimals; i++) {
             Vector2d position;

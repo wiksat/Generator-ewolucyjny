@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +31,7 @@ public class App extends Application {
         String[] cars = {"Volvo", "BMW", "Ford", "Mazda"};
 
 
-        OptionReader.save(cars);
+//        OptionReader.save(cars);
 
         GridPane grid = new GridPane();
 
@@ -93,17 +94,30 @@ public class App extends Application {
         behaviourVariantComboBox.getSelectionModel().selectFirst();
         grid.addRow(17, new Label("Wybierz wariant zachowania zwierzakow"), behaviourVariantComboBox);
 
+        grid.addRow(18, new Label());
 
+        var simulationMoveDelayNTBox = new NumberTextField(GuiParameters.simulationMoveDelay);
+        grid.addRow(19, new Label("Dlugosc dnia w milisekundach: "), simulationMoveDelayNTBox);
+
+        var saveStatisticsComboBox = new ComboBox<>();
+        saveStatisticsComboBox.getItems().addAll("Tak", "Nie");
+        saveStatisticsComboBox.getSelectionModel().selectFirst();
+        grid.addRow(20, new Label("Zapisuj statystyki do pliku"), saveStatisticsComboBox);
+
+        var loadParametersComboBox = new ComboBox<>();
+        loadParametersComboBox.getItems().addAll("Tak", "Nie");
+        loadParametersComboBox.getSelectionModel().selectLast();
+        grid.addRow(21, new Label("Wczytaj konfiguracje z pliku"), loadParametersComboBox);
+
+        grid.addRow(22, new Label());
         Button startSimulation = new Button("Wlacz symulacje");
-        grid.addRow(18, startSimulation);
+        grid.addRow(23, startSimulation);
 
         startSimulation.setOnAction(e -> {
-            int mapHeight = mapHeightNTBox.getNumber();
-            int mapWidth = mapWidthNTBox.getNumber();
-            int jungleHeight = jungleHightNTBox.getNumber();
 
             SimulationParameters.mapWidth = mapWidthNTBox.getNumber();
             SimulationParameters.mapHeight = mapHeightNTBox.getNumber();
+            SimulationParameters.jungleHeight = jungleHightNTBox.getNumber();
             SimulationParameters.startNumberOfPlants = startNumberOfPlantsNTBox.getNumber();
             SimulationParameters.plantEnergy = plantEnergyNTBox.getNumber();
             SimulationParameters.numberOfNewPlant = numberOfNewPlantNTBox.getNumber();
@@ -114,6 +128,7 @@ public class App extends Application {
             SimulationParameters.minNumberOfMutations = minNumberOfMutationsNTBox.getNumber();
             SimulationParameters.maxNumberOfMutations = maxNumberOfMutationsNTBox.getNumber();
             SimulationParameters.lengthOfAnimalGenome = lengthOfAnimalGenomeNTBox.getNumber();
+            SimulationParameters.simulationMoveDelay = simulationMoveDelayNTBox.getNumber();
             if (mapVariantComboBox.getValue().toString().equals("kula ziemska")) {
                 SimulationParameters.mapVariant = false;
             } else {
@@ -135,7 +150,77 @@ public class App extends Application {
                 SimulationParameters.behaviourVariant = true;
             }
 
-            WorldMapSimulationStage = new SimulationStage(mapWidth, mapHeight, jungleHeight);
+            if (saveStatisticsComboBox.getValue().toString().equals("Tak")) {
+                SimulationParameters.withSaveStatistics = true;
+            } else {
+                SimulationParameters.withSaveStatistics = false;
+            }
+
+            if (loadParametersComboBox.getValue().toString().equals("Tak")) {
+                try {
+                    OptionReader.read();
+                } catch (FileNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+                List<String[]> options = OptionReader.getOptions();
+
+                String[] temp = options.get(0);
+                SimulationParameters.mapHeight = Integer.parseInt(String.valueOf(temp[1]));
+                temp = options.get(1);
+                SimulationParameters.mapWidth = Integer.parseInt(String.valueOf(temp[1]));
+                temp = options.get(2);
+                SimulationParameters.jungleHeight = Integer.parseInt(String.valueOf(temp[1]));
+                temp = options.get(3);
+                if (temp[1].equals("true")) {
+                    SimulationParameters.mapVariant = true;
+                } else {
+                    SimulationParameters.mapVariant = false;
+                }
+                temp = options.get(4);
+                SimulationParameters.startNumberOfPlants = Integer.parseInt(String.valueOf(temp[1]));
+                temp = options.get(5);
+                SimulationParameters.plantEnergy = Integer.parseInt(String.valueOf(temp[1]));
+                temp = options.get(6);
+                SimulationParameters.numberOfNewPlant = Integer.parseInt(String.valueOf(temp[1]));
+                temp = options.get(7);
+                if (temp[1].equals("true")) {
+                    SimulationParameters.plantGrowthVariant = true;
+                } else {
+                    SimulationParameters.plantGrowthVariant = false;
+                }
+                temp = options.get(8);
+                SimulationParameters.startNumberOfAnimals = Integer.parseInt(String.valueOf(temp[1]));
+                temp = options.get(9);
+                SimulationParameters.startAnimalEnergy = Integer.parseInt(String.valueOf(temp[1]));
+                temp = options.get(10);
+                SimulationParameters.minLifeEnergyToReproduce = Integer.parseInt(String.valueOf(temp[1]));
+                temp = options.get(11);
+                SimulationParameters.lifeEnergySpendForPropagation = Integer.parseInt(String.valueOf(temp[1]));
+                temp = options.get(12);
+                SimulationParameters.minNumberOfMutations = Integer.parseInt(String.valueOf(temp[1]));
+                temp = options.get(13);
+                SimulationParameters.maxNumberOfMutations = Integer.parseInt(String.valueOf(temp[1]));
+                temp = options.get(14);
+                if (temp[1].equals("true")) {
+                    SimulationParameters.mutationVariant = true;
+                } else {
+                    SimulationParameters.mutationVariant = false;
+                }
+                temp = options.get(15);
+                SimulationParameters.lengthOfAnimalGenome = Integer.parseInt(String.valueOf(temp[1]));
+                temp = options.get(16);
+                if (temp[1].equals("true")) {
+                    SimulationParameters.behaviourVariant = true;
+                } else {
+                    SimulationParameters.behaviourVariant = false;
+                }
+            }
+
+            WorldMapSimulationStage = new SimulationStage(
+                    SimulationParameters.mapWidth,
+                    SimulationParameters.mapHeight,
+                    SimulationParameters.jungleHeight);
             WorldMapSimulationStage.setTitle("Symulacja swiata zwierzat");
 
         });

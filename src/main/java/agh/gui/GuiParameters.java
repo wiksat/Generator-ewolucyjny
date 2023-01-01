@@ -26,4 +26,6 @@ public interface GuiParameters {
     int lengthOfAnimalGenome = 16;
     boolean behaviourVariant = false; /* false - pelna predestynacja, true - nieco szaleństwa */
 
+    int simulationMoveDelay = 100;
+
 }
