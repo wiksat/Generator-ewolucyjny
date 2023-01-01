@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4aa76a78-281e-4a75-ba85-5abd33576347" name="Changes" comment="debug">
+    <list default="true" id="4aa76a78-281e-4a75-ba85-5abd33576347" name="Changes" comment="naprawiony magiczny teleport">
+      <change afterPath="$PROJECT_DIR$/src/main/java/agh/gui/OptionReader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/config.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agh/oop/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/oop/Animal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/gui/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/gui/App.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +67,7 @@
       <recent name="C:\Users\wikto\IdeaProjects\Generator-ewolucyjny\src\main\java\agh\ics\oop" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\wikto\IdeaProjects\Generator-ewolucyjny\src\main\java\agh\gui" />
       <recent name="C:\Users\wikto\IdeaProjects\Generator-ewolucyjny\src\main\resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -102,7 +105,8 @@
       <updated>1670847956387</updated>
       <workItem from="1670847959827" duration="3567000" />
       <workItem from="1672132419164" duration="60650000" />
-      <workItem from="1672325539458" duration="21696000" />
+      <workItem from="1672325539458" duration="26008000" />
+      <workItem from="1672593311583" duration="4781000" />
     </task>
     <task id="LOCAL-00001" summary="changed package">
       <created>1670849139968</created>
@@ -293,7 +297,21 @@
       <option name="project" value="LOCAL" />
       <updated>1672344683272</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="naprawiony dziwny bug z tablicą (chyba)">
+      <created>1672347632664</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1672347632664</updated>
+    </task>
+    <task id="LOCAL-00029" summary="naprawiony magiczny teleport">
+      <created>1672350711185</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1672350711185</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -311,8 +329,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="dodane pliki2" />
-    <MESSAGE value="zaczęty animal (idzie opornie)" />
     <MESSAGE value="zaczęty animal 2" />
     <MESSAGE value="zaczęty AbstractWorldMap" />
     <MESSAGE value="dalsza praca nad AbstractWorldMap" />
@@ -336,6 +352,8 @@
     <MESSAGE value="poprawione to i owo" />
     <MESSAGE value="poprawione to i owo2" />
     <MESSAGE value="debug" />
-    <option name="LAST_COMMIT_MESSAGE" value="debug" />
+    <MESSAGE value="naprawiony dziwny bug z tablicą (chyba)" />
+    <MESSAGE value="naprawiony magiczny teleport" />
+    <option name="LAST_COMMIT_MESSAGE" value="naprawiony magiczny teleport" />
   </component>
 </project>

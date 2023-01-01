@@ -13,6 +13,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+
 public class App extends Application {
 
     SimulationStage WorldMapSimulationStage;
@@ -23,6 +27,14 @@ public class App extends Application {
         primaryStage.setScene(firstScene);
         primaryStage.show();
     }
+
+    private Scene createFirstScene() throws IOException {
+
+
+        String[] cars = {"Volvo", "BMW", "Ford", "Mazda"};
+
+
+        OptionReader.save(cars);
 
     private Scene createFirstScene() {
         HBox layout = new HBox();
@@ -106,7 +118,7 @@ public class App extends Application {
 //        grid.addRow(19, saveStatistics);
 
         Button startSimulation = new Button("Wlacz symulacje");
-        grid.addRow(20, startSimulation);
+        grid.addRow(18, startSimulation);
 
         startSimulation.setOnAction(e -> {
             int mapHeight = mapHeightNTBox.getNumber();
@@ -152,7 +164,7 @@ public class App extends Application {
         });
 
 //        grid.getChildren().add(startSimulation);
-        return new Scene(layout, 600, 800);
+        return new Scene(grid, 500, 700);
     }
 
 
