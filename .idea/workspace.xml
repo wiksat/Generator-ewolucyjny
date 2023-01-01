@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4aa76a78-281e-4a75-ba85-5abd33576347" name="Changes" comment="naprawiony magiczny teleport">
-      <change afterPath="$PROJECT_DIR$/src/main/java/agh/gui/OptionReader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/config.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agh/gui/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/gui/App.java" afterDir="false" />
-    </list>
+    <list default="true" id="4aa76a78-281e-4a75-ba85-5abd33576347" name="Changes" comment="naprawione co ożóg zepsuł" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,6 +31,7 @@
       </GitPushTagMode>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
