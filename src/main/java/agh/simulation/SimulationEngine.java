@@ -7,6 +7,7 @@ import agh.oop.*;
 
 import agh.statistics.StatisticsModule;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -24,7 +25,8 @@ public class SimulationEngine implements Runnable {
     private int day = 0;
     private int moveDelay = SimulationParameters.simulationMoveDelay;
     public StatisticsModule statisticsModule;
-    public SimulationEngine(AbstractWorldMap map, GuiWorldMap guiWorldMap, StatisticsModule statisticsModule, GuiStatisticsModule guiStatisticsModule) {
+    public int nrOfDay=0;
+    public SimulationEngine(AbstractWorldMap map, GuiWorldMap guiWorldMap, StatisticsModule statisticsModule, GuiStatisticsModule guiStatisticsModule) throws Exception {
         this.guiWorldMap = guiWorldMap;
         this.map = map;
         this.statisticsModule = statisticsModule;
@@ -45,6 +47,7 @@ public class SimulationEngine implements Runnable {
         }
 
         this.map.growGrass(SimulationParameters.startNumberOfPlants);
+        this.statisticsModule.statisticsWriter.createFile();
     }
 
     private void feedAnimals() {
@@ -94,7 +97,7 @@ public class SimulationEngine implements Runnable {
         this.animals.addAll(children);
     }
 
-    private void setStatistics(){
+    private void setStatistics() throws IOException {
         int sum = 0;
         for (Animal animal : animals) {
             sum += animal.getLifeEnergy();
@@ -106,8 +109,10 @@ public class SimulationEngine implements Runnable {
             sumDead += animal.getAge();
         }
         statisticsModule.changeAverageAgeForDead(sumDead,deadAnimals.size());
+        statisticsModule.saveDataToLists(nrOfDay);
+        nrOfDay++;
     }
-    private void oneDayActions() {
+    private void oneDayActions() throws IOException {
         List<Animal> newDeadAnimals = new ArrayList<>();
         for (Animal animal : this.animals) {
             animal.nextDay();
@@ -141,9 +146,13 @@ public class SimulationEngine implements Runnable {
                     } catch (InterruptedException e) {
                         return;
                     }
-            oneDayActions();
+            try {
+                oneDayActions();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
-                System.out.println("______________");
+            System.out.println("______________");
             day++;
 
             guiWorldMap.refresh(this.map);

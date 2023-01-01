@@ -135,7 +135,11 @@ public class App extends Application {
                 SimulationParameters.behaviourVariant = true;
             }
 
-            WorldMapSimulationStage = new SimulationStage(mapWidth, mapHeight, jungleHeight);
+            try {
+                WorldMapSimulationStage = new SimulationStage(mapWidth, mapHeight, jungleHeight);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
             WorldMapSimulationStage.setTitle("Symulacja swiata zwierzat");
 
         });

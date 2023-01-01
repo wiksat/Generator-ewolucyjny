@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4aa76a78-281e-4a75-ba85-5abd33576347" name="Changes" comment="naprawione co ożóg zepsuł" />
+    <list default="true" id="4aa76a78-281e-4a75-ba85-5abd33576347" name="Changes" comment="naprawione co ożóg zepsuł2">
+      <change afterPath="$PROJECT_DIR$/src/main/java/agh/statistics/StatisticsWriter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/gui/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/gui/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/gui/SimulationStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/gui/SimulationStage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/simulation/SimulationEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/simulation/SimulationEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/simulation/SimulationThreadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/simulation/SimulationThreadController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/statistics/StatisticsModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/statistics/StatisticsModule.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,6 +40,7 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -307,7 +316,21 @@
       <option name="project" value="LOCAL" />
       <updated>1672350711185</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="naprawione co ożóg zepsuł">
+      <created>1672604929370</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1672604929370</updated>
+    </task>
+    <task id="LOCAL-00031" summary="naprawione co ożóg zepsuł2">
+      <created>1672605039029</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1672605039029</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -325,8 +348,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="zaczęty animal 2" />
-    <MESSAGE value="zaczęty AbstractWorldMap" />
     <MESSAGE value="dalsza praca nad AbstractWorldMap" />
     <MESSAGE value="poprawiony Animal" />
     <MESSAGE value="poprawiony Animal2" />
@@ -350,6 +371,8 @@
     <MESSAGE value="debug" />
     <MESSAGE value="naprawiony dziwny bug z tablicą (chyba)" />
     <MESSAGE value="naprawiony magiczny teleport" />
-    <option name="LAST_COMMIT_MESSAGE" value="naprawiony magiczny teleport" />
+    <MESSAGE value="naprawione co ożóg zepsuł" />
+    <MESSAGE value="naprawione co ożóg zepsuł2" />
+    <option name="LAST_COMMIT_MESSAGE" value="naprawione co ożóg zepsuł2" />
   </component>
 </project>
