@@ -17,15 +17,15 @@ import java.util.concurrent.ThreadLocalRandom;
 public class SimulationEngine implements Runnable {
 
     private final AbstractWorldMap map;
-    private GuiWorldMap guiWorldMap;
-    private GuiStatisticsModule guiStatisticsModule;
+    private final GuiWorldMap guiWorldMap;
+    private final GuiStatisticsModule guiStatisticsModule;
     private final List<Animal> animals = new ArrayList<>();
     private final List<Animal> deadAnimals = new ArrayList<>();
     private final int numberOfNewPlants;
     private int day = 0;
-    private int moveDelay;
+    private final int moveDelay;
     public StatisticsModule statisticsModule;
-    private boolean withSaveStatistics;
+    private final boolean withSaveStatistics;
     public int nrOfDay = 0;
     public SimulationEngine(AbstractWorldMap map, GuiWorldMap guiWorldMap, StatisticsModule statisticsModule, GuiStatisticsModule guiStatisticsModule) throws Exception {
         this.guiWorldMap = guiWorldMap;
@@ -64,7 +64,7 @@ public class SimulationEngine implements Runnable {
 
                 var animals = this.map.getAnimalsAt(animal.getPosition());
                 var theStrongestAnimal = animals.last();
-                if (animal.getLifeEnergy() == theStrongestAnimal.animalEnergy()) {
+                if (animal.getLifeEnergy() == theStrongestAnimal.energyOfAnimal()) {
                     animal.eatPlant();
                }
 
@@ -134,9 +134,6 @@ public class SimulationEngine implements Runnable {
         for (Animal animal : this.animals) {
             animal.selectDirectionAndMove();
         }
-//        for (Animal animal : this.animals) {
-//            System.out.println(animal.getPosition().toString() + " " + animal.getUniqueID());
-//        }
 
 
         feedAnimals();

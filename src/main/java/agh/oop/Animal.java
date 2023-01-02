@@ -7,31 +7,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Animal extends AbstractWorldMapElement  {
     public String uniqueID = UUID.randomUUID().toString();
-
     private int howManyChildren=0;
     private MapDirection orientation;
     private Vector2d position;
     private int age;
-    private AbstractWorldMap map;
+    private final AbstractWorldMap map;
     private StatusOfAnimal status = StatusOfAnimal.ALIVE;
-
     private final ArrayList<MoveDirection> genotype;
-    private int genLength;
-    private int genCounter;
+    private final int genLength;
     private int lastUsedGene;
     private int lifeEnergy;
-    private int costOfTheDay;
-    private int minLifeEnergyToReproduce;
-    private int amountOfEnergyFromParentToChild;
-    private int energyFromPlant;
-    private boolean mapWariant;
-    private int costOfTeleport;
-    private boolean mutationVariant;
-    private boolean behaviourVariant;
+    private final int costOfTheDay;
+    private final int minLifeEnergyToReproduce;
+    private final int amountOfEnergyFromParentToChild;
+    private final int energyFromPlant;
+    private final boolean mapWariant;
+    private final int costOfTeleport;
+    private final boolean mutationVariant;
+    private final boolean behaviourVariant;
     public StatisticsModule statisticsModule;
 
     public Animal(AbstractWorldMap map, Vector2d initialPosition,StatisticsModule statisticsModule){
@@ -41,7 +37,6 @@ public class Animal extends AbstractWorldMapElement  {
         this.statisticsModule = statisticsModule;
         this.genLength = SimulationParameters.lengthOfAnimalGenome;
         this.lifeEnergy = SimulationParameters.startAnimalEnergy;
-        this.genCounter = 0;
         this.costOfTheDay = SimulationParameters.costOfTheDay;
         this.minLifeEnergyToReproduce = SimulationParameters.minLifeEnergyToReproduce;
         this.amountOfEnergyFromParentToChild = SimulationParameters.lifeEnergySpendForPropagation;
@@ -57,7 +52,6 @@ public class Animal extends AbstractWorldMapElement  {
             double randNum = Math.random()*8;
             genes.add(MoveDirection.extract((int)randNum));
         }
-//        System.out.println(genes);
         this.genotype = genes;
     }
 
@@ -73,7 +67,6 @@ public class Animal extends AbstractWorldMapElement  {
         this.genLength=genotype.size();
         this.genotype = genotype;
         this.lifeEnergy = startingEnergy;
-        this.genCounter=0;
         this.costOfTheDay = SimulationParameters.costOfTheDay;
         this.minLifeEnergyToReproduce = SimulationParameters.minLifeEnergyToReproduce;
         this.amountOfEnergyFromParentToChild = SimulationParameters.lifeEnergySpendForPropagation;
@@ -85,18 +78,12 @@ public class Animal extends AbstractWorldMapElement  {
         this.lastUsedGene = (int) (Math.random()*this.genLength);
     }
 
-
-
     public Vector2d getPosition() {
         return this.position;
     }
 
     public StatusOfAnimal getStatus() {
         return status;
-    }
-
-    public String getA(){
-        return position+" "+orientation;
     }
 
     public void makeDead(){
@@ -134,14 +121,12 @@ public class Animal extends AbstractWorldMapElement  {
         int x = newPosition.x;
         int y = newPosition.y;
         if (mapWariant) {
-                System.out.println("TELEPORT");
             setLifeEnergy(getLifeEnergy() - costOfTeleport);
             return Vector2d.getRandomVectorBetween(
                     this.map.mapBoundary.lowerLeft(),
                     this.map.mapBoundary.upperRight());
         }
         else {
-//                System.out.println("KULA Ziemska ");
             if (newPosition.x < 0) {
                 x =  this.map.mapBoundary.upperRight().x;
             }
@@ -168,16 +153,13 @@ public class Animal extends AbstractWorldMapElement  {
     public void move(MoveDirection direction){
 
         if (direction == MoveDirection.FORWARD) {
-//            System.out.println(direction + "  " + this.uniqueID);
             Vector2d orientationVector = this.orientation.toUnitVector();
             Vector2d newPosition = this.position.add(orientationVector);
 
             if (this.map.canMoveTo(newPosition)) {
                 newPosition = this.mapMode(newPosition);
-//                if (this.getStatus()!=StatusOfAnimal.DEAD){
                     this.positionChanged(this.position, newPosition);
                     this.position = newPosition;
-//                }
 
             }
         } else {
@@ -228,10 +210,10 @@ public class Animal extends AbstractWorldMapElement  {
             throw new IllegalArgumentException("There is too little life energy to reproduce");
         }
 
-        float precentOfGenesThisAnimal = this.getLifeEnergy() / (this.getLifeEnergy() + otherAnimal.getLifeEnergy());
+        float precentOfGenesThisAnimal = (float) (this.getLifeEnergy()) / (this.getLifeEnergy() + otherAnimal.getLifeEnergy());
         float precentOfGenesAnotherAnimal = 1 - precentOfGenesThisAnimal;
 
-        ArrayList<MoveDirection> newGenotype  = new ArrayList<MoveDirection>();
+        ArrayList<MoveDirection> newGenotype  = new ArrayList<>();
         boolean side=Math.random() < 0.5;
             if (side) {
                 newGenotype.addAll(otherAnimal.getLeftSlice((int)precentOfGenesAnotherAnimal*otherAnimal.getGenotype().size()));
@@ -260,10 +242,7 @@ public class Animal extends AbstractWorldMapElement  {
         otherAnimal.setLifeEnergy(otherAnimal.getLifeEnergy() - this.amountOfEnergyFromParentToChild);
 
         var child = new Animal( this.map, this.position, statisticsModule, this.amountOfEnergyFromParentToChild*2, newGenotype);
-//System.out.println("utworzono dziecko z genotypem");
-//        System.out.println(newGenotype);
-//        System.out.println(newGenotype.size());
-//        System.out.println(child.uniqueID);
+
 
         this.incrementChildren();
         otherAnimal.incrementChildren();
@@ -307,7 +286,6 @@ public class Animal extends AbstractWorldMapElement  {
     }
 
     public void selectDirectionAndMove() {
-
         if (this.behaviourVariant){
             if (Math.random()<0.8){
                 if (this.lastUsedGene+1>=this.genLength){
@@ -326,11 +304,7 @@ public class Animal extends AbstractWorldMapElement  {
             if (this.lastUsedGene+1>=this.genLength){
                 this.lastUsedGene=-1;
             }
-//            System.out.println(this.genotype);
-//            System.out.println(this.genLength+"   "+this.lastUsedGene+"    "+this.genotype.size());
-//            System.out.println(this.uniqueID+ "  "+getA());
-//            System.out.println(this.genotype);
-//            System.out.println(this.lastUsedGene);
+
             this.move(getGenotypeAt(this.lastUsedGene+1));
             this.lastUsedGene= this.lastUsedGene+1;
         }
@@ -338,17 +312,17 @@ public class Animal extends AbstractWorldMapElement  {
     public MoveDirection getGenotypeAt(int nr){
         return this.genotype.get(nr);
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Animal animal = (Animal) o;
-        return Objects.equals(this.uniqueID, animal.uniqueID);
+        return Objects.equals(uniqueID, animal.uniqueID);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(uniqueID);
     }
-
 }

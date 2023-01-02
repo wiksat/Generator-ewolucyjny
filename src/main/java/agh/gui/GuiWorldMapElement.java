@@ -8,13 +8,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class GuiWorldMapElement extends StackPane {
 
@@ -52,7 +50,6 @@ public class GuiWorldMapElement extends StackPane {
             energyLabel.setTextFill(Color.WHITE);
             this.getChildren().add(energyLabel);
         }
-//        this.setOnMouseClicked(this::handleClick);
     }
 
 }

@@ -13,13 +13,13 @@ public class AbstractWorldMap implements IWorldMap {
     protected final Map<Vector2d, AbstractWorldMapElement> grasses = new LinkedHashMap<>();
 
     protected MapBoundary mapBoundary;
-    protected MapBoundary jungleBoundary;
+    protected MapBoundary equatorBoundary;
     private final StatisticsModule statisticsModule;
 
     private int usedPlaces=0;
-    private boolean growVarinat;
-    private int width;
-    private int height;
+    private final boolean growVarinat;
+    private final int width;
+    private final int height;
 
     public AbstractWorldMap(int width, int height, int jungleHeight, StatisticsModule statisticsModule) {
         this.mapBoundary = new MapBoundary(new Vector2d(0, 0), new Vector2d(width-1, height-1));
@@ -30,19 +30,18 @@ public class AbstractWorldMap implements IWorldMap {
 
         Vector2d jungleLowerLeft = new Vector2d(0, centerY - jungleHeight / 2);
         this.statisticsModule=statisticsModule;
-        this.jungleBoundary = new MapBoundary(jungleLowerLeft,
+        this.equatorBoundary = new MapBoundary(jungleLowerLeft,
                 jungleLowerLeft.add(new Vector2d(width-1, jungleHeight-1)));
 
         this.growVarinat=SimulationParameters.plantGrowthVariant;
     }
 
-
     @Override
 
     public boolean place(Animal animal) {
-        if (animal == null) throw new IllegalArgumentException("null can't be placed on the worldMap");
+        if (animal == null) throw new IllegalArgumentException("null can't be placed");
         if (animal.getPosition() == null) {
-            throw new IllegalArgumentException("Object can't be placed on position " + animal.getPosition());
+            throw new IllegalArgumentException("Object can't be placed at position: " + animal.getPosition());
         }
 
         if (!this.animals.containsKey(animal.getPosition())) {
@@ -57,8 +56,8 @@ public class AbstractWorldMap implements IWorldMap {
     public NavigableSet<MapAnimalContainer> getAnimalsAt(Vector2d position) {
         return this.animals.getOrDefault(position, new TreeSet<>());
     }
-    public MapBoundary getJungleBoundary() {
-        return jungleBoundary;
+    public MapBoundary getEquatorBoundary() {
+        return equatorBoundary;
     }
     public MapBoundary getMapBoundary() {
         return mapBoundary;
@@ -70,7 +69,7 @@ public class AbstractWorldMap implements IWorldMap {
         }
         return this.grasses.get(position);
     }
-    private void removeAnimalsEntryIfPossible(Vector2d position) {
+    private void removeAnimalsEntryIfAlone(Vector2d position) {
         if (this.animals.get(position).isEmpty()) {
             this.animals.remove(position);
             usedPlaces--;
@@ -87,7 +86,6 @@ public class AbstractWorldMap implements IWorldMap {
             positionSet.add(newMapAnimalContainer);
         }
 
-//        System.out.println("zmieniono energie  "+oldEnergy+"  "+newEnergy);
     }
     public Optional<Pair<Animal, Animal>> getPairOfStrongestAnimalsAt(Vector2d position) {
         NavigableSet<MapAnimalContainer> allAnimals = this.getAnimalsAt(position);
@@ -122,8 +120,8 @@ public class AbstractWorldMap implements IWorldMap {
                         double los = Math.random();
                         if (los<0.8){
                             grassPosition = Vector2d.getRandomVectorBetween(
-                                    this.jungleBoundary.lowerLeft(),
-                                    this.jungleBoundary.upperRight());
+                                    this.equatorBoundary.lowerLeft(),
+                                    this.equatorBoundary.upperRight());
                         }
                         else{
                             grassPosition = Vector2d.getRandomVectorBetween(
@@ -142,8 +140,6 @@ public class AbstractWorldMap implements IWorldMap {
         }
     }
 
-
-
     @Override
     public boolean canMoveTo(Vector2d position) {
         return (position != null);
@@ -151,18 +147,10 @@ public class AbstractWorldMap implements IWorldMap {
     @Override
     public MapBoundary getBound(){ return this.mapBoundary; }
 
-
     @Override
     public String toString() {
         return "";
     }
-    public Vector2d getLowerLeftDrawLimit() {
-        return this.mapBoundary.lowerLeft();
-    }
-    public Vector2d getUpperRightDrawLimit() {
-        return this.mapBoundary.upperRight();
-    }
-
 
     @Override
     public boolean isOccupied(Vector2d position) {
@@ -201,28 +189,25 @@ public class AbstractWorldMap implements IWorldMap {
         MapAnimalContainer mapAnimalContainer = new MapAnimalContainer(animal.getLifeEnergy(), animal);
         if ( this.animals.get(position)!=null){
             this.animals.get(position).remove(mapAnimalContainer);
-            removeAnimalsEntryIfPossible(position);
+            removeAnimalsEntryIfAlone(position);
         }
 
 
     }
 
     @Override
-    public boolean positionChanged(Animal animal, Vector2d oldPosition, Vector2d newPosition) {
+    public void positionChanged(Animal animal, Vector2d oldPosition, Vector2d newPosition) {
         if (animal.getStatus()!=StatusOfAnimal.DEAD){
             MapAnimalContainer mapAnimalContainer = new MapAnimalContainer(animal.getLifeEnergy(), animal);
             this.animals.get(oldPosition).remove(mapAnimalContainer);
-            removeAnimalsEntryIfPossible(oldPosition);
+            removeAnimalsEntryIfAlone(oldPosition);
             if (!this.animals.containsKey(newPosition)) {
                 this.animals.put(newPosition, new TreeSet<>());
                 usedPlaces++;
                 statisticsModule.changeAmountOfFreePlaces(this.usedPlaces);
             }
             this.animals.get(newPosition).add(mapAnimalContainer);
-//            System.out.println("zmieniono pozycje "+oldPosition+"  "+newPosition);
-        return true;
-    }
-        return false;
+        }
     }
     @Override
     public List<Animal> getAnimals(){

@@ -28,7 +28,7 @@ public class App extends Application {
     private Scene createFirstScene() throws IOException {
 
 
-        String[] cars = {"Volvo", "BMW", "Ford", "Mazda"};
+//        String[] cars = {"Volvo", "BMW", "Ford", "Mazda"};
 
 
 //        OptionReader.save(cars);

@@ -4,11 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4aa76a78-281e-4a75-ba85-5abd33576347" name="Changes" comment="statystyki do pliku">
+    <list default="true" id="4aa76a78-281e-4a75-ba85-5abd33576347" name="Changes" comment="statystyki do pliku2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/gui/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/gui/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/gui/GuiStatisticsModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/gui/GuiStatisticsModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/gui/GuiWorldMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/gui/GuiWorldMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/gui/GuiWorldMapElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/gui/GuiWorldMapElement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/agh/gui/OptionReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/gui/OptionReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/gui/SimulationStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/gui/SimulationStage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/oop/AbstractWorldMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/oop/AbstractWorldMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/oop/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/oop/Animal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/oop/IPositionChangeObserver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/oop/IWorldMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/oop/IWorldMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/oop/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/oop/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/oop/MapAnimalContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/oop/MapAnimalContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/oop/MapBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/oop/MapBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/oop/MoveDirection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/oop/MoveDirection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/oop/StatusOfAnimal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/oop/StatusOfAnimal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/oop/Vector2d.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/oop/Vector2d.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/agh/simulation/SimulationEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/simulation/SimulationEngine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agh/simulation/SimulationParameters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/simulation/SimulationParameters.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/simulation/SimulationThreadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/simulation/SimulationThreadController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/statistics/StatisticsModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/statistics/StatisticsModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agh/statistics/StatisticsWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agh/statistics/StatisticsWriter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +54,6 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -48,22 +64,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/wikto/Pulpit/DarwinGame-main/DarwinGame-main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/wikto/IdeaProjects/Generator-ewolucyjny",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\wikto\IdeaProjects\Generator-ewolucyjny\src\main\java\agh\ics\oop" />
@@ -109,6 +125,7 @@
       <workItem from="1672132419164" duration="60650000" />
       <workItem from="1672325539458" duration="26008000" />
       <workItem from="1672593311583" duration="4781000" />
+      <workItem from="1672615175571" duration="3241000" />
     </task>
     <task id="LOCAL-00001" summary="changed package">
       <created>1670849139968</created>
@@ -334,7 +351,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672609235338</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="statystyki do pliku2">
+      <created>1672612631845</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1672612631845</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -352,7 +376,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="poprawiony Animal" />
     <MESSAGE value="poprawiony Animal2" />
     <MESSAGE value="poprawki wspólne" />
     <MESSAGE value="poprawki wspólne2" />
@@ -377,6 +400,7 @@
     <MESSAGE value="naprawione co ożóg zepsuł" />
     <MESSAGE value="naprawione co ożóg zepsuł2" />
     <MESSAGE value="statystyki do pliku" />
-    <option name="LAST_COMMIT_MESSAGE" value="statystyki do pliku" />
+    <MESSAGE value="statystyki do pliku2" />
+    <option name="LAST_COMMIT_MESSAGE" value="statystyki do pliku2" />
   </component>
 </project>

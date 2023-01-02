@@ -7,14 +7,10 @@ import agh.oop.Vector2d;
 import agh.simulation.SimulationParameters;
 import javafx.application.Platform;
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
-import javafx.geometry.VPos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-import static javafx.geometry.VPos.*;
 
 public class GuiWorldMap extends VBox {
 
@@ -77,7 +73,7 @@ public class GuiWorldMap extends VBox {
 
 //                if isOccupied
 
-                if (this.aWorldMap.getJungleBoundary().isInside(position)) {
+                if (this.aWorldMap.getEquatorBoundary().isInside(position)) {
                     stackPane.setBackground(new Background(new BackgroundFill(Color.rgb(15, 95, 20), null, null)));
                 }
 

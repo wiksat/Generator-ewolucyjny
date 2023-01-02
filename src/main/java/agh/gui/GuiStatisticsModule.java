@@ -1,11 +1,9 @@
 package agh.gui;
 
 
-import agh.oop.AbstractWorldMap;
 import agh.simulation.SimulationParameters;
 import agh.statistics.StatisticsModule;
 import javafx.application.Platform;
-import javafx.geometry.HPos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -15,13 +13,11 @@ import java.util.Locale;
 
 public class GuiStatisticsModule extends VBox {
 
-    private StatisticsModule statisticsModule;
-    private GridPane statisticGrid = new GridPane();
-    private Stage stage;
+    private final StatisticsModule statisticsModule;
+    private final GridPane statisticGrid = new GridPane();
 
     public GuiStatisticsModule (StatisticsModule statisticsModule ,Stage stage) {
         this.statisticsModule = statisticsModule;
-        this.stage = stage;
         this.statisticGrid.setGridLinesVisible(true);
         statisticGrid.setBackground(new Background(new BackgroundFill(Color.rgb(125, 210, 235), null, null)));
         getChildren().addAll(statisticGrid);

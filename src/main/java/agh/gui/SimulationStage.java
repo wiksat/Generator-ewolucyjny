@@ -8,33 +8,28 @@ import agh.statistics.StatisticsWriter;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-import java.util.Locale;
+
 
 public class SimulationStage extends Stage {
-    private final StatisticsModule statisticsModule;
-    private final StatisticsWriter statisticsWriter;
-    private GuiWorldMap guiWorldMap;
 
-    private SimulationThreadController sThreadController;
+    private final SimulationThreadController sThreadController;
 
     public SimulationStage( int mapWidth,int mapHeight, int jungleHeight) throws Exception {
         AbstractWorldMap aWorldMap;
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
         this.setX(bounds.getMinX());
-        statisticsWriter=new StatisticsWriter();
-        statisticsModule = new StatisticsModule(statisticsWriter);
+        StatisticsWriter statisticsWriter = new StatisticsWriter();
+        StatisticsModule statisticsModule = new StatisticsModule(statisticsWriter);
 
         aWorldMap = new AbstractWorldMap(mapWidth, mapHeight, jungleHeight, statisticsModule);
 
 
-        guiWorldMap = new GuiWorldMap(aWorldMap, this);
+        GuiWorldMap guiWorldMap = new GuiWorldMap(aWorldMap, this);
         GuiStatisticsModule guiStatisticsModule = new GuiStatisticsModule(statisticsModule, this);
         this.sThreadController = new SimulationThreadController(aWorldMap, guiWorldMap, statisticsModule, guiStatisticsModule);
 

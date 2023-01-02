@@ -49,7 +49,7 @@ public interface IWorldMap {
     Object objectAt(Vector2d position);
     MapBoundary getBound();
 
-    boolean positionChanged(Animal Animal, Vector2d oldPosition, Vector2d newPosition);
+    void positionChanged(Animal Animal, Vector2d oldPosition, Vector2d newPosition);
 
     List<Animal> getAnimals();
 }

@@ -11,7 +11,7 @@ public class Vector2d {
         this.y = y;
     }
     public String toString(){
-        return "("+Integer.toString(this.x)+","+Integer.toString(this.y)+")";
+        return "("+ this.x +","+ this.y +")";
     }
     public boolean precedes(Vector2d other){
         return this.x <= other.x && this.y <= other.y;
@@ -20,25 +20,16 @@ public class Vector2d {
         return this.x >= other.x && this.y >= other.y;
     }
     public Vector2d add(Vector2d other){
-        Vector2d vector2d = new Vector2d(this.x + other.x, this.y + other.y);
-        return vector2d;
+        return new Vector2d(this.x + other.x, this.y + other.y);
     }
-    public Vector2d subtract(Vector2d other){
-        Vector2d vector2d = new Vector2d(this.x - other.x, this.y - other.y);
-        return vector2d;
-    }
+
     public Vector2d upperRight(Vector2d other){
-        Vector2d vector2d = new Vector2d(Math.max(this.x,other.x), Math.max(this.y, other.y));
-        return vector2d;
+        return new Vector2d(Math.max(this.x,other.x), Math.max(this.y, other.y));
     }
     public Vector2d lowerLeft(Vector2d other){
-        Vector2d vector2d = new Vector2d(Math.min(this.x,other.x), Math.min(this.y, other.y));
-        return vector2d;
+        return new Vector2d(Math.min(this.x,other.x), Math.min(this.y, other.y));
     }
-    public Vector2d opposite(){
-        Vector2d vector2d = new Vector2d(-this.x,-this.y);
-        return vector2d;
-    }
+
     public static Vector2d getRandomVectorBetween(Vector2d lowerLeft, Vector2d upperRight) {
         int x = ThreadLocalRandom.current().nextInt(lowerLeft.x, upperRight.x + 1);
         int y = ThreadLocalRandom.current().nextInt(lowerLeft.y, upperRight.y + 1);
@@ -49,9 +40,8 @@ public class Vector2d {
     public boolean equals(Object other){
         if (this == other)
             return true;
-        if (!(other instanceof Vector2d))
+        if (!(other instanceof Vector2d that))
             return false;
-        Vector2d that = (Vector2d) other;
         return that.x == this.x && that.y == this.y;
     }
 
