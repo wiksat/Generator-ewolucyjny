@@ -11,8 +11,8 @@ import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class App extends Application {
 
@@ -104,14 +104,22 @@ public class App extends Application {
         saveStatisticsComboBox.getSelectionModel().selectFirst();
         grid.addRow(20, new Label("Zapisuj statystyki do pliku"), saveStatisticsComboBox);
 
-        var loadParametersComboBox = new ComboBox<>();
-        loadParametersComboBox.getItems().addAll("Tak", "Nie");
-        loadParametersComboBox.getSelectionModel().selectLast();
-        grid.addRow(21, new Label("Wczytaj konfiguracje z pliku"), loadParametersComboBox);
+        AtomicBoolean loadParametersComboBox = new AtomicBoolean(false);
+        Button loadParameters = new Button("Wczytaj konfiguracje z pliku");
+        grid.addRow(21, loadParameters);
+
+        loadParameters.setOnAction(e -> {
+            FileChooserHandler temp = new FileChooserHandler();
+            FileChooserHandler.InnerClass t = new FileChooserHandler.InnerClass();
+            t.findPlace(temp);
+            loadParametersComboBox.set(true);
+        });
 
         grid.addRow(22, new Label());
+
         Button startSimulation = new Button("Wlacz symulacje");
         grid.addRow(23, startSimulation);
+
 
         startSimulation.setOnAction(e -> {
 
@@ -156,7 +164,7 @@ public class App extends Application {
                 SimulationParameters.withSaveStatistics = false;
             }
 
-            if (loadParametersComboBox.getValue().toString().equals("Tak")) {
+            if (loadParametersComboBox.get()) {
                 try {
                     OptionReader.read();
                 } catch (FileNotFoundException ex) {
@@ -215,6 +223,7 @@ public class App extends Application {
                     SimulationParameters.behaviourVariant = false;
                 }
             }
+
 
             try {
                 WorldMapSimulationStage = new SimulationStage(

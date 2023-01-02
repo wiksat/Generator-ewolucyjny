@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class OptionReader {
-    private static final String CSV_FILE = "src/main/resources/config.csv";
+    public static String CSV_FILE = "src/main/resources/config.csv";
 
     private static List<String[]> options;
 
@@ -26,7 +26,6 @@ public class OptionReader {
             }
             options.add(line.split("="));
         }
-        System.out.println(options);
     }
 
     public static List<String[]> getOptions() {
