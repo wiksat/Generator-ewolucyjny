@@ -69,9 +69,7 @@ public class GuiWorldMap extends VBox {
                 Vector2d position = new Vector2d(i, j);
                 StackPane stackPane = new StackPane();
                 stackPane.setBackground(new Background(new BackgroundFill(Color.rgb(5, 155, 25), null, null)));
-//                if równik
 
-//                if isOccupied
 
                 if (this.aWorldMap.getEquatorBoundary().isInside(position)) {
                     stackPane.setBackground(new Background(new BackgroundFill(Color.rgb(15, 95, 20), null, null)));
@@ -84,14 +82,13 @@ public class GuiWorldMap extends VBox {
                         System.out.print(((Animal) aWorldMap.getTopWorldMapElementAt(position)).getStatus() + "  ");
                         System.out.print(((Animal) aWorldMap.getTopWorldMapElementAt(position)).getUniqueID() + "  ");
                         System.out.println(aWorldMap.getTopWorldMapElementAt(position).toString() + position.toString());
+//                        System.out.println(((Animal) aWorldMap.getTopWorldMapElementAt(position)).getGenotype());
                     }
                     else {
 //                        System.out.println(aWorldMap.getTopWorldMapElementAt(position).toString() + position.toString());
                     }
-
                     AbstractWorldMapElement worldMapElement = aWorldMap.getTopWorldMapElementAt(position);
                     GuiWorldMapElement element = new GuiWorldMapElement(worldMapElement);
-//                    element.addGuiWorldMapElementClickObservers((IGuiWorldMapElementClickObserver) parentStage);
                     stackPane.getChildren().add(element);
                 }
 
@@ -99,7 +96,6 @@ public class GuiWorldMap extends VBox {
                 this.gridMap.add(stackPane, i + 1 , maxY - j, 1, 1);
             }
         }
-
     }
     public void refresh(AbstractWorldMap map) {
         Platform.runLater(this::createGrid);

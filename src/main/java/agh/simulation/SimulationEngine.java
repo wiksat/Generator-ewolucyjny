@@ -77,7 +77,7 @@ public class SimulationEngine implements Runnable {
     }
     private void makeAnimalReproduce() {
         Set<Vector2d> occupiedPositions = new HashSet<>();
-        List<Animal> children = new ArrayList<>();
+        ArrayList<Animal> children = new ArrayList<>();
 
         for (Animal animal : this.animals) {
             if (!occupiedPositions.contains(animal.getPosition())) {
@@ -146,11 +146,11 @@ public class SimulationEngine implements Runnable {
     public void run() {
         while(true) {
             guiWorldMap.refresh(this.map);
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        return;
-                    }
+//                    try {
+//                        Thread.sleep(200);
+//                    } catch (InterruptedException e) {
+//                        return;
+//                    }
             try {
                 oneDayActions();
             } catch (IOException e) {

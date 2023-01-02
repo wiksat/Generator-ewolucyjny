@@ -28,11 +28,6 @@ public class App extends Application {
     private Scene createFirstScene() throws IOException {
 
 
-//        String[] cars = {"Volvo", "BMW", "Ford", "Mazda"};
-
-
-//        OptionReader.save(cars);
-
         GridPane grid = new GridPane();
 
         var mapHeightNTBox = new NumberTextField(GuiParameters.mapHeight);
@@ -237,7 +232,6 @@ public class App extends Application {
 
         });
 
-//        grid.getChildren().add(startSimulation);
         return new Scene(grid, 500, 700);
     }
 

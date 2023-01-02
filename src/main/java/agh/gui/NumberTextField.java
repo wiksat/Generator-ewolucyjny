@@ -11,13 +11,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
 
-/**
- * Textfield implementation that accepts formatted number and stores them in a
- * BigDecimal property The user input is formatted when the focus is lost or the
- * user hits RETURN.
- *
- * @author Thomas Bolz
- */
 public class NumberTextField extends TextField {
 
     private final NumberFormat nf;
@@ -35,9 +28,6 @@ public class NumberTextField extends TextField {
         return number;
     }
 
-    public NumberTextField() {
-        this(BigDecimal.ZERO);
-    }
 
     public NumberTextField(BigDecimal value) {
         this(value, NumberFormat.getInstance());
@@ -57,7 +47,6 @@ public class NumberTextField extends TextField {
 
     private void initHandlers() {
 
-        // try to parse when focus is lost or RETURN is hit
         setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -76,7 +65,6 @@ public class NumberTextField extends TextField {
             }
         });
 
-        // Set text in field if BigDecimal property is changed from outside.
         numberProperty().addListener(new ChangeListener<BigDecimal>() {
 
             @Override
@@ -86,10 +74,6 @@ public class NumberTextField extends TextField {
         });
     }
 
-    /**
-     * Tries to parse the user input to a number according to the provided
-     * NumberFormat
-     */
     private void parseAndFormatInput() {
         try {
             String input = getText();
@@ -101,7 +85,6 @@ public class NumberTextField extends TextField {
             setNumber(newValue);
             selectAll();
         } catch (ParseException ex) {
-            // If parsing fails keep old number
             setText(nf.format(number.get()));
         }
     }

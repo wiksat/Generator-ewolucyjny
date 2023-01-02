@@ -34,16 +34,11 @@ public class SimulationStage extends Stage {
         this.sThreadController = new SimulationThreadController(aWorldMap, guiWorldMap, statisticsModule, guiStatisticsModule);
 
 
-        Region spacer = new Region();
-        HBox.setHgrow(spacer, Priority.ALWAYS);
-
-//        HBox.setHgrow(statisticsModule, Priority.ALWAYS);
-
 
         HBox layout = new HBox();
-        VBox rightBox = new VBox();
+        VBox vBox = new VBox();
         HBox simulationControls = new HBox();
-        rightBox.getChildren().addAll(simulationControls);
+        vBox.getChildren().addAll(simulationControls);
 
 
         this.setOnCloseRequest(e -> this.sThreadController.stopSimulation());
@@ -53,11 +48,9 @@ public class SimulationStage extends Stage {
 
 
 
-
-
         simulationControls.getChildren().addAll(startButton);
 
-        layout.getChildren().addAll(guiWorldMap, spacer, guiStatisticsModule, rightBox);
+        layout.getChildren().addAll(guiWorldMap, guiStatisticsModule, vBox);
 
         this.setY(bounds.getMinY());
         this.setScene(new Scene(
