@@ -10,7 +10,7 @@ public enum MoveDirection {
     TURN270(6),
     TURN315(7);
 
-    public int numerValue;
+    public final int numerValue;
     MoveDirection(int value) {
         this.numerValue = value;
     }
@@ -63,9 +63,6 @@ public enum MoveDirection {
             }
             case 6 ->{
                 return MoveDirection.TURN270;
-            }
-            case 7 ->{
-                return MoveDirection.TURN315;
             }
             default -> {
                 return MoveDirection.TURN315;

@@ -1,9 +1,7 @@
 package agh.gui;
 
 import java.io.*;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -35,7 +33,10 @@ public class OptionReader {
 
     public static void save(String[] config) throws IOException {
 
-        String[] titles = {"height","width","height_of_equator","map_variant",
+        String[] titles = {"height",
+                "width",
+                "height_of_equator",
+                "map_variant",
                 "start_amount_of_plants",
                 "energy_of_one_plant",
                 "amount_of_plants_every_day",

@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) {
 
         System.out.println("Hello Satora!");
+        System.out.println("Hello Ozog!");
 
         try{
             Application.launch(App.class, args);

@@ -9,7 +9,7 @@ public class SimulationThreadController {
     private final StatisticsModule statisticsModule;
 
     private Thread thread;
-    private SimulationEngine engine;
+    private final SimulationEngine engine;
 
     public SimulationThreadController(AbstractWorldMap map, GuiWorldMap guiWorldMap, StatisticsModule statisticsModule, GuiStatisticsModule guiStatisticsModule) throws Exception {
         this.statisticsModule=statisticsModule;

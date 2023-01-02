@@ -1,8 +1,7 @@
 package agh.oop;
 
-import java.util.Objects;
 
-public record MapAnimalContainer(int animalEnergy, Animal animal) implements Comparable<MapAnimalContainer>{
+public record MapAnimalContainer(int energyOfAnimal, Animal animal) implements Comparable<MapAnimalContainer>{
 
     @Override
     public int compareTo(MapAnimalContainer o) {
@@ -13,7 +12,7 @@ public record MapAnimalContainer(int animalEnergy, Animal animal) implements Com
             return -1;
         }
 
-        if(this.animalEnergy() == o.animalEnergy()){
+        if(this.energyOfAnimal() == o.energyOfAnimal()){
             if (this.animal().getAge()== o.animal().getAge()) {
                 if (this.animal().getHowManyChildren() == o.animal().getHowManyChildren()) {
                     return this.animal().uniqueID.compareTo(o.animal().uniqueID);
@@ -24,7 +23,7 @@ public record MapAnimalContainer(int animalEnergy, Animal animal) implements Com
         }
 
 
-        return this.animalEnergy() - o.animalEnergy();
+        return this.energyOfAnimal() - o.energyOfAnimal();
 
     }
 }

@@ -1,11 +1,6 @@
 package agh.statistics;
 
-import agh.oop.*;
-import agh.simulation.SimulationParameters;
-import javafx.scene.layout.VBox;
-
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class StatisticsModule {
 
