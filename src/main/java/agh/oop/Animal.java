@@ -211,7 +211,7 @@ public class Animal extends AbstractWorldMapElement  {
         }
 
         float precentOfGenesThisAnimal = (float)(this.getLifeEnergy()) / (this.getLifeEnergy() + otherAnimal.getLifeEnergy());
-        System.out.println("PPPPPPP " + precentOfGenesThisAnimal);
+//        System.out.println("PPPPPPP " + precentOfGenesThisAnimal);
         float precentOfGenesAnotherAnimal = 1 - precentOfGenesThisAnimal;
 
         ArrayList<MoveDirection> newGenotype  = new ArrayList<>();
@@ -242,7 +242,7 @@ public class Animal extends AbstractWorldMapElement  {
         this.setLifeEnergy(this.getLifeEnergy() - this.amountOfEnergyFromParentToChild);
         otherAnimal.setLifeEnergy(otherAnimal.getLifeEnergy() - this.amountOfEnergyFromParentToChild);
 
-        System.out.println("GENOTYP: " + newGenotype);
+//        System.out.println("GENOTYP: " + newGenotype);
         var child = new Animal( this.map, this.position, statisticsModule, this.amountOfEnergyFromParentToChild*2, newGenotype);
 
 

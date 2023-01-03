@@ -77,16 +77,16 @@ public class GuiWorldMap extends VBox {
 
                 if (aWorldMap.isOccupied(position)) {
 
-                    if (aWorldMap.getTopWorldMapElementAt(position) instanceof Animal){
-                        System.out.print(((Animal) aWorldMap.getTopWorldMapElementAt(position)).getLifeEnergy() + "__");
-                        System.out.print(((Animal) aWorldMap.getTopWorldMapElementAt(position)).getStatus() + "  ");
-                        System.out.print(((Animal) aWorldMap.getTopWorldMapElementAt(position)).getUniqueID() + "  ");
-                        System.out.println(aWorldMap.getTopWorldMapElementAt(position).toString() + position.toString());
-//                        System.out.println(((Animal) aWorldMap.getTopWorldMapElementAt(position)).getGenotype());
-                    }
-                    else {
+//                    if (aWorldMap.getTopWorldMapElementAt(position) instanceof Animal){
+//                        System.out.print(((Animal) aWorldMap.getTopWorldMapElementAt(position)).getLifeEnergy() + "__");
+//                        System.out.print(((Animal) aWorldMap.getTopWorldMapElementAt(position)).getStatus() + "  ");
+//                        System.out.print(((Animal) aWorldMap.getTopWorldMapElementAt(position)).getUniqueID() + "  ");
 //                        System.out.println(aWorldMap.getTopWorldMapElementAt(position).toString() + position.toString());
-                    }
+////                        System.out.println(((Animal) aWorldMap.getTopWorldMapElementAt(position)).getGenotype());
+//                    }
+//                    else {
+////                        System.out.println(aWorldMap.getTopWorldMapElementAt(position).toString() + position.toString());
+//                    }
                     AbstractWorldMapElement worldMapElement = aWorldMap.getTopWorldMapElementAt(position);
                     GuiWorldMapElement element = new GuiWorldMapElement(worldMapElement);
                     stackPane.getChildren().add(element);
