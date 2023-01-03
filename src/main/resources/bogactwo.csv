@@ -1,0 +1,17 @@
+height=10
+width=10
+height_of_equator=2
+map_variant=false
+start_amount_of_plants=15
+energy_of_one_plant=10
+amount_of_plants_every_day=5
+grow_variant=false
+start_amount_of_animals=10
+start_energy_of_animals=20
+energy_required_to_okay_animal=10
+energy_of_reproduce=5
+min_amount_of_mutation=0
+max_amount_of_mutation=1
+mutation_variant=false
+length_of_genotype=32
+behavoiur_variant=false

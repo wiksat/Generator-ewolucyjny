@@ -235,6 +235,7 @@ public class Animal extends AbstractWorldMapElement  {
                     } else {
                         newGenotype.set(ind, newGenotype.get(ind).prev());
                     }
+
                 }
             }
 
