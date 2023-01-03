@@ -67,7 +67,6 @@ public class SimulationEngine implements Runnable {
                 if (animal.getLifeEnergy() == theStrongestAnimal.energyOfAnimal()) {
                     animal.eatPlant();
                }
-
             }
         }
 
@@ -145,19 +144,12 @@ public class SimulationEngine implements Runnable {
     @Override
     public void run() {
         while(true) {
-            guiWorldMap.refresh(this.map);
-//                    try {
-//                        Thread.sleep(200);
-//                    } catch (InterruptedException e) {
-//                        return;
-//                    }
             try {
                 oneDayActions();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
 
-            System.out.println("______________");
             day++;
 
             guiWorldMap.refresh(this.map);

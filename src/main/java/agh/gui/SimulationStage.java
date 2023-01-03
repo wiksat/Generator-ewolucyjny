@@ -52,11 +52,18 @@ public class SimulationStage extends Stage {
 
         layout.getChildren().addAll(guiWorldMap, guiStatisticsModule, vBox);
 
+        int gridCellWidth = GuiParameters.gridCellWidth;
+        int gridCellHeight = GuiParameters.gridCellHeight;
+        if (SimulationParameters.mapWidth > 20 || SimulationParameters.mapHeight > 20) {
+            gridCellWidth = GuiParameters.gridCellWidth / 2;
+            gridCellHeight = GuiParameters.gridCellHeight / 2;
+        }
+
         this.setY(bounds.getMinY());
         this.setScene(new Scene(
                 layout,
-                Math.min(bounds.getWidth(), GuiParameters.gridCellWidth * (SimulationParameters.mapWidth + 2) + 250),
-                Math.min(bounds.getHeight(), GuiParameters.gridCellHeight * (SimulationParameters.mapHeight + 2))));
+                Math.min(bounds.getWidth(), gridCellWidth * (SimulationParameters.mapWidth + 2) + 250),
+                Math.min(bounds.getHeight(), gridCellHeight * (SimulationParameters.mapHeight + 2))));
         this.show();
     }
 

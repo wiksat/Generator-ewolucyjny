@@ -211,38 +211,35 @@ public class Animal extends AbstractWorldMapElement  {
         }
 
         float precentOfGenesThisAnimal = (float)(this.getLifeEnergy()) / (this.getLifeEnergy() + otherAnimal.getLifeEnergy());
-        System.out.println("PPPPPPP " + precentOfGenesThisAnimal);
         float precentOfGenesAnotherAnimal = 1 - precentOfGenesThisAnimal;
 
         ArrayList<MoveDirection> newGenotype  = new ArrayList<>();
         boolean side=Math.random() < 0.5;
             if (side) {
-                newGenotype.addAll(otherAnimal.getLeftSlice((int) (precentOfGenesAnotherAnimal * otherAnimal.getGenotype().size())));
-                newGenotype.addAll((this.getRightSlice((int) (precentOfGenesThisAnimal * this.getGenotype().size()))));
-
+                int numberOfGenesOtherAnimal = (int) (precentOfGenesAnotherAnimal * otherAnimal.getGenotype().size());
+                newGenotype.addAll(otherAnimal.getLeftSlice(numberOfGenesOtherAnimal));
+                newGenotype.addAll(this.getRightSlice(this.genLength - numberOfGenesOtherAnimal));
             }
             else {
-                newGenotype.addAll(this.getLeftSlice((int) (precentOfGenesThisAnimal * this.getGenotype().size())));
-                newGenotype.addAll((otherAnimal.getRightSlice((int) (precentOfGenesAnotherAnimal * otherAnimal.getGenotype().size()))));
+                int numberOfGenesOtherAnimal = (int) (precentOfGenesThisAnimal * this.getGenotype().size());
+                newGenotype.addAll(this.getLeftSlice(numberOfGenesOtherAnimal));
+                newGenotype.addAll(otherAnimal.getRightSlice(this.genLength - numberOfGenesOtherAnimal));
             }
             if (mutationVariant){
                 int ile=SimulationParameters.maxNumberOfMutations-SimulationParameters.minNumberOfMutations;
                 int l = (int) (Math.random() * (ile + SimulationParameters.minNumberOfMutations));
                 for (int i = 0; i < l; i++) {
-                    int ind= (int) (Math.random()*this.genLength);
-                    if (Math.random()>0.5){
-                        newGenotype.set(ind,newGenotype.get(ind).next());
-                    }else{
-                        newGenotype.set(ind,newGenotype.get(ind).prev());
+                    int ind = (int) (Math.random() * this.genLength);
+                    if (Math.random() > 0.5){
+                        newGenotype.set(ind, newGenotype.get(ind).next());
+                    } else {
+                        newGenotype.set(ind, newGenotype.get(ind).prev());
                     }
-
                 }
             }
 
         this.setLifeEnergy(this.getLifeEnergy() - this.amountOfEnergyFromParentToChild);
         otherAnimal.setLifeEnergy(otherAnimal.getLifeEnergy() - this.amountOfEnergyFromParentToChild);
-
-        System.out.println("GENOTYP: " + newGenotype);
         var child = new Animal( this.map, this.position, statisticsModule, this.amountOfEnergyFromParentToChild*2, newGenotype);
 
 
@@ -289,29 +286,12 @@ public class Animal extends AbstractWorldMapElement  {
 
     public void selectDirectionAndMove() {
         if (this.behaviourVariant){
-            if (Math.random()<0.8){
-                if (this.lastUsedGene+1>=this.genLength){
-                    this.lastUsedGene=-1;
+            if (Math.random() < 0.8){
+                if (this.lastUsedGene + 1 >= this.genLength){
+                    this.lastUsedGene =- 1;
                 }
-                try {
-                    this.move(this.genotype.get( this.lastUsedGene+1));
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println(e);
-                    System.out.println(this.lastUsedGene+1 + genLength);
-                    System.out.println(genotype);
-
-//                    try {
-//                        Thread.sleep(500);
-//                    } catch (InterruptedException et) {
-//                        return;
-//                    }
-//                    System.out.println(this.lastUsedGene+1 + genLength);
-//                    System.out.println(genotype);
-//                    System.out.println(status.toString() + " " + age + " " + lifeEnergy + position + orientation);
-
-                }
-
-                this.lastUsedGene= this.lastUsedGene+1;
+                this.move(this.genotype.get( this.lastUsedGene + 1));
+                this.lastUsedGene= this.lastUsedGene + 1;
             }
             else {
                 int t = (int) (Math.random()*this.genLength);
@@ -320,12 +300,12 @@ public class Animal extends AbstractWorldMapElement  {
             }
         }
         else {
-            if (this.lastUsedGene+1>=this.genLength){
-                this.lastUsedGene=-1;
+            if (this.lastUsedGene + 1 >= this.genLength){
+                this.lastUsedGene =- 1;
             }
 
-            this.move(getGenotypeAt(this.lastUsedGene+1));
-            this.lastUsedGene= this.lastUsedGene+1;
+            this.move(getGenotypeAt(this.lastUsedGene + 1));
+            this.lastUsedGene= this.lastUsedGene + 1;
         }
     }
     public MoveDirection getGenotypeAt(int nr){
