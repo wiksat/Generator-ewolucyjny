@@ -64,7 +64,6 @@ public class AbstractWorldMap implements IWorldMap {
     }
     public AbstractWorldMapElement getTopWorldMapElementAt(Vector2d position) {
         var animals = this.getAnimalsAt(position);
-        System.out.println(animals);
         if (!animals.isEmpty()) {
             return animals.last().animal();
         }

@@ -1,12 +1,12 @@
 height=10
 width=10
-height_of_equator=2
+height_of_equator=3
 map_variant=false
-start_amount_of_plants=15
+start_amount_of_plants=5
 energy_of_one_plant=10
-amount_of_plants_every_day=5
+amount_of_plants_every_day=15
 grow_variant=false
-start_amount_of_animals=10
+start_amount_of_animals=8
 start_energy_of_animals=20
 energy_required_to_okay_animal=10
 energy_of_reproduce=5
